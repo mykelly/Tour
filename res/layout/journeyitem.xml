@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/bg_intro">
+  <!--   <ScrollView   android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+        > -->
+   <LinearLayout 
+       android:layout_width="800dp"
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+    android:layout_margin="20dp" >
+      <RelativeLayout 
+       android:layout_width="match_parent"
+    android:layout_height="60dp" 
+    android:orientation="horizontal" 
+    android:background="@drawable/bg_journey_top"
+    android:gravity="center_vertical">
+       <TextView 
+            android:id="@+id/journeyitem_date"
+              android:layout_width="wrap_content"
+           android:layout_height="wrap_content" 
+           android:text="2014-04-13"
+           android:textColor="#ffffff"
+           android:textSize="16sp"
+           android:layout_marginLeft="50dp"
+           android:layout_alignParentLeft="true"
+           android:layout_centerVertical="true"
+           />
+        <TextView 
+             android:id="@+id/journeyitem_week"
+              android:layout_width="wrap_content"
+           android:layout_height="wrap_content" 
+           android:text="星期一"
+           android:textColor="#ffffff"
+           android:textSize="16sp"         
+android:layout_centerInParent="true"
+           />
+          <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_roll_list_border"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="1dp"
+        android:paddingLeft="1dp"
+        android:paddingTop="1dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp" >
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_roll_top_border"
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:text="目的地"
+            android:textColor="#8d8d8d" 
+              android:textSize="16sp">
+        </TextView>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/roll_line" >
+        </View>
+
+        <TextView
+            android:id="@+id/journeyitem_destination"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="目的地"
+            android:textColor="#000000"
+            android:textSize="16sp" >
+        </TextView>
+    </LinearLayout>
+        
+        
+   </RelativeLayout> 
+   
+         <LinearLayout android:layout_weight="0.7"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_roll_list_border"
+        android:orientation="horizontal"
+        android:paddingBottom="1dp"
+        android:paddingLeft="1dp"
+        android:paddingTop="1dp"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_roll_top_border"
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:text="行程内容"
+            android:textColor="#000000" 
+              android:textSize="16sp">
+        </TextView>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/roll_line" >
+        </View>
+
+        <TextView
+            android:id="@+id/journeyitem_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+           android:layout_gravity="left"
+            android:text="行程内容"
+            android:textColor="#000000"
+            android:textSize="16sp" >
+        </TextView>
+    </LinearLayout>
+       
+         
+          <LinearLayout 
+               android:layout_weight="0.5"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+         >
+         <LinearLayout 
+     
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+                android:background="@drawable/bg_roll_list_border"
+                android:orientation="vertical" 
+                android:layout_marginTop="20dp">
+
+             
+               <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" > 
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="1dp"
+                        android:background="@drawable/bg_roll_top_border"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="早餐"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_breakfast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                 <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                     android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="午餐"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_lunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+ </LinearLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+  <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" > 
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                      android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="晚餐"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_dinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                      android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="夜宵"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_supper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout> 
+  </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+ <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" > 
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" 
+                     android:layout_weight="0.5">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="交通"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_transport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                 <LinearLayout android:visibility="gone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" 
+                     android:layout_weight="0.5">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="地接社"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_travel_agency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                
+  </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+<RelativeLayout 
+       android:id="@+id/journeyitem_hotel_relyt"
+     android:layout_width="fill_parent"
+      android:layout_height="50dp"
+      android:background="@drawable/bg_hotel_style"
+    >
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="酒店"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_hotel"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:layout_marginRight="30dp"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                   
+                </LinearLayout>
+                 <ImageView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/more_activity_arrow_right"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        />
+</RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@drawable/bg_roll_bottom_border"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="备注"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/journeyitem_remark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+               
+          </LinearLayout>
+        </LinearLayout>
+         
+         
+         
+         
+   </LinearLayout> 
+<!-- </ScrollView> -->
+</RelativeLayout>

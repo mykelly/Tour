@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+      android:id="@+id/ll_call_name_item"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_roll_list_border"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="1dp"
+        android:paddingLeft="1dp"
+        android:paddingTop="1dp" >
+        <LinearLayout 
+         android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+              android:background="@drawable/bg_roll_top_border"
+              android:gravity="center"
+    >
+        <TextView
+            android:id="@+id/tv_call_name_item_number"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"        
+            android:gravity="center"
+            android:text="1"
+           android:textColor="#8d8d8d"
+              android:textSize="16sp" >
+        </TextView>
+        <TextView
+            android:id="@+id/tv_call_name_item_team"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"        
+            android:gravity="center"
+            android:text="A"
+           android:textColor="#8d8d8d"
+              android:textSize="16sp" 
+              >
+        </TextView>
+</LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/roll_line" >
+        </View>
+  <LinearLayout 
+         android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+              android:gravity="center_vertical"
+               android:layout_marginLeft="5dp"
+    >
+        <TextView
+            android:id="@+id/tv_call_name_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"           
+            android:text="@string/tour_name"
+              android:textColor="#000000"
+            android:textSize="16sp" >
+        </TextView>
+        <TextView
+            android:id="@+id/tv_call_name_item_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+              android:textColor="#000000"
+            android:textSize="13sp" 
+            android:layout_marginTop="3dp">
+        </TextView>
+        <TextView
+            android:id="@+id/tv_call_name_item_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+              android:textColor="#000000"
+            android:textSize="13sp"
+            android:layout_marginTop="3dp" >
+        </TextView>
+</LinearLayout>
+        <ImageView
+            android:id="@+id/iv_call_name_item_status"
+            android:layout_width="60dp"
+            android:layout_height="20dp" 
+            android:src="@drawable/tg_absent_default"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp">
+        </ImageView>
+    </LinearLayout>
+
+</LinearLayout>

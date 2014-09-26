@@ -1,0 +1,18 @@
+Location:dameitour.keystore
+Password:0123456789
+Confirm:0123456789
+
+Alias:tour
+Password:9876543210
+Confirm:9876543210
+Validity:10
+First and Last Name:xiaolun Yao
+Organizational Unit:DaMei Ltd
+Organization:DaMei Ltd
+City or Locality:ShenZhen
+State or Province:GuangDong
+Country Code():CN
+
+0123456789
+9876543210
+”≈ªØ£∫zipalign -v 4 source.apk destination.apk

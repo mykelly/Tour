@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="hello">Hello World, TourActivity!</string>
+    <string name="app_name">达美旅游</string>
+    <string name="login">登录</string>
+    <string name="login_software_name">软件名</string>
+    <string name="login_user_name">用户名</string>
+    <string name="login_password">密码</string>
+    <string name="login_user_tip">用户名不能为空</string>
+    <string name="login_password_tip">密码不能为空</string>
+    <string name="login_null_tip">用户名和密码不能为空</string>
+    <string name="login_user_errortip">用户名错误</string>
+    <string name="login_password_errortip">密码错误</string>
+    <string name="login_error_tip">用户名和密码错误</string>
+     
+    <string name="tour_down_info">下\n载\n团\n信\n息</string>
+    <string name="tour_down_info_tip">最近不用出团了,休息一下吧!</string>
+    <string name="tour_detail"> 团详情</string>
+    <string name="tour_name"> 团名</string>
+    <string name="tour_number"> 团号</string>
+    <string name="tour_leader"> 领队</string>
+    <string name="tour_leader_phone"> 领队电话</string>
+    <string name="tour_guide"> 导游</string>
+    <string name="tour_guide_phone"> 导游电话</string>
+    <string name="tour_driver"> 司机</string>
+    <string name="tour_driver_phone"> 司机电话</string>
+    <string name="tour_flag"> 旗号</string>
+    <string name="tour_content"> 简介</string>
+    <string name="tour_from_date"> 出发日期</string>
+    <string name="tour_from_day"> 出团天数</string>
+    <string name="tour_count"> 总人数</string>
+    <string name="tour_count_list"> 人员涵盖</string>   
+    <string name="tour_type"> 团种</string>
+    <string name="tour_ptype"> 类型</string>
+    <string name="tour_place">接待关口</string>
+    <string name="tour_comment">备注</string>
+    <string name="tour_member">团成员</string>
+    <string name="tour_list">团列表</string>
+    <string name="tour_downloadinfo">下载团信息</string>
+    <string name="tour_info">团信息</string>
+    <string name="tour_detalil">查看详情</string>
+    <string name="tour_info_call_name">点名</string>
+    <string name="tour_info_count">总人数:</string>
+    <string name="member_count">实到人数:</string>
+    <string name="member_absent">缺席:</string>
+    <string name="label">"标签"</string>
+    <string name="alarm_list_title">"闹钟"</string>
+    <string name="add_alarm">"添加闹钟"</string>
+    <string name="desk_clock_button_description">"时钟显示"</string>
+    <string name="default_label">"闹钟"</string>
+    <string name="menu_desk_clock">"座钟"</string>
+    <string name="menu_edit_alarm">"修改闹钟设置"</string>
+    <string name="enable_alarm">"启用闹钟"</string>
+    <string name="delete_alarm">"取消闹钟"</string>
+    <string name="disable_alarm">"停用闹钟"</string>
+    <string name="delete_alarm_confirm">"将会取消此闹钟。"</string>
+    <string name="alarm_notify_snooze_label">"<xliff:g id="LABEL">%s</xliff:g>（已暂停）"</string>
+    <string name="alarm_repeat">"重复"</string>
+    <string name="alarm_vibrate">"振动"</string>
+    <string name="alert">"铃声"</string>
+    <string name="time">"时间"</string>
+    <string name="set_alarm">"设置闹钟"</string>
+    <string name="done">"完成"</string>
+    <string name="revert">"还原"</string>
+    <string name="delete">"删除闹钟"</string>
+    <string name="alarm_alert_dismiss_text">"取消"</string>
+    <string name="alarm_volume_title">"闹钟音量"</string>
+    <string name="alarm_volume_summary">"设置闹钟音量"</string>
+    <string name="silent_alarm_summary">"静音"</string>
+    <string name="alarm_notify_text">"选择暂停或关闭此闹钟。"</string>
+    <string name="alarm_alert_snooze_text">"暂停再响"</string>
+    <string name="alarm_alert_alert_silenced">"闹钟响铃时间为 <xliff:g id="MINUTES">%d</xliff:g> 分钟"</string>
+    <string name="alarm_notify_snooze_text">"已将闹钟设置为从现在起 <xliff:g id="TIME">%s</xliff:g>后再提醒。选中可以取消。"</string>
+    <string name="alarm_alert_snooze_set">"暂停 <xliff:g id="MINUTES">%d</xliff:g> 分钟。"</string>
+
+    <string-array name="alarm_set">
+        <item msgid="5163476010406761625">"已将此闹钟设置为从现在起不到 1 分钟后提醒。"</item>
+        <item msgid="7110525731259629055">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g>后再提醒。"</item>
+        <item msgid="7003982794086186185">"已将此闹钟设置为从现在起 <xliff:g id="HOURS">%2$s</xliff:g>后再提醒。"</item>
+        <item msgid="7311021123230077742">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g>后再提醒。"</item>
+        <item msgid="8431715191823114872">"已将此闹钟设置为从现在起 <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+        <item msgid="3244151088673185428">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+        <item msgid="3663661342600168814">"已将此闹钟设置为从现在起 <xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+        <item msgid="7779544127785487304">"已将该闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+    </string-array>
+
+    <string name="day">"1 天"</string>
+    <string name="days">"<xliff:g id="DAYS">%s</xliff:g> 天"</string>
+    <string name="hour">"1 小时"</string>
+    <string name="hours" msgid="2071487018566991613">"<xliff:g id="HOURS">%s</xliff:g> 小时"</string>
+    <string name="minute">"1 分钟"</string>
+    <string name="minutes">"<xliff:g id="MINUTES">%s</xliff:g> 分钟"</string>
+    <string name="every_day">"每天"</string>
+    <string name="never">"一律不"</string>
+    <string name="day_concat">", "</string>
+    <string name="clock_instructions">"选择要显示的时钟。"</string>
+    <string name="analog_gadget">"模拟时钟"</string>
+    <string name="settings">"设置"</string>
+    <string name="alarm_in_silent_mode_title">"静音模式下闹钟响"</string>
+    <string name="alarm_in_silent_mode_summary">"手机处于静音模式时，闹钟仍会响"</string>
+    <string name="snooze_duration_title">"再响间隔"</string>
+
+    <string-array name="snooze_duration_entries">
+        <item msgid="8337408933053603125">"5 分钟"</item>
+        <item msgid="5294206441496024610">"10 分钟"</item>
+        <item msgid="2165904039211935470">"15 分钟"</item>
+        <item msgid="7248236967714374250">"20 分钟"</item>
+        <item msgid="738394723625179423">"25 分钟"</item>
+        <item msgid="1180222611308391616">"30 分钟"</item>
+    </string-array>
+    <string-array name="snooze_duration_values">
+        <item msgid="3655014754453084122">"5"</item>
+        <item msgid="8939029597449573449">"10"</item>
+        <item msgid="3922647341176353315">"15"</item>
+        <item msgid="5821804105985044459">"20"</item>
+        <item msgid="6048861883552402852">"25"</item>
+        <item msgid="2740866721232379791">"30"</item>
+    </string-array>
+
+    <string name="alarm_klaxon_service_desc">"在 DeskClock 中设置的闹钟铃声播放服务。"</string>
+
+</resources>

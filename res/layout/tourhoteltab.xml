@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.tour"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_intro"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+       android:background="@drawable/top_blue_bg"  >
+
+        <ImageButton
+            android:id="@+id/tourhoteltab_back"
+            android:layout_width="60dip"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/go_back_style"
+              >
+        </ImageButton>
+
+        
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="酒店详情"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="none" >
+
+        <!-- GalleryimageFlow商品详情缩略图图片滑动切换展示 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <com.tour.view.GalleryimageFlow
+                android:id="@+id/gy"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+               >
+            </com.tour.view.GalleryimageFlow>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="10dip"
+                android:layout_gravity="bottom"
+                android:background="#8f8f8f"
+                android:gravity="center"
+                android:padding="1dip"
+                android:visibility="gone" >
+
+                <com.tour.view.TourCircleFlowIndicator
+                    android:id="@+id/exchange_ad_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginRight="-5dip"
+                    android:paddingBottom="1dip"
+                    android:paddingLeft="1dip"
+                    android:paddingRight="-5dip"
+                    android:paddingTop="1dip"
+                    app:activeColor="#1fb6fc"
+                    app:activeType="fill"
+                    app:circleSeparation="10dip"
+                    app:inactiveColor="#ffffff"
+                    app:inactiveType="fill"
+                    app:radius="2.4dip" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="@drawable/line_horizontal" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/hotel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                   android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="标题"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:typeface="normal" >
+                </TextView>
+
+                <Button
+                    android:id="@+id/videobutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dip"
+                    android:layout_centerVertical="true"
+                    android:text="播放视频">
+                </Button>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="@drawable/line_horizontal" >
+            </View>
+
+            <TextView
+                android:id="@+id/hotel_addr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dip"
+                android:text="地址："
+                android:textColor="#000000"
+                android:textSize="20sp" >
+            </TextView>
+               <TextView
+                android:id="@+id/hotel_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dip"
+                android:text="酒店级别："
+                android:textColor="#000000"
+                android:textSize="20sp" ></TextView>
+           <TextView
+                android:id="@+id/hotel_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dip"
+                android:text="联系人："
+                android:textColor="#000000"
+                android:textSize="20sp" >    </TextView>
+            <TextView
+                android:id="@+id/hotel_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dip"
+                android:text="电话号码："
+                android:textColor="#000000"
+                android:textSize="20sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/hotel_fax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dip"
+                android:text="传真号码："
+                android:textColor="#000000"
+                android:textSize="20sp" >
+            </TextView>
+      
+            
+        
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_intro"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/tour_roll_list_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tour_top_height"
+        layout="@layout/tour_top_layout" >
+    </include>
+      <RelativeLayout
+        android:id="@+id/roll_list_item_relyt"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+         android:layout_gravity="center"
+         >
+    <include 
+        android:id="@+id/tour_roll_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/roll_list_item" 
+       >
+    </include>
+     </RelativeLayout>
+<TextView  android:visibility="gone"
+        android:id="@+id/tour_roll_list_tip"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="@string/tour_down_info_tip"
+        android:textColor="#000000"
+        android:textSize="25dp"
+    />
+    <ListView android:visibility="gone"
+        android:id="@+id/roolList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@android:color/transparent" >
+    </ListView>
+
+</LinearLayout>

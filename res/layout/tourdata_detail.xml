@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_intro" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+       android:background="@drawable/top_blue_bg"  >
+
+        <ImageButton
+            android:id="@+id/customer_detail_back"
+            android:layout_width="60dip"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/go_back_style"
+              >
+        </ImageButton>
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="团信息详情"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout> 
+
+    <ScrollView 
+         android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+        >
+         <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"              
+                android:orientation="vertical"            
+                >
+        
+    <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_roll_list_border"
+                android:orientation="vertical" 
+                android:layout_margin="20dp"
+                >
+
+                  <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >            
+                <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="1dp"
+                          android:background="@drawable/bg_roll_top_border"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_name"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+               <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                         android:layout_marginTop="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_type"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+ </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+
+            
+                 <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >  
+                       <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_number"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>          
+                <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_flag"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_flag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                  <LinearLayout android:visibility="gone"
+                      android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_ptype"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_ptype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+ </LinearLayout>
+
+              
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>         
+       <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >            
+                <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_from_date"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_fromdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_count_list"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_countlist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                  <LinearLayout android:visibility="gone"
+                      android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_from_day"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+ </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+                
+    <LinearLayout android:visibility="gone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >            
+                <LinearLayout 
+                     android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_count"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                  
+ </LinearLayout>
+
+                <View android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+                                            
+                 <LinearLayout android:visibility="gone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >            
+                <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_leader"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_leader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                <LinearLayout
+                     android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_leader_phone"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_leaderphone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+              </LinearLayout>   
+                
+                <View  android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+                
+     <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >            
+                <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_guide"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_guide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                <LinearLayout
+                     android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_guide_phone"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_guidephone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+              </LinearLayout>   
+                
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+
+                
+                 <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+                <LinearLayout 
+                    android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_driver"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_drive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+  <LinearLayout 
+                    android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_driver_phone"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_drivephone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+                
+               </LinearLayout>
+                  <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+         <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >            
+                
+                  <LinearLayout 
+                    android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/roll_item_tv"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                       android:text="@string/tour_place"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                         android:id="@+id/tourdata_detail_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+ </LinearLayout>
+                 
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>
+                 <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+                <LinearLayout 
+                    android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                          android:background="@color/roll_item_tv"  
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                         android:text="@string/tour_comment"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                         android:id="@+id/tourdata_detail_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>
+  
+                
+               </LinearLayout>
+          <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/roll_line" >
+                </View>         
+            <LinearLayout android:layout_weight="0.5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" 
+                   >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"     
+                        android:layout_marginBottom="1dp"              
+                       android:background="@drawable/bg_roll_bottom_border"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="5dp"
+                        android:text="@string/tour_content"
+                        android:textColor="#000000"
+                        android:textSize="17sp" >
+                    </TextView>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/roll_line" >
+                    </View>
+
+                    <TextView
+                        android:id="@+id/tourdata_detail_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#8d8d8d"
+                        android:textSize="17sp" >
+                    </TextView>
+                </LinearLayout>    
+              
+               </LinearLayout> 
+
+                
+            </LinearLayout>
+  </ScrollView>  
+    
+</LinearLayout>
