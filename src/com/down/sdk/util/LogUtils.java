@@ -2,7 +2,7 @@ package com.down.sdk.util;
 
 import android.util.Log;
 /**
- * Log¹ÜÀí¹¤¾ßÀà
+ * Logç®¡ç†å·¥å…·ç±»
  *
  */
 public class LogUtils {

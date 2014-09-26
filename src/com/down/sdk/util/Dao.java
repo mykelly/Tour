@@ -8,7 +8,7 @@ import com.tour.SQLite.DBTour;
 
  /**
   *
-  * Ò»¸öÒµÎñÀà
+  * ä¸€ä¸ªä¸šåŠ¡ç±»
   */
  public class Dao {
      private DBTour dbHelper;
@@ -22,7 +22,7 @@ import com.tour.SQLite.DBTour;
      }
 
      /**
-      * ²é¿´Êı¾İ¿âÖĞÊÇ·ñÓĞÊı¾İ
+      * æŸ¥çœ‹æ•°æ®åº“ä¸­æ˜¯å¦æœ‰æ•°æ®
       */
      public boolean isHasInfors(String urlstr) {
          SQLiteDatabase database = dbHelper.getReadableDatabase();
@@ -35,12 +35,12 @@ import com.tour.SQLite.DBTour;
      }
 
      /**
-      * ±£´æ ÏÂÔØµÄ¾ßÌåĞÅÏ¢
+      * ä¿å­˜ ä¸‹è½½çš„å…·ä½“ä¿¡æ¯
       */
 //     public void saveInfos(List<DownloadInfo> infos) {
 //         SQLiteDatabase database = dbHelper.getWritableDatabase();
 //         for (DownloadInfo info : infos) {
-//        	 LogUtils.s("±£´æ ÏÂÔØ"+"startPos="+info.getStartPos()+"--compeleteSize="+info.getCompeleteSize()+"--endPos="+ info.getEndPos());
+//        	 LogUtils.s("ä¿å­˜ ä¸‹è½½"+"startPos="+info.getStartPos()+"--compeleteSize="+info.getCompeleteSize()+"--endPos="+ info.getEndPos());
 //             String sql = "insert into download_info(thread_id,start_pos, end_pos,compelete_size,url) values (?,?,?,?,?)";
 //           Object[] bindArgs = { info.getThreadId(), info.getStartPos(),
 //                     info.getEndPos(), info.getCompeleteSize(), info.getUrl() };
@@ -51,14 +51,14 @@ import com.tour.SQLite.DBTour;
  
        SQLiteDatabase database = dbHelper.getWritableDatabase();
     
-//      	 LogUtils.s("±£´æ ÏÂÔØ"+"startPos="+startPos+"--compeleteSize="+compeleteSize+"--endPos="+ endPos);
+//      	 LogUtils.s("ä¿å­˜ ä¸‹è½½"+"startPos="+startPos+"--compeleteSize="+compeleteSize+"--endPos="+ endPos);
            String sql = "insert into download_info(thread_id,start_pos, end_pos,compelete_size,url) values (?,?,?,?,?)";
          Object[] bindArgs = { threadId, startPos,endPos, compeleteSize, url };
            database.execSQL(sql, bindArgs);
        
    }
      /**
-      * µÃµ½ÏÂÔØ¾ßÌåĞÅÏ¢
+      * å¾—åˆ°ä¸‹è½½å…·ä½“ä¿¡æ¯
       */
      public int getInfos(String urlstr,int compeleteSize) {
 //         List<DownloadInfo> list = new ArrayList<DownloadInfo>();
@@ -71,15 +71,15 @@ import com.tour.SQLite.DBTour;
 //                     cursor.getInt(1), cursor.getInt(2), compeleteSize,
 //                    cursor.getString(4));
         	 end_pos=cursor.getInt(0);
-//             LogUtils.s("µÃµ½ÏÂÔØ¾ßÌåĞÅÏ¢"+"end_pos="+cursor.getInt(0)+"--compeleteSize="+compeleteSize);
+//             LogUtils.s("å¾—åˆ°ä¸‹è½½å…·ä½“ä¿¡æ¯"+"end_pos="+cursor.getInt(0)+"--compeleteSize="+compeleteSize);
              
          }
          cursor.close();
          return end_pos ;
      }
-     /**ÏÂÔØÍê³ÉµÄapk±£´æ*/
+     /**ä¸‹è½½å®Œæˆçš„apkä¿å­˜*/
      public void saveapk(String apkid ,int endPos,String url,String pkgname) {
-//    	 LogUtils.s("±£´æµ½Êı¾İ¿â"+apkid);
+//    	 LogUtils.s("ä¿å­˜åˆ°æ•°æ®åº“"+apkid);
     	 if(isExistid(apkid)){
     		 SQLiteDatabase database = dbHelper.getWritableDatabase();
     		 String sql = "insert into download_apk(apkid,end_pos,url,pkgname) values (?,?,?,?)";
@@ -87,7 +87,7 @@ import com.tour.SQLite.DBTour;
     		 database.execSQL(sql, bindArgs);
     	 }
      }
-     /**ÏÂÔØÎÄ¼şÊÇ·ñ´æÔÚ*/
+     /**ä¸‹è½½æ–‡ä»¶æ˜¯å¦å­˜åœ¨*/
      public boolean isExistid(String apkid){
     	 SQLiteDatabase database = dbHelper.getReadableDatabase();
          String sql = "select count(*)  from download_apk where apkid=?";
@@ -100,7 +100,7 @@ import com.tour.SQLite.DBTour;
      
 
      /**
-     * ¸üĞÂÊı¾İ¿âÖĞµÄÏÂÔØĞÅÏ¢
+     * æ›´æ–°æ•°æ®åº“ä¸­çš„ä¸‹è½½ä¿¡æ¯
       */
 /*     public void updataInfos(int threadId, int compeleteSize, String urlstr) {
     	 synchronized (this) {
@@ -112,14 +112,14 @@ import com.tour.SQLite.DBTour;
         
      }*/
      /**
-      * ¹Ø±ÕÊı¾İ¿â
+      * å…³é—­æ•°æ®åº“
       */
      public void closeDb() {
          dbHelper.close();
     }
 
      /**
-     * ÏÂÔØÍê³ÉºóÉ¾³ıÊı¾İ¿âÖĞµÄÊı¾İ
+     * ä¸‹è½½å®Œæˆååˆ é™¤æ•°æ®åº“ä¸­çš„æ•°æ®
       */
      public void delete(String url) {
          SQLiteDatabase database = dbHelper.getReadableDatabase();

@@ -1,20 +1,20 @@
 package com.down.sdk.util;
 
 /**
- * ¶ÔÍâ»Øµ÷½Ó¿Ú
+ * å¯¹å¤–å›è°ƒæ¥å£
  * @author Administrator
  *
  */
 
 public interface DownCallBack {
 	/**
-	 *  apkÁĞ±íÊı¾İ£¨json¸ñÊ½£©
+	 *  apkåˆ—è¡¨æ•°æ®ï¼ˆjsonæ ¼å¼ï¼‰
 	 * @param apkData
 	 */
 	void getApkDataBack( String apkData,String flag);
 	/**
-	 * apkÏÂÔØ½ø¶È
-	 * @param progress ÏÂÔØ½ø¶È
+	 * apkä¸‹è½½è¿›åº¦
+	 * @param progress ä¸‹è½½è¿›åº¦
 	 * @param  
 	 */
     void getApkProgress(String id,int progress,int maxProgress);

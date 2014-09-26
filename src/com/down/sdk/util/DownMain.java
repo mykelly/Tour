@@ -12,12 +12,12 @@ import com.down.sdk.service.DowenLoadService;
 import com.down.sdk.service.Downloader;
 
 /**
- * ½Ó¿Úµ÷ÓÃÂß¼­´¦Àí
+ * æ¥å£è°ƒç”¨é€»è¾‘å¤„ç†
  * 
  */
 public class DownMain {
 	public  DownCallBack downCallBack;
-	/**È«¾Ö¾²Ì¬±äÁ¿*/
+	/**å…¨å±€é™æ€å˜é‡*/
 	public static DownMain downMain=null;
 	public static Context mContext=null;
  
@@ -42,10 +42,10 @@ public class DownMain {
 
 	
 	/**
-	 * ¿ªÊ¼ÏÂÔØ
+	 * å¼€å§‹ä¸‹è½½
 	 */ 	
 	public void DownloadStart(int position ){
-//		LogUtils.s("¿ªÊ¼ÏÂÔØ");
+//		LogUtils.s("å¼€å§‹ä¸‹è½½");
 		Intent intent=new Intent(mContext,DowenLoadService.class);
 		intent.putExtra("control", "start");
 		intent.putExtra("position", position);
@@ -53,17 +53,17 @@ public class DownMain {
 	}
 	
 	/**
-	 * ÔİÍ£ÏÂÔØ
+	 * æš‚åœä¸‹è½½
 	 */
     public void DownloadPause (int position){
-//    	LogUtils.s("ÔİÍ£");
+//    	LogUtils.s("æš‚åœ");
     	Intent intent=new Intent(mContext,DowenLoadService.class);
     	intent.putExtra("control", "pause");
 		intent.putExtra("position", position);
 		mContext.startService(intent);
 	}
     /**
-	 * ¼ÌĞøÏÂÔØ
+	 * ç»§ç»­ä¸‹è½½
 	 */
     public void DownloadContinue (String id){
     	Intent intent=new Intent(mContext,DowenLoadService.class);
@@ -75,12 +75,12 @@ public class DownMain {
  
 
     /**
-     * ÖØĞÂÏÂÔØ
+     * é‡æ–°ä¸‹è½½
      */
    
     public void DownloadReStart (String id){
     	/*if(downloaders.get(url)!=null){
-    		LogUtils.s("„h³ıÊı¾İ");
+    		LogUtils.s("åˆªé™¤æ•°æ®");
     		downloaders.get(url).pause();
     		FileUtils.deleteFile(Configs.ASDKROOT
 					+ FileUtils.subFileName(url));
@@ -94,7 +94,7 @@ public class DownMain {
     		intent.putExtra("notfi_id", notfi_id);
     		mContext.startService(intent);
     	}else{
-    		LogUtils.s("›]ÓĞ„h³ıÊı¾İ");
+    		LogUtils.s("æ²’æœ‰åˆªé™¤æ•°æ®");
 //    		if(url!=null&&!"".equals(url))
 //    		starDown(url,apkName);
     		
@@ -106,7 +106,7 @@ public class DownMain {
   	}
 
 	/**
-	 * ÉèÖÃ»Øµ÷½Ó¿Ú
+	 * è®¾ç½®å›è°ƒæ¥å£
 	 * @param payCallBack
 	 */
 	public void setDownCallBack(DownCallBack downCallBack){

@@ -27,7 +27,7 @@ public class TourTabActivity extends TabActivity {
 	 TextView mTitle;
 	TabHost tabHost;
 	TabWidget tabWidget;
-	private String name[] = { "ÍÅĞÅÏ¢", "ĞĞ³Ì°²ÅÅ", "¾°µã", "²ÍÌü", "ÊÓÆµ","ÄÖÖÓ" };
+	private String name[] = { "å›¢ä¿¡æ¯", "è¡Œç¨‹å®‰æ’", "æ™¯ç‚¹", "é¤å…", "è§†é¢‘","é—¹é’Ÿ" };
 	// default
 	private int myMenuRes[] = { R.drawable.tab_tour_default, R.drawable.tab_journey_default,
 			R.drawable.tab_scenic_default, R.drawable.tab_cate_default, R.drawable.tab_vedio_default ,R.drawable.tab_clock_default};
@@ -38,7 +38,7 @@ public class TourTabActivity extends TabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub¡¢
+		// TODO Auto-generated method stubã€
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.tourtab);
 		super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class TourTabActivity extends TabActivity {
 				}else if("5".equals(tabId)){
 					mTitle.setText(name[5]);
 				}
-				// tabIdÖµÎªÒªÇĞ»»µ½µÄtabÒ³µÄË÷ÒıÎ»ÖÃ
+				// tabIdå€¼ä¸ºè¦åˆ‡æ¢åˆ°çš„tabé¡µçš„ç´¢å¼•ä½ç½®
 				for (int i = 0; i < tabWidget.getChildCount(); i++) {
 					if (tabId.equals(i + "")) {
 						ImageView iv = (ImageView) tabWidget.getChildAt(i)
@@ -105,7 +105,7 @@ public class TourTabActivity extends TabActivity {
 //				public void run() {
 //					// TODO Auto-generated method stub
 //					DBTour dbTour=new DBTour(getApplicationContext());
-//					dbTour.onUpgrade(null, 2, 3);//µ¼ÈëÊı¾İ
+//					dbTour.onUpgrade(null, 2, 3);//å¯¼å…¥æ•°æ®
 //				}
 //			}) ;
 //			thread.start();
@@ -141,14 +141,14 @@ public class TourTabActivity extends TabActivity {
 				.setIndicator(localView).setContent(intent);
 		tabHost.addTab(localTabSpec);
 	}
-	// ·µ»Ø¼ü¼àÌıÍË³ö
+	// è¿”å›é”®ç›‘å¬é€€å‡º
 		@Override
 	    public boolean dispatchKeyEvent(KeyEvent event) {
 	       
 	        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK
 	        		&& event.getAction() == KeyEvent.ACTION_DOWN ) {
 	        	if((System.currentTimeMillis()-exitTime) > 1000){
-					Toast.makeText(getApplicationContext(), "ÔÙ°´Ò»´ÎÍË³öÈí¼ş",500).show();
+					Toast.makeText(getApplicationContext(), "å†æŒ‰ä¸€æ¬¡é€€å‡ºè½¯ä»¶",500).show();
 					exitTime = System.currentTimeMillis();
 					 return true;
 					} else {
@@ -156,6 +156,6 @@ public class TourTabActivity extends TabActivity {
 					 return true;
 					} 	
 	        }
-	        return super.dispatchKeyEvent(event);   /** °´ÏÂÆäËü¼ü£¬µ÷ÓÃ¸¸Àà·½·¨£¬½øĞĞÄ¬ÈÏ²Ù×÷ */  
+	        return super.dispatchKeyEvent(event);   /** æŒ‰ä¸‹å…¶å®ƒé”®ï¼Œè°ƒç”¨çˆ¶ç±»æ–¹æ³•ï¼Œè¿›è¡Œé»˜è®¤æ“ä½œ */  
 	        }
 }

@@ -26,7 +26,7 @@ import com.tour.util.PublicData;
 public class ScenicGidAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	List<DataPlaceInfo> tourScenic;
-	private List<String> imageurl = new ArrayList<String>();// ´æÖüÍ¼Æ¬
+	private List<String> imageurl = new ArrayList<String>();// å­˜è´®å›¾ç‰‡
 	public ScenicGidAdapter(Context mContext,List<DataPlaceInfo> tourScenic){
 		this.tourScenic=tourScenic;
 		 inflater = LayoutInflater.from(mContext);
@@ -81,11 +81,11 @@ public class ScenicGidAdapter extends BaseAdapter {
 							String newUrl = imageUrl.substring(0,
 									imageUrl.indexOf("|"));
 							imageurl.add(newUrl);
-							// Ê£ÓàURL
+							// å‰©ä½™URL
 							String remainUrl = imageUrl.substring(
 									imageUrl.indexOf("|") + 1,
 									imageUrl.length());
-							// Ö±µ½²»´æÔÚ¡°|¡±
+							// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 							while (remainUrl.contains("|")) {
 								if (remainUrl.length() > 0) {
 									newUrl = remainUrl.substring(0,
@@ -107,7 +107,7 @@ public class ScenicGidAdapter extends BaseAdapter {
 			 
 			}
 //		  String imagename="1212181717374p3y.jpg";
-		  String imagename=imageurl.get(0);//Ä¬ÈÏÑ¡µÚÒ»¸öÍ¼Æ¬×ö·âÃæ
+		  String imagename=imageurl.get(0);//é»˜è®¤é€‰ç¬¬ä¸€ä¸ªå›¾ç‰‡åšå°é¢
 //		  System.out.println("position="+position+"      imagename="+imagename);
 		  String SDCardRoot = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
 		  String  pathName=SDCardRoot + File.separator + "DaMeiTour"+ File.separator+ "zip"+ File.separator+ PublicData.tour_zip+ File.separator+imagename;
@@ -117,10 +117,10 @@ public class ScenicGidAdapter extends BaseAdapter {
 			  File f=new File(pathName);		
 			  FileInputStream  fis = new FileInputStream(f);
 		
-		// Ñ¹ËõµÄÍ¼Æ¬£¨2µÄÕûÊı±¶£©£¬ÊıÖµÔ½Ğ¡£¬Ñ¹ËõÂÊÔ½Ğ¡£¬Í¼Æ¬Ô½ÇåÎú
+		// å‹ç¼©çš„å›¾ç‰‡ï¼ˆ2çš„æ•´æ•°å€ï¼‰ï¼Œæ•°å€¼è¶Šå°ï¼Œå‹ç¼©ç‡è¶Šå°ï¼Œå›¾ç‰‡è¶Šæ¸…æ™°
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inSampleSize = 2;
-			// ½«InputStream±äÎªBitmap£¬ƒÈ´æÒç³ö’Òì³£
+			// å°†InputStreamå˜ä¸ºBitmapï¼Œå…§å­˜æº¢å‡ºæ‹‹å¼‚å¸¸
 			try {
 				
 				d = BitmapFactory.decodeStream(fis, null,opts);

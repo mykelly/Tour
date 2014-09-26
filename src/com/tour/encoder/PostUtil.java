@@ -30,7 +30,7 @@ import com.tour.util.PublicData;
 public class PostUtil {
  
 	private String postData = "";
-	private final static String KEY = "KeyforTm";// ÃÜÔ¿
+	private final static String KEY = "KeyforTm";// å¯†é’¥
 
 	public String getData(String[] array) {
 		String jsonStr = new String();
@@ -44,7 +44,7 @@ public class PostUtil {
 				value = array[i + 1].toString();
 				temp.put(key, value);				
 			}
-			// µ¹Ğò
+			// å€’åº
 //			int i = array.length;
 //			while (i >= 0) {
 //				if (i >= 2) {
@@ -61,7 +61,7 @@ public class PostUtil {
 			
 			Gson gson = new Gson();
 			String toJson = gson.toJson(temp);
-//			System.out.println("·¢ËÍÇëÇóÊı¾İ=" + toJson);
+//			System.out.println("å‘é€è¯·æ±‚æ•°æ®=" + toJson);
 
 			jsonStr = encrypt(gson.toJson(toJson));
 
@@ -71,23 +71,23 @@ public class PostUtil {
 		}
 
 		HttpPost httpRequest = new HttpPost(PublicData.postUrl);
-		// PostÔË×÷´«ËÍ±äÊı±ØĞëÓÃNameValuePair[]ÕóÁĞ´¢´æ
-		// ´«²ÎÊı ·şÎñ¶Ë»ñÈ¡µÄ·½·¨Îªrequest.getParameter("name")
+		// Postè¿ä½œä¼ é€å˜æ•°å¿…é¡»ç”¨NameValuePair[]é˜µåˆ—å‚¨å­˜
+		// ä¼ å‚æ•° æœåŠ¡ç«¯è·å–çš„æ–¹æ³•ä¸ºrequest.getParameter("name")
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		list.add(new BasicNameValuePair("data", jsonStr));
 
 		try {
-			// ·¢³öHTTP request
+			// å‘å‡ºHTTP request
 			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));
-			// È¡µÃHTTP response
+			// å–å¾—HTTP response
 			HttpResponse httpResponse = new DefaultHttpClient()
 					.execute(httpRequest);
 			if (httpResponse.getStatusLine().getStatusCode() == 200) {
 				String strReturn = EntityUtils.toString(httpResponse
 						.getEntity());
-//				System.out.println("·µ»ØÊı¾İ£º" + strReturn);
+//				System.out.println("è¿”å›æ•°æ®ï¼š" + strReturn);
 				postData = decrypt(strReturn);
-//				System.out.println("½âÃÜÊı¾İ£º" + postData);
+//				System.out.println("è§£å¯†æ•°æ®ï¼š" + postData);
 
 				// Gson gson = new Gson();
 				// String toJson = gson.toJson(desStr);
@@ -116,7 +116,7 @@ public class PostUtil {
 	}
 	
 	/**
-	 * ¼ÓÃÜ
+	 * åŠ å¯†
 	 * 
 	 * @param plainText
 	 * @return
@@ -135,7 +135,7 @@ public class PostUtil {
 	}
 
 	/**
-	 * ½âÃÜ
+	 * è§£å¯†
 	 * 
 	 * @param encryptText
 	 * @return

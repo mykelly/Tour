@@ -47,11 +47,11 @@ public class TourDownVideoActivity extends Activity implements DownCallBack{
 	}
 	private Handler handler=new Handler(){
 		public void handleMessage(android.os.Message msg) {
-			TTLog.s("ÏÂÔØÍê³É¡£¡£¡£¡£");
+			TTLog.s("ä¸‹è½½å®Œæˆã€‚ã€‚ã€‚ã€‚");
 			Bundle bundle = msg.getData();
 			String id = bundle.getString("id");
 			Button btn = (Button) downVideoList.findViewWithTag(id);	
-			btn.setText("ÒÑÏÂÔØ");
+			btn.setText("å·²ä¸‹è½½");
 		};
 	};
 }

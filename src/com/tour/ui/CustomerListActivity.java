@@ -16,7 +16,7 @@ public class CustomerListActivity extends NotTitleActivity {
 	private ImageButton  ib_back;
 	private	ListView lv_customer;
 	/**
-	 * @param wl ¡°ÂÃ¿ÍÏêÏ¸ĞÅÏ¢¡±
+	 * @param wl â€œæ—…å®¢è¯¦ç»†ä¿¡æ¯â€
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

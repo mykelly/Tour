@@ -45,7 +45,7 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 	private String mAccount, mPassword,tip="";
 //    private ShowToast toast;
 	private HttpAsynTask httpAsynTask;
-	private WaitDialog dialog;// ¡°µÈ´ı¡±¶Ô»°¿ò
+	private WaitDialog dialog;// â€œç­‰å¾…â€å¯¹è¯æ¡†
 	private	List<HashMap<String, List<HashMap<String, String>>>> datalist = new ArrayList<HashMap<String, List<HashMap<String, String>>>>();
 	public  Handler mHandler;
 	/** Called when the activity is first created. */
@@ -55,9 +55,9 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 		setContentView(R.layout.login);
 		init();
 		   networkstatus=new NetWorkStatus();
-		 PublicData.isNetWork=networkstatus.isNetWork(getApplicationContext());//¼ì²éÁªÍøÇé¿ö
+		 PublicData.isNetWork=networkstatus.isNetWork(getApplicationContext());//æ£€æŸ¥è”ç½‘æƒ…å†µ
 		if(PublicData.isNetWork){
-		VersionUpdate	updates = new VersionUpdate();//¸üĞÂ°æ±¾
+		VersionUpdate	updates = new VersionUpdate();//æ›´æ–°ç‰ˆæœ¬
 		updates.asyncUpdate(TourLoginActivity.this, true);
 		}
 		 mHandler=new Handler(){
@@ -72,9 +72,9 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 
 					case 1:
 						
-						DBTour dbTour=new DBTour(getApplicationContext());//´´½¨Êı¾İ¿â
+						DBTour dbTour=new DBTour(getApplicationContext());//åˆ›å»ºæ•°æ®åº“
 						try {
-							PublicData.isnew = datalist.get(0).get("isnew").get(0).get("isnew");//1 ÓĞ·µ»ØĞÂÊı¾İ£»0Ã»ÓĞ
+							PublicData.isnew = datalist.get(0).get("isnew").get(0).get("isnew");//1 æœ‰è¿”å›æ–°æ•°æ®ï¼›0æ²¡æœ‰
 					    PublicData.username = editAccount.getText().toString();
 						PublicData.password = editPassword.getText().toString();
 						PublicData.truename = datalist.get(0).get("admin_true_name").get(0).get("admin_true_name");
@@ -82,7 +82,7 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 						PublicData.gid = datalist.get(0).get("admin_gid").get(0).get("admin_gid");
 						PublicData.islogin = datalist.get(0).get("admin_check").get(0).get("admin_check");	
 						SaveDataClass saveDataClass=new SaveDataClass();	
-						saveDataClass.saveAccountPassword(getApplicationContext());//±£´æÓÃ»§ÕËºÅÃÜÂë
+						saveDataClass.saveAccountPassword(getApplicationContext());//ä¿å­˜ç”¨æˆ·è´¦å·å¯†ç 
 						if ("1".equals(PublicData.isnew)) {
 						
 												
@@ -96,17 +96,17 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 									
 										
 						String last_updata_time=saveDataClass.getLastUpDataTime(getApplicationContext());
-						if(!last_updata_time.equals(PublicData.tour_update_time)){//ÓĞĞÂÑ¹Ëõ°üĞèÒª¸üĞÂ
+						if(!last_updata_time.equals(PublicData.tour_update_time)){//æœ‰æ–°å‹ç¼©åŒ…éœ€è¦æ›´æ–°
 							PublicData.isUpgrade=true;
 						
 							Intent intent = new Intent();
-							intent.setClass(TourLoginActivity.this, RollListActivity.class);//Ìø×ªµ½ÏÂÔØÑ¹Ëõ°üÒ³Ãæ
+							intent.setClass(TourLoginActivity.this, RollListActivity.class);//è·³è½¬åˆ°ä¸‹è½½å‹ç¼©åŒ…é¡µé¢
 							startActivity(intent); 
 							
 							
 						}else{
 							  PublicData.isUpgrade=false;
-							Intent intent=new Intent(TourLoginActivity.this,TourTabActivity.class);//Ö±½ÓÌø×ªµ½ÍÅĞÅÏ¢Ò³Ãæ
+							Intent intent=new Intent(TourLoginActivity.this,TourTabActivity.class);//ç›´æ¥è·³è½¬åˆ°å›¢ä¿¡æ¯é¡µé¢
 						    startActivity(intent);
 						  
 						}
@@ -114,14 +114,14 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 						
 						}else{
 							PublicData.isUpgrade=false;
-							 Toast. makeText(TourLoginActivity.this, "ÔİÃ»³öÍÅĞÅÏ¢",Toast.LENGTH_LONG).show();	
+							 Toast. makeText(TourLoginActivity.this, "æš‚æ²¡å‡ºå›¢ä¿¡æ¯",Toast.LENGTH_LONG).show();	
 							 PublicData.tour_id=TourData.queryByUser(TourLoginActivity.this, PublicData.uid);	
 							 if(!"".equals(PublicData.tour_id)){							 
-									Intent intent=new Intent(TourLoginActivity.this,TourTabActivity.class);//Ö±½ÓÌø×ªµ½ÍÅĞÅÏ¢Ò³Ãæ
+									Intent intent=new Intent(TourLoginActivity.this,TourTabActivity.class);//ç›´æ¥è·³è½¬åˆ°å›¢ä¿¡æ¯é¡µé¢
 								    startActivity(intent);
 							 }else{
 								    Intent intent = new Intent();
-									intent.setClass(TourLoginActivity.this, RollListActivity.class);//Ìø×ªµ½ÏÂÔØÑ¹Ëõ°üÒ³Ãæ
+									intent.setClass(TourLoginActivity.this, RollListActivity.class);//è·³è½¬åˆ°ä¸‹è½½å‹ç¼©åŒ…é¡µé¢
 									startActivity(intent); 
 									
 //									Intent intent=new Intent(TourLoginActivity.this,TourTabActivity.class);
@@ -133,7 +133,7 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 						
 						} catch (Exception e) {
 							// TODO: handle exception
-							tip="Êı¾İÒì³£";
+							tip="æ•°æ®å¼‚å¸¸";
 							Toast.makeText(getApplicationContext(), tip, 1000).show();
 						}								
 						break;
@@ -175,7 +175,7 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 		});
 //		toast=new ShowToast();
 	
-//		if (!PublicData.isNetWork) {//¶ÏÍøÊ±
+//		if (!PublicData.isNetWork) {//æ–­ç½‘æ—¶
 			SaveDataClass saveDataClass=new SaveDataClass();
 			saveDataClass.getAccountPassword(TourLoginActivity.this);
 			if(!"".equals(PublicData.username)){
@@ -195,9 +195,9 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 			mAccount=editAccount.getText().toString();
 			mPassword=editPassword.getText().toString();
  
-			 PublicData.isNetWork=networkstatus.isNetWork(getApplicationContext());//¼ì²éÁªÍøÇé¿ö
+			 PublicData.isNetWork=networkstatus.isNetWork(getApplicationContext());//æ£€æŸ¥è”ç½‘æƒ…å†µ
 				 		
-				if (PublicData.isNetWork) {//ÓĞÍø
+				if (PublicData.isNetWork) {//æœ‰ç½‘
 					if(!"".equals(mAccount)&&!"".equals(mPassword)){
 	                dialog=new WaitDialog(TourLoginActivity.this, android.R.style.Theme_Translucent);
 					dialog.show();
@@ -217,21 +217,21 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 						    }
 					    }
 					}
-				} else {//¶ÏÍø
+				} else {//æ–­ç½‘
  
 					SaveDataClass saveDataClass=new SaveDataClass();
-					saveDataClass.getAccountPassword(TourLoginActivity.this);//»ñÈ¡±¾µØÕËºÅÃÜÂë
-//					saveDataClass.getTourId(getApplicationContext());//»ñÈ¡ÍÅid
+					saveDataClass.getAccountPassword(TourLoginActivity.this);//è·å–æœ¬åœ°è´¦å·å¯†ç 
+//					saveDataClass.getTourId(getApplicationContext());//è·å–å›¢id
 					if(!"".equals(mAccount)&&!"".equals(mPassword)){
 						if(mAccount.equals(PublicData.username)&&mPassword.equals(PublicData.password)){
 							 PublicData.tour_id=TourData.queryByUser(TourLoginActivity.this, PublicData.uid);	
 							 if(!"".equals(PublicData.tour_id)){							 
-									Intent intent=new Intent(TourLoginActivity.this,TourTabActivity.class);//Ö±½ÓÌø×ªµ½ÍÅĞÅÏ¢Ò³Ãæ
+									Intent intent=new Intent(TourLoginActivity.this,TourTabActivity.class);//ç›´æ¥è·³è½¬åˆ°å›¢ä¿¡æ¯é¡µé¢
 								    startActivity(intent);
 							 }else{
 								    PublicData.isnew="0";
 								    Intent intent = new Intent();
-									intent.setClass(TourLoginActivity.this, RollListActivity.class);//Ìø×ªµ½ÏÂÔØÑ¹Ëõ°üÒ³Ãæ
+									intent.setClass(TourLoginActivity.this, RollListActivity.class);//è·³è½¬åˆ°ä¸‹è½½å‹ç¼©åŒ…é¡µé¢
 									startActivity(intent); 
 							 }
 							 finish();
@@ -268,7 +268,7 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 //		}
 	};
 	/**
-	 * µÇÂ¼½Ó¿Ú
+	 * ç™»å½•æ¥å£
 	 * @author wl
 	 *
 	 */
@@ -288,7 +288,7 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 				dialog.dismiss();
 			if(datalist.size()>0&&datalist.get(0).get("status").get(0).get("status")!=null){
 				if("1".equals(datalist.get(0).get("status").get(0).get("status"))){
-//					tip="µÇÂ¼³É¹¦£¡";
+//					tip="ç™»å½•æˆåŠŸï¼";
 					mHandler.sendEmptyMessage(1);
 				
 				}else{
@@ -296,7 +296,7 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 					mHandler.sendEmptyMessage(0);
 				} 
 			}else{
-				tip="ÍøÂçÒì³££¡";
+				tip="ç½‘ç»œå¼‚å¸¸ï¼";
 				mHandler.sendEmptyMessage(0);
 			}
 		}
@@ -307,17 +307,17 @@ public class TourLoginActivity extends NotTitleActivity implements HttpCallBack 
 		resultStr = pu.getData(new String[]{"act","user_login","name",mAccount,"pwd",mPassword
 //				,"imei",PublicDataClass.Imei
 				});
-//		System.out.println("µÇÂ¼·µ»ØÊı¾İ"+resultStr);
+//		System.out.println("ç™»å½•è¿”å›æ•°æ®"+resultStr);
 		DataJsonParser jsonParser=new DataJsonParser();
 		try {
 			datalist=jsonParser.getDataList(resultStr);
-//			System.out.println("·µ»ØÊı¾İ"+datalist);
+//			System.out.println("è¿”å›æ•°æ®"+datalist);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	// ÅĞ¶ÏÍøÂç×´Ì¬²¢ÉèÖÃÍøÂç
+	// åˆ¤æ–­ç½‘ç»œçŠ¶æ€å¹¶è®¾ç½®ç½‘ç»œ
 	private boolean NetWorkStatus() {
 		boolean netSataus = false;
 		ConnectivityManager cwjManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

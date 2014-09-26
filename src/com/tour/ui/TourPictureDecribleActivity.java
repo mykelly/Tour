@@ -16,7 +16,6 @@ public class TourPictureDecribleActivity extends Activity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		System.out.println("Í¼Æ¬ÃèÊö½áÊø");
 		finish();
 	}
 }

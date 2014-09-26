@@ -3,27 +3,27 @@ package com.down.sdk.util;
 public class Configs {
 	public static boolean SDEXIST = false;
 	public static String ASDKROOT=null;
-	/**Êı¾İ°üÄ¿Â¼*/
+	/**æ•°æ®åŒ…ç›®å½•*/
  	public static String APKPATH ="DaMeiTour/video/";
 	public static String ASDK ="/"+APKPATH;
-	/**SDÊ£Óà´óĞ¡M*/
+	/**SDå‰©ä½™å¤§å°M*/
 	public static long SDSIZE = 0;
-	/**Í¨ÖªÀ¸µÄ¹ã²¥½ÓÊÜ*/
+	/**é€šçŸ¥æ çš„å¹¿æ’­æ¥å—*/
 	public static String BROADCASTRECEVIER_ACTON=" com.down.sdk.xx";
-	/**ÓÎÏ·ÁĞ±íurl*/
+	/**æ¸¸æˆåˆ—è¡¨url*/
 	public static String gameListUrl="";
-	/**Ó¦ÓÃÁĞ±íurl*/
+	/**åº”ç”¨åˆ—è¡¨url*/
 	public static String apkListUrl="";
-	/**ÏÂÔØÍê³ÉÌá½»½á¹û*/
+	/**ä¸‹è½½å®Œæˆæäº¤ç»“æœ*/
 	public static String update_info="";
-	/**³õÊ¼»¯*/
+	/**åˆå§‹åŒ–*/
 	public final static String INIT="INIT";
-	/**ÎŞ½çÃæÓ¦ÓÃÊı¾İ±êÊ¶*/
+	/**æ— ç•Œé¢åº”ç”¨æ•°æ®æ ‡è¯†*/
 	public final static String NOUIAPKLIST="noUiapkList";
-	/**ÓĞ½çÃæÓ¦ÓÃÊı¾İ±êÊ¶*/
+	/**æœ‰ç•Œé¢åº”ç”¨æ•°æ®æ ‡è¯†*/
 	public final static String APKLIST="apkList";
-	/**ÎŞ½çÃæÓÎÏ·Êı¾İ±êÊ¶*/
+	/**æ— ç•Œé¢æ¸¸æˆæ•°æ®æ ‡è¯†*/
 	public final static String  GAMELIST="gameList";
-	/**ÍË³ö*/
+	/**é€€å‡º*/
 	public static boolean isDestroy=false;
 }

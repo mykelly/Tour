@@ -79,14 +79,14 @@ public class DownVideoAdpater extends BaseAdapter {
 			holder.videokey.setText("");
 		}
 		if(isDownCom(position)){
-			holder.videodown.setText("ÒÑÏÂÔØ");
+			holder.videodown.setText("å·²ä¸‹è½½");
 		}else{
 			String id=PublicData.moviephone.get(position).getId()+"";
 			TTLog.s("xxxxxxxx========="+id);
 			if(DowenLoadService.downloaders!=null&&DowenLoadService.downloaders.get(id)!=null&&DowenLoadService.downloaders.get(id).isdownloading()){
-				holder.videodown.setText("ÕıÔÚÏÂÔØ");
+				holder.videodown.setText("æ­£åœ¨ä¸‹è½½");
 			}else{
-				holder.videodown.setText("ÏÂÔØÊÓÆµ");
+				holder.videodown.setText("ä¸‹è½½è§†é¢‘");
 			}
 			
 		}
@@ -97,13 +97,13 @@ public class DownVideoAdpater extends BaseAdapter {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//				if (DowenLoadService.downloaders.get(PublicData.moviephone.get(position).getId()+"").isdownloading())
-				if(PublicData.isNetWork){//ÁªÍø		
+				if(PublicData.isNetWork){//è”ç½‘		
 					downMain.DownloadStart(position);
 					Button btn= (Button)v.findViewById(R.id.downvideo);
-					btn.setText("ÕıÔÚÏÂÔØ");
+					btn.setText("æ­£åœ¨ä¸‹è½½");
 
 				}else{
-					Toast.makeText(mContext, "ÍøÂçÒÑ¶Ï¿ª£¬ÎŞ·¨ÏÂÔØÊÓÆµ£¡",Toast.LENGTH_LONG).show();  
+					Toast.makeText(mContext, "ç½‘ç»œå·²æ–­å¼€ï¼Œæ— æ³•ä¸‹è½½è§†é¢‘ï¼",Toast.LENGTH_LONG).show();  
 				}
 				//				else{
 				//					downMain.DownloadPause(position);
@@ -118,16 +118,16 @@ public class DownVideoAdpater extends BaseAdapter {
 				if(isDownCom(position)){
 					String videoUrl=PublicData.moviephone.get(position).getMovieUrl();
 					Intent intent=new Intent();				
-					//					if(PublicData.isNetWork){//ÁªÍø
-					//						 intent.setClass(mContext, VideoPlayer.class);//²¥·ÅÍøÂçÊÓÆµ
+					//					if(PublicData.isNetWork){//è”ç½‘
+					//						 intent.setClass(mContext, VideoPlayer.class);//æ’­æ”¾ç½‘ç»œè§†é¢‘
 					//					}else{
-					intent.setClass(mContext, TourVideoActivity.class);	//²¥·Å±¾µØÊÓÆµ
+					intent.setClass(mContext, TourVideoActivity.class);	//æ’­æ”¾æœ¬åœ°è§†é¢‘
 					//					}					
 					intent.putExtra("VideoUrl", videoUrl);
 					intent.putExtra("VideoPath","/DaMeiTour/video/");
 					mContext.startActivity(intent);
 				}else{
-					Toast toast=Toast.makeText(mContext, "ÏÂÔØÍê£¬²ÅÄÜ²¥·Å",Toast.LENGTH_LONG);
+					Toast toast=Toast.makeText(mContext, "ä¸‹è½½å®Œï¼Œæ‰èƒ½æ’­æ”¾",Toast.LENGTH_LONG);
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 				}

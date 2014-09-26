@@ -14,7 +14,7 @@ import java.net.URLConnection;
 import org.apache.http.conn.ConnectTimeoutException;
 public class HttpUtils {
 	/**
-	 * ·â×°ÇëÇóÍ·ĞÅÏ¢
+	 * å°è£…è¯·æ±‚å¤´ä¿¡æ¯
 	 * @param urls
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public class HttpUtils {
 			urlConn = null;
 			e1.printStackTrace();
 		} catch (java.net.UnknownHostException e2) {
-//			LogUtils.e("³ö´íÁË", "ÓòÃû³ö´íÁË");
+//			LogUtils.e("å‡ºé”™äº†", "åŸŸåå‡ºé”™äº†");
 			url = null;
 			urlConn = null;
 			e2.printStackTrace();
@@ -49,18 +49,18 @@ public class HttpUtils {
 	/*********************************************** GET *****************************************************/
 	
 	/**
-	 * GETµÃµ½HTTPÁ¬½Ó
-	 * urls£ºÇëÇóurl
-	 * flag£º0Õı³£·â×°ĞÅÏ¢ 1 ÒÆ¶¯KJAVA 2ÒÆ¶¯KJAVAĞéÄâÏÂÔØ
+	 * GETå¾—åˆ°HTTPè¿æ¥
+	 * urlsï¼šè¯·æ±‚url
+	 * flagï¼š0æ­£å¸¸å°è£…ä¿¡æ¯ 1 ç§»åŠ¨KJAVA 2ç§»åŠ¨KJAVAè™šæ‹Ÿä¸‹è½½
 	 */
 	public static HttpURLConnection getMethodDown(String urls) {
 		HttpURLConnection urlConn = null;
 		urlConn = (HttpURLConnection) headMethod(urls);
 		if (urlConn != null) {
 			try {
-				// ÉèÖÃÒÔGET·½Ê½
+				// è®¾ç½®ä»¥GETæ–¹å¼
 				urlConn.setRequestMethod("GET");
-				// ÊÇ·ñ¸úËæÖØ¶¨Ïò
+				// æ˜¯å¦è·Ÿéšé‡å®šå‘
 				urlConn.setInstanceFollowRedirects(true);
 				
 				
@@ -74,7 +74,7 @@ public class HttpUtils {
 		return urlConn;
 	}
 	/**
-	 * GETµÃµ½HTTPÁ¬½Ó urls£ºÇëÇóurl 
+	 * GETå¾—åˆ°HTTPè¿æ¥ urlsï¼šè¯·æ±‚url 
 	 */
 	public static String getMethod(String urls) {
 		HttpURLConnection urlConn = null;
@@ -82,9 +82,9 @@ public class HttpUtils {
 		urlConn = (HttpURLConnection) headMethod(urls);
 		if (urlConn != null) {
 			try {
-				// ÉèÖÃÒÔGET·½Ê½
+				// è®¾ç½®ä»¥GETæ–¹å¼
 				urlConn.setRequestMethod("GET");
-				// ÊÇ·ñ¸úËæÖØ¶¨Ïò
+				// æ˜¯å¦è·Ÿéšé‡å®šå‘
 				urlConn.setInstanceFollowRedirects(true);
 
 				if (urlConn.getResponseCode() == 200) {
@@ -99,10 +99,10 @@ public class HttpUtils {
 					in.close();
 				}
 
-			} catch (ConnectTimeoutException e) {// Á¬½Ó³¬Ê±
+			} catch (ConnectTimeoutException e) {// è¿æ¥è¶…æ—¶
 				e.printStackTrace();
 				return "exception ConnectTimeout";
-			} catch (SocketTimeoutException e) {// ¶ÁÈ¡³¬Ê±
+			} catch (SocketTimeoutException e) {// è¯»å–è¶…æ—¶
 				e.printStackTrace();
 				return "exception SocketTimeout";
 			} catch (MalformedURLException e) {
@@ -117,7 +117,7 @@ public class HttpUtils {
 		return buffer.toString();
 	}
 	/**
-	 * »ñÈ¡urlÖĞÎÄ¼şÃû
+	 * è·å–urlä¸­æ–‡ä»¶å
 	 * 
 	 * @param urls
 	 * @return

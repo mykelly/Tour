@@ -50,14 +50,14 @@ import com.tour.view.WaitDialog;
 
 /**
  * 
- * @author ly ÍÅÁĞ±í
+ * @author ly å›¢åˆ—è¡¨
  * @param <RollListAdpater>
  */
 public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 	private String url = "http://api.diaobao.in/index.php/wemedia_first/splash_screen?device_type=5&access_token=47aee53783c7b8f0aa726b5f31450472"; 
 	private ImageButton ib_fresh,ib_exit;
 	private TextView mTitle;
-	private WaitDialog dialog;// ¡°µÈ´ı¡±¶Ô»°¿ò
+	private WaitDialog dialog;// â€œç­‰å¾…â€å¯¹è¯æ¡†
 	private ListView rollList;
 	private RollListAdpater rollAdapter;
 	private HttpAsynTask httpAsynTask;
@@ -66,9 +66,9 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 	private	List<HashMap<String, List<HashMap<String, String>>>> datalist = new ArrayList<HashMap<String, List<HashMap<String, String>>>>();
 	private RelativeLayout relyt_download;
 	private LinearLayout lilyt_download;
-	private	TextView tv_tip; // ÌáÊ¾
-	private	TextView tv_mDate; // ÈÕÆÚ
-	private	TextView tv_mTitle; // ÍÅÃû
+	private	TextView tv_tip; // æç¤º
+	private	TextView tv_mDate; // æ—¥æœŸ
+	private	TextView tv_mTitle; // å›¢å
 	private	TextView tv_mNumber;
 	private	TextView tv_mDowanLoad;
 	@Override
@@ -104,14 +104,14 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 						break;
 					case 2:
 						SaveDataClass saveDataClass=new SaveDataClass();
-						saveDataClass.saveLastUpDataTime(getApplicationContext());//±£´æ¸üĞÂÊı¾İÊ±¼ä
+						saveDataClass.saveLastUpDataTime(getApplicationContext());//ä¿å­˜æ›´æ–°æ•°æ®æ—¶é—´
 						String zipPath="";
 						if (Environment.getExternalStorageState().equals(
 								Environment.MEDIA_MOUNTED)) {					 
 							zipPath =Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "DaMeiTour" + File.separator + "zip"+File.separator;
 						} else {
 							zipPath = Environment.getExternalStorageDirectory().getPath();
-//							System.out.println("Ã»ÓĞsd¿¨ÏÂÔØÂ·¾¶apkPath="+apkPath);
+//							System.out.println("æ²¡æœ‰sdå¡ä¸‹è½½è·¯å¾„apkPath="+apkPath);
 							for (int i = 0; i < 4; i++) {
 								String temp = zipPath + i;
 								File f = new File(temp);
@@ -127,7 +127,7 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 						createDir(folderPath);
 						UnZipFile unZipFile=new UnZipFile();
 						try {
-							unZipFile.upZipFile(zipFile, folderPath);//½âÑ¹Ëõ°ü
+							unZipFile.upZipFile(zipFile, folderPath);//è§£å‹ç¼©åŒ…
 						} catch (ZipException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -193,7 +193,7 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 		tv_mTitle=(TextView) findViewById(R.id.roll_list_item_title);
 		tv_mNumber=(TextView) findViewById(R.id.roll_list_item_number);
 		tv_mDowanLoad=(TextView) findViewById(R.id.roll_list_item_down);
-		//ÏÂÔØÑ¹Ëõ°ü£¨ÏÂÔØµØÖ·Îª:PublicData.zip_url£©,ÏÂÔØÍêÑ¹Ëõ°ü×Ô¶¯Ìø×ªµ½ÍÅĞÅÏ¢Ò³Ãæ
+		//ä¸‹è½½å‹ç¼©åŒ…ï¼ˆä¸‹è½½åœ°å€ä¸º:PublicData.zip_urlï¼‰,ä¸‹è½½å®Œå‹ç¼©åŒ…è‡ªåŠ¨è·³è½¬åˆ°å›¢ä¿¡æ¯é¡µé¢
 //		tv_mDowanLoad.setOnClickListener(new OnClickListener() {
 		lilyt_download.setOnClickListener(new OnClickListener() {
 			
@@ -227,7 +227,7 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 		return file;
 	}
 	/**
-	 * »ñÈ¡ÍÅĞÅÏ¢½Ó¿Ú
+	 * è·å–å›¢ä¿¡æ¯æ¥å£
 	 * @author wl
 	 *
 	 */
@@ -254,7 +254,7 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 					mHandler.sendEmptyMessage(0);
 				} 
 			}else{
-				tip="ÍøÂçÒì³££¡";
+				tip="ç½‘ç»œå¼‚å¸¸ï¼";
 				mHandler.sendEmptyMessage(0);
 			}
 		}
@@ -263,12 +263,12 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 		String resultStr = new String("");
 		PostUtil pu = new PostUtil();
 		resultStr = pu.getData(new String[]{"act","get_user_tour","uid",PublicData.uid});
-//		System.out.println("·µ»ØÊı¾İ"+resultStr);
+//		System.out.println("è¿”å›æ•°æ®"+resultStr);
 //		{"tour_id":"75","tour_title":"abc","tour_zip":"t75-pf4edp","tour_no":"007","tour_date":"2014-04-30","url":"http:\/\/192.168.1.10:7777\/public\/upload\/zip\/t75-pf4edp.zip","status":"1"}
 		DataJsonParser jsonParser=new DataJsonParser();
 		try {
 			datalist=jsonParser.getDataList(resultStr);
-//			System.out.println("·µ»ØÊı¾İ"+datalist);
+//			System.out.println("è¿”å›æ•°æ®"+datalist);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

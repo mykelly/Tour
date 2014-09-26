@@ -21,39 +21,39 @@ import com.down.sdk.util.LogUtils;
 
 public class Downloader {
  
-	// ÏÂÔØµÄÎÄ¼şÃû³Æ
+	// ä¸‹è½½çš„æ–‡ä»¶åç§°
 	private String filename;
-	// ÏÂÔØµÄµØÖ·
+	// ä¸‹è½½çš„åœ°å€
 	private String urlstr;
-	// ÏÂİdÎÄ¼şID
+	// ä¸‹è¼‰æ–‡ä»¶ID
 	private String apkId;
-	// ÏÂÔØ½ø¶È
+	// ä¸‹è½½è¿›åº¦
 	private int progress=0;
-	// ¹¤¾ßÀà
+	// å·¥å…·ç±»
 	private Dao dao;
-	// ËùÒªÏÂÔØµÄÎÄ¼şµÄ´óĞ¡
+	// æ‰€è¦ä¸‹è½½çš„æ–‡ä»¶çš„å¤§å°
 	private int fileSize;
-	private static final int INIT = 1;// ¶¨ÒåÈıÖÖÏÂÔØµÄ×´Ì¬£º³õÊ¼»¯×´Ì¬£¬ÕıÔÚÏÂÔØ×´Ì¬£¬ÔİÍ£×´Ì¬
-	// ÕıÔÚÏÂÔØ
+	private static final int INIT = 1;// å®šä¹‰ä¸‰ç§ä¸‹è½½çš„çŠ¶æ€ï¼šåˆå§‹åŒ–çŠ¶æ€ï¼Œæ­£åœ¨ä¸‹è½½çŠ¶æ€ï¼Œæš‚åœçŠ¶æ€
+	// æ­£åœ¨ä¸‹è½½
 	private static final int DOWNLOADING = 2;
-	/** ÔİÍ£ÏÂÔØ */
+	/** æš‚åœä¸‹è½½ */
 	private static final int PAUSE = 3;
-	/** ÏÂÔØ */
+	/** ä¸‹è½½ */
 	private int state = INIT;
-	// ÏÂÔØ°Ù·Ö±È
+	// ä¸‹è½½ç™¾åˆ†æ¯”
 	private int downloadCount = 0;
 	private BlockingQueue<Runnable> queue;
 	private ThreadPoolExecutor executor;
-	//ÏÂÔØ¸öÊı
+	//ä¸‹è½½ä¸ªæ•°
 	private final int downCount=2;
 	private Context mContext;
 	/**
 	 * @param apkId
-	 *            Ó¦ÓÃµÄID
+	 *            åº”ç”¨çš„ID
 	 * @param urlstr
-	 *            ÏÂÔØµØÖ·
+	 *            ä¸‹è½½åœ°å€
 	 * @param context
-	 *            ÉÏÏÂÎÄ
+	 *            ä¸Šä¸‹æ–‡
 	 */
 	public Downloader(String apkId, String urlstr, Context context ) {
 		this.urlstr = urlstr;
@@ -61,7 +61,7 @@ public class Downloader {
 		this.mContext=context;
 		dao = new Dao(context);		
 		if (urlstr != null) {
-			// »ñµÃÎÄ¼şÃû
+			// è·å¾—æ–‡ä»¶å
 			filename = urlstr.substring(urlstr.lastIndexOf("/") + 1, urlstr.length());
 		}
 	}
@@ -75,7 +75,7 @@ public class Downloader {
 //				DowenLoadService.downloaders.get(apkId).delete(urlstr);
 				DowenLoadService.downloaders.get(apkId).reset();
 				DowenLoadService.downloaders.remove(apkId);
-				Toast.makeText(mContext, "ÒÑ¾­ÏÂÔØ",
+				Toast.makeText(mContext, "å·²ç»ä¸‹è½½",
 						Toast.LENGTH_SHORT).show();
 				DownMain.downMain.getDownCallBack().getApkProgress(apkId, 100,
 						100);
@@ -89,34 +89,34 @@ public class Downloader {
 	}; 
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÕıÔÚÏÂÔØ
+	 * åˆ¤æ–­æ˜¯å¦æ­£åœ¨ä¸‹è½½
 	 */
 	public boolean isdownloading() {
 		return state == DOWNLOADING;
 	}
 
 	/**
-	 * ÅĞ¶Ï ÏÂÔØ×´Ì¬
+	 * åˆ¤æ–­ ä¸‹è½½çŠ¶æ€
 	 */
 	public int downloadstate() {
 		return state;
 	}
 
 	/**
-	 * µÃµ½downloaderÀïµÄĞÅÏ¢ Ê×ÏÈ½øĞĞÅĞ¶ÏÊÇ·ñÊÇµÚÒ»´ÎÏÂÔØ£¬Èç¹ûÊÇµÚÒ»´Î¾ÍÒª½øĞĞ³õÊ¼»¯£¬²¢½«ÏÂÔØÆ÷µÄĞÅÏ¢±£´æµ½Êı¾İ¿âÖĞ
-	 * Èç¹û²»ÊÇµÚÒ»´ÎÏÂÔØ£¬ÄÇ¾ÍÒª´ÓÊı¾İ¿âÖĞ¶Á³öÖ®Ç°ÏÂÔØµÄĞÅÏ¢£¨ÆğÊ¼Î»ÖÃ£¬½áÊøÎªÖ¹£¬ÎÄ¼ş´óĞ¡µÈ£©£¬²¢½«ÏÂÔØĞÅÏ¢·µ»Ø¸øÏÂÔØÆ÷
+	 * å¾—åˆ°downloaderé‡Œçš„ä¿¡æ¯ é¦–å…ˆè¿›è¡Œåˆ¤æ–­æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡ä¸‹è½½ï¼Œå¦‚æœæ˜¯ç¬¬ä¸€æ¬¡å°±è¦è¿›è¡Œåˆå§‹åŒ–ï¼Œå¹¶å°†ä¸‹è½½å™¨çš„ä¿¡æ¯ä¿å­˜åˆ°æ•°æ®åº“ä¸­
+	 * å¦‚æœä¸æ˜¯ç¬¬ä¸€æ¬¡ä¸‹è½½ï¼Œé‚£å°±è¦ä»æ•°æ®åº“ä¸­è¯»å‡ºä¹‹å‰ä¸‹è½½çš„ä¿¡æ¯ï¼ˆèµ·å§‹ä½ç½®ï¼Œç»“æŸä¸ºæ­¢ï¼Œæ–‡ä»¶å¤§å°ç­‰ï¼‰ï¼Œå¹¶å°†ä¸‹è½½ä¿¡æ¯è¿”å›ç»™ä¸‹è½½å™¨
 	 */
 	public void getDownloaderInfors() {
 		FileUtils.ExistSDCard(mContext);
 		File file_size = new File(FileUtils.jointPath(filename));
 		if (isFirst(urlstr)) {
-			// Ïß³Ì³Ø£º×î´ó5Ìõ£¬Ã¿´ÎÖ´ĞĞ£º1Ìõ£¬¿ÕÏĞÏß³Ì½áÊøµÄ³¬Ê±Ê±¼ä£º180Ãë
+			// çº¿ç¨‹æ± ï¼šæœ€å¤§5æ¡ï¼Œæ¯æ¬¡æ‰§è¡Œï¼š1æ¡ï¼Œç©ºé—²çº¿ç¨‹ç»“æŸçš„è¶…æ—¶æ—¶é—´ï¼š180ç§’
 			if(executor==null){
 				queue = new LinkedBlockingQueue<Runnable>();
 				executor = new ThreadPoolExecutor(1, 5, 180, TimeUnit.SECONDS,
 						queue);
 			}
-			// ÓÃÏß³Ì³ØÀ´×öÏÂÔØÈÎÎñ
+			// ç”¨çº¿ç¨‹æ± æ¥åšä¸‹è½½ä»»åŠ¡
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
@@ -126,7 +126,7 @@ public class Downloader {
 		} else {
 
 			int compeleteSize = (int) file_size.length();
-			// µÃµ½Êı¾İ¿âÖĞÒÑÓĞµÄurlstrµÄÏÂÔØÆ÷µÄ¾ßÌåĞÅÏ¢
+			// å¾—åˆ°æ•°æ®åº“ä¸­å·²æœ‰çš„urlstrçš„ä¸‹è½½å™¨çš„å…·ä½“ä¿¡æ¯
 			fileSize = dao.getInfos(urlstr, compeleteSize);
 			if (fileSize == compeleteSize) {
 				mHandler.sendEmptyMessage(1);
@@ -151,7 +151,7 @@ public class Downloader {
 			if (connection.getResponseCode() == 200) {
 
 				int range = fileSize;
-				// ±£´æinfosÖĞµÄÊı¾İµ½Êı¾İ¿â
+				// ä¿å­˜infosä¸­çš„æ•°æ®åˆ°æ•°æ®åº“
 				dao.saveInfos(0, range, fileSize, 0, urlstr);
 				
 				File file_size = new File(FileUtils.jointPath(filename));
@@ -167,27 +167,27 @@ public class Downloader {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-//			LogUtils.s("ÍøÂç³¬Ê±");
+//			LogUtils.s("ç½‘ç»œè¶…æ—¶");
 		}
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÊÇµÚÒ»´Î ÏÂÔØ
+	 * åˆ¤æ–­æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡ ä¸‹è½½
 	 */
 	private boolean isFirst(String urlstr) {
 		return dao.isHasInfors(urlstr);
 	}
 
 	/**
-	 * * ÀûÓÃÏß³Ì¿ªÊ¼ÏÂÔØÊı¾İ
+	 * * åˆ©ç”¨çº¿ç¨‹å¼€å§‹ä¸‹è½½æ•°æ®
 	 */
 	public void download(String id, int endPos, int compeleteSize, String urlstr) {
-//		LogUtils.s("ÀûÓÃÏß³Ì¿ªÊ¼ÏÂÔØÊı¾İ");
+//		LogUtils.s("åˆ©ç”¨çº¿ç¨‹å¼€å§‹ä¸‹è½½æ•°æ®");
 		if (state == DOWNLOADING)
 			return;
 
 		state = DOWNLOADING;
-//		LogUtils.s(compeleteSize+"ÀûÓÃÏß³Ì¿ªÊ¼ÏÂÔØÊı¾İ---2"+endPos);
+//		LogUtils.s(compeleteSize+"åˆ©ç”¨çº¿ç¨‹å¼€å§‹ä¸‹è½½æ•°æ®---2"+endPos);
 //		System.out.println("downExecutor==null---"+DowenLoadService.downExecutor==null);
 		if(DowenLoadService.downExecutor==null){
 			DowenLoadService.downQueue = new LinkedBlockingQueue<Runnable>();
@@ -223,7 +223,7 @@ public class Downloader {
 				connection = (HttpURLConnection) url.openConnection();
 				connection.setConnectTimeout(30000);
 				connection.setRequestMethod("GET");
-				// ÉèÖÃ·¶Î§£¬¸ñÊ½ÎªRange£ºbytes x-y;
+				// è®¾ç½®èŒƒå›´ï¼Œæ ¼å¼ä¸ºRangeï¼šbytes x-y;
 				connection.setRequestProperty("Range", "bytes=" + compeleteSize
 						+ "-" + endPos);
 //				LogUtils.s("--compeleteSize=" + compeleteSize
@@ -231,13 +231,13 @@ public class Downloader {
 
 				randomAccessFile = new RandomAccessFile(FileUtils.jointPath(filename), "rwd");
 				randomAccessFile.seek(compeleteSize);
-				// ½«ÒªÏÂÔØµÄÎÄ¼şĞ´µ½±£´æÔÚ±£´æÂ·¾¶ÏÂµÄÎÄ¼şÖĞ
+				// å°†è¦ä¸‹è½½çš„æ–‡ä»¶å†™åˆ°ä¿å­˜åœ¨ä¿å­˜è·¯å¾„ä¸‹çš„æ–‡ä»¶ä¸­
 				is = connection.getInputStream();
 				byte[] buffer = new byte[4096];
 				int length = -1;
 				while ((length = is.read(buffer)) != -1) {
 					if (state == PAUSE) {
-//						LogUtils.s("Í£Í£Í£");
+//						LogUtils.s("åœåœåœ");
 						return;
 					}
 					randomAccessFile.write(buffer, 0, length);
@@ -255,10 +255,10 @@ public class Downloader {
 					}
 
 				
-					if (compeleteSize == endPos) {// ÏÂÔØÍê³É
+					if (compeleteSize == endPos) {// ä¸‹è½½å®Œæˆ
 						DowenLoadService.downloaders.get(downapkId)
 								.setProgress(apkprogress);
-//						LogUtils.s("ÏÂÔØÍê³É" + "size--"
+//						LogUtils.s("ä¸‹è½½å®Œæˆ" + "size--"
 //								+ DowenLoadService.downloaders.size()
 //								+ "urlstr---"
 //								+ DowenLoadService.downloaders.get(downapkId));
@@ -273,7 +273,7 @@ public class Downloader {
 
 				}
 			} catch (Exception e) {
-//				LogUtils.s("ÏÂÔØÊ§°Ü");
+//				LogUtils.s("ä¸‹è½½å¤±è´¥");
 				
 				e.printStackTrace();
 			} finally {
@@ -294,7 +294,7 @@ public class Downloader {
 
 
 	/**
-	 * É¾³ıÊı¾İ¿âÖĞurlstr¶ÔÓ¦µÄÏÂÔØÆ÷ĞÅÏ¢
+	 * åˆ é™¤æ•°æ®åº“ä¸­urlstrå¯¹åº”çš„ä¸‹è½½å™¨ä¿¡æ¯
 	 * 
 	 * @param urlstr
 	 */
@@ -303,14 +303,14 @@ public class Downloader {
 	}*/
 
 	/**
-	 * ÉèÖÃÔİÍ£
+	 * è®¾ç½®æš‚åœ
 	 */
 	public void pause() {
 		state = PAUSE;
 	}
 
 	/**
-	 * ÖØÖÃÏÂÔØ×´Ì¬
+	 * é‡ç½®ä¸‹è½½çŠ¶æ€
 	 */
 	public void reset() {
 		state = INIT;

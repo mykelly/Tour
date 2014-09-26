@@ -22,7 +22,7 @@ public class HttpAsynTask extends AsyncTask<String, Integer, String> {
 	
 	@Override
 	protected void onPreExecute() {
-		//µÚÒ»¸öÖ´ĞĞ·½·¨
+		//ç¬¬ä¸€ä¸ªæ‰§è¡Œæ–¹æ³•
 		super.onPreExecute();
 		isRunning=true;
 	}
@@ -31,18 +31,18 @@ public class HttpAsynTask extends AsyncTask<String, Integer, String> {
 	@Override
 	protected void onProgressUpdate(Integer... values) {
 		//super.onProgressUpdate(values);
-        //Õâ¸öº¯ÊıÔÚdoInBackgroundµ÷ÓÃpublishProgressÊ±´¥·¢£¬ËäÈ»µ÷ÓÃÊ±Ö»ÓĞÒ»¸ö²ÎÊı  
-        //µ«ÊÇÕâÀïÈ¡µ½µÄÊÇÒ»¸öÊı×é,ËùÒÔÒªÓÃprogesss[0]À´È¡Öµ  
-        //µÚn¸ö²ÎÊı¾ÍÓÃprogress[n]À´È¡Öµ 
+        //è¿™ä¸ªå‡½æ•°åœ¨doInBackgroundè°ƒç”¨publishProgressæ—¶è§¦å‘ï¼Œè™½ç„¶è°ƒç”¨æ—¶åªæœ‰ä¸€ä¸ªå‚æ•°  
+        //ä½†æ˜¯è¿™é‡Œå–åˆ°çš„æ˜¯ä¸€ä¸ªæ•°ç»„,æ‰€ä»¥è¦ç”¨progesss[0]æ¥å–å€¼  
+        //ç¬¬nä¸ªå‚æ•°å°±ç”¨progress[n]æ¥å–å€¼ 
 		
-		//ÕâÀï¿ÉÒÔÓÃÀ´½øĞĞUI¸üĞÂÌáÊ¾
+		//è¿™é‡Œå¯ä»¥ç”¨æ¥è¿›è¡ŒUIæ›´æ–°æç¤º
  
 	}
 
 	
 	@Override
 	protected String doInBackground(String... params) {
-		//µÚ¶ş¸öÖ´ĞĞ·½·¨,onPreExecute()Ö´ĞĞÍêºóÖ´ĞĞ
+		//ç¬¬äºŒä¸ªæ‰§è¡Œæ–¹æ³•,onPreExecute()æ‰§è¡Œå®Œåæ‰§è¡Œ
 		json = HttpRequestUtil.getJsonObjectFromServer(url);
 		
 		return  "";
@@ -50,9 +50,9 @@ public class HttpAsynTask extends AsyncTask<String, Integer, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-        //doInBackground·µ»ØÊ±´¥·¢£¬»»¾ä»°Ëµ£¬¾ÍÊÇdoInBackgroundÖ´ĞĞÍêºó´¥·¢  
-        //ÕâÀïµÄresult¾ÍÊÇÉÏÃædoInBackgroundÖ´ĞĞºóµÄ·µ»ØÖµ£¬ËùÒÔÕâÀïÊÇ"Ö´ĞĞÍê±Ï" 
-		//ÕâÀï¿ÉÒÔÓÃÀ´UI½á¹ûÏÔÊ¾
+        //doInBackgroundè¿”å›æ—¶è§¦å‘ï¼Œæ¢å¥è¯è¯´ï¼Œå°±æ˜¯doInBackgroundæ‰§è¡Œå®Œåè§¦å‘  
+        //è¿™é‡Œçš„resultå°±æ˜¯ä¸Šé¢doInBackgroundæ‰§è¡Œåçš„è¿”å›å€¼ï¼Œæ‰€ä»¥è¿™é‡Œæ˜¯"æ‰§è¡Œå®Œæ¯•" 
+		//è¿™é‡Œå¯ä»¥ç”¨æ¥UIç»“æœæ˜¾ç¤º
 		if(callBack!=null){
 			callBack.httpCallBack(flag,json);
 		}
@@ -61,7 +61,7 @@ public class HttpAsynTask extends AsyncTask<String, Integer, String> {
  
 	}
 
-	//onCancelled·½·¨ÓÃÓÚÔÚÈ¡ÏûÖ´ĞĞÖĞµÄÈÎÎñÊ±¸ü¸ÄUI  
+	//onCancelledæ–¹æ³•ç”¨äºåœ¨å–æ¶ˆæ‰§è¡Œä¸­çš„ä»»åŠ¡æ—¶æ›´æ”¹UI  
     @Override  
     protected void onCancelled() {  
      

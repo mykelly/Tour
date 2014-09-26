@@ -14,7 +14,7 @@ import android.os.Environment;
 import android.os.StatFs;
 
 /**
- * ÎÄ¼ş¹ÜÀí
+ * æ–‡ä»¶ç®¡ç†
  * 
  * @author Administrator
  * 
@@ -22,11 +22,11 @@ import android.os.StatFs;
 public class FileUtils {
 
 	/**
-	 * É¾³ıÖ¸¶¨ÎÄ¼ş
+	 * åˆ é™¤æŒ‡å®šæ–‡ä»¶
 	 * 
 	 * @param strFile
-	 *            ÎÄ¼şÈ«Â·¾¶Ãû
-	 * @return boolean É¾³ı³É¹¦·µ»Øtrue , ·ñÔò·µ»Øfalse
+	 *            æ–‡ä»¶å…¨è·¯å¾„å
+	 * @return boolean åˆ é™¤æˆåŠŸè¿”å›true , å¦åˆ™è¿”å›false
 	 */
 	public static boolean deleteFile(String strFile) {
 		File file = new File(strFile);
@@ -39,11 +39,11 @@ public class FileUtils {
 	}
 
 	/**
-	 * ÅĞ¶ÏÎÄ¼ş»òÄ¿Â¼ÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­æ–‡ä»¶æˆ–ç›®å½•æ˜¯å¦å­˜åœ¨
 	 * 
 	 * @param str
-	 *            ÎÄ¼ş»òÄ¿Â¼È«Ãû
-	 * @return boolean É¾³ı³É¹¦Óë·ñ
+	 *            æ–‡ä»¶æˆ–ç›®å½•å…¨å
+	 * @return boolean åˆ é™¤æˆåŠŸä¸å¦
 	 */
 	public static boolean isExist(String str) {
 		File aFile = new File(str);
@@ -51,21 +51,21 @@ public class FileUtils {
 	}
 
 	/**
-	 * ÅĞ¶ÏSD¿¨ÊÇ·ñ´æÔÚ
+	 * åˆ¤æ–­SDå¡æ˜¯å¦å­˜åœ¨
 	 * 
 	 * @return
 	 */
 	public static void ExistSDCard(Context context) {
 		
-	   if(android.os.Environment.getExternalStoragePublicDirectory("/mnt/sdcard/").exists()){// SD¿¨´æÔÚ
+	   if(android.os.Environment.getExternalStoragePublicDirectory("/mnt/sdcard/").exists()){// SDå¡å­˜åœ¨
 		   Configs.ASDKROOT="/mnt/sdcard/"+Configs.ASDK;
 	   }else if (android.os.Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED)) {// SD¿¨´æÔÚ
+				android.os.Environment.MEDIA_MOUNTED)) {// SDå¡å­˜åœ¨
 			File path = Environment.getExternalStorageDirectory();
 			Configs.SDEXIST = true;
 			Configs.ASDKROOT = path.getAbsolutePath() + Configs.ASDK;
 
-		} else { // SD¿¨²»´æÔÚ
+		} else { // SDå¡ä¸å­˜åœ¨
 			Configs.SDEXIST = false;
 			Configs.ASDKROOT =context.getFilesDir()+"/";
 
@@ -79,28 +79,28 @@ public class FileUtils {
 	}
 
 	/**
-	 * »ñÈ¡SD¿¨Ê£Óà´óĞ¡
+	 * è·å–SDå¡å‰©ä½™å¤§å°
 	 * 
 	 * @return
 	 */
 	public static long getSDFreeSize() {
-		// È¡µÃSD¿¨ÎÄ¼şÂ·¾¶
+		// å–å¾—SDå¡æ–‡ä»¶è·¯å¾„
 		File path = Environment.getExternalStorageDirectory();
 		StatFs sf = new StatFs(path.getPath());
-		// »ñÈ¡µ¥¸öÊı¾İ¿éµÄ´óĞ¡(Byte)
+		// è·å–å•ä¸ªæ•°æ®å—çš„å¤§å°(Byte)
 		long blockSize = sf.getBlockSize();
-		// ¿ÕÏĞµÄÊı¾İ¿éµÄÊıÁ¿
+		// ç©ºé—²çš„æ•°æ®å—çš„æ•°é‡
 		long freeBlocks = sf.getAvailableBlocks();
-		// ·µ»ØSD¿¨¿ÕÏĞ´óĞ¡
-		// return freeBlocks * blockSize; //µ¥Î»Byte
-		// return (freeBlocks * blockSize)/1024; //µ¥Î»KB
+		// è¿”å›SDå¡ç©ºé—²å¤§å°
+		// return freeBlocks * blockSize; //å•ä½Byte
+		// return (freeBlocks * blockSize)/1024; //å•ä½KB
 		long size = (freeBlocks * blockSize) / 1024 / 1024;
 		Configs.SDSIZE = size;
-		return size; // µ¥Î»MB
+		return size; // å•ä½MB
 	}
 
 	/**
-	 * µÃµ½Drawable
+	 * å¾—åˆ°Drawable
 	 * @param name
 	 * @return
 	 */
@@ -116,28 +116,28 @@ public class FileUtils {
 	}
 	/**
 	 * 
-	 * @param drawable ×ª»»³É Bitmap
+	 * @param drawable è½¬æ¢æˆ Bitmap
 	 * @return
 	 */
 	public static Bitmap drawableToBitmap(Drawable drawable) {  
-        // È¡ drawable µÄ³¤¿í  
+        // å– drawable çš„é•¿å®½  
         int w = drawable.getIntrinsicWidth();  
         int h = drawable.getIntrinsicHeight();  
   
-        // È¡ drawable µÄÑÕÉ«¸ñÊ½  
+        // å– drawable çš„é¢œè‰²æ ¼å¼  
         Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888  
                 : Bitmap.Config.RGB_565;  
-        // ½¨Á¢¶ÔÓ¦ bitmap  
+        // å»ºç«‹å¯¹åº” bitmap  
         Bitmap bitmap = Bitmap.createBitmap(w, h, config);  
-        // ½¨Á¢¶ÔÓ¦ bitmap µÄ»­²¼  
+        // å»ºç«‹å¯¹åº” bitmap çš„ç”»å¸ƒ  
         Canvas canvas = new Canvas(bitmap);  
         drawable.setBounds(0, 0, w, h);  
-        // °Ñ drawable ÄÚÈİ»­µ½»­²¼ÖĞ  
+        // æŠŠ drawable å†…å®¹ç”»åˆ°ç”»å¸ƒä¸­  
         drawable.draw(canvas);  
         return bitmap;  
     }  
 	/**
-	 * ÏÂÔØÂ·¾¶
+	 * ä¸‹è½½è·¯å¾„
 	 */
 	public static String jointPath (String filename) {
 		String path=Configs.ASDKROOT+filename;

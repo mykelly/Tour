@@ -8,17 +8,17 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 /**
- * ÊµÏÖ¶ÔJSONµÄÍ¨ÓÃ½âÎö
+ * å®ç°å¯¹JSONçš„é€šç”¨è§£æ
  * 
  * <p>
- * ±ØĞëÊ¹ÓÃList[HashMap[String, List[HashMap[String, String]]]]´æ·ÅÊı¾İ
+ * å¿…é¡»ä½¿ç”¨List[HashMap[String, List[HashMap[String, String]]]]å­˜æ”¾æ•°æ®
  * 
  * <p>
- * È¡Êı¾İµÄ·½·¨ÈçÏÂ£º
+ * å–æ•°æ®çš„æ–¹æ³•å¦‚ä¸‹ï¼š
  * 
- * <b> 2Î¬Êı¾İ£ºlist.get(0).get("exam_begin").get(0).get("exam_begin")</b>
+ * <b> 2ç»´æ•°æ®ï¼šlist.get(0).get("exam_begin").get(0).get("exam_begin")</b>
  * <p>
- * <b> 3Î¬Êı¾İ£ºlist.get(0).get("list").get(position).get("±êÇ©Ãû")</b>
+ * <b> 3ç»´æ•°æ®ï¼šlist.get(0).get("list").get(position).get("æ ‡ç­¾å")</b>
  * 
  * @author wl
  * 
@@ -37,13 +37,13 @@ public class DataJsonParser {
 				new HashMap<String, List<HashMap<String, String>>>();
 
 		@SuppressWarnings("unchecked")
-		Iterator<String> outKey = jsonObject.keys();// »ñµÃ¼üÃû
+		Iterator<String> outKey = jsonObject.keys();// è·å¾—é”®å
 		String key1, value1;
 		while (outKey.hasNext()) {
 			key1 = (String) outKey.next();
 			List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
-			if (key1.equals("list")) {// ·¢ÏÖ2Î¬Êı×é
+			if (key1.equals("list")) {// å‘ç°2ç»´æ•°ç»„
 				JSONArray jsonArray = jsonObject.getJSONArray(key1);
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject object = jsonArray.getJSONObject(i);
@@ -55,20 +55,20 @@ public class DataJsonParser {
 					while (inKey.hasNext()) {
 						key2 = (String) inKey.next();
 						value2 = object.getString(key2);
-						inMapList.put(key2, value2);// ´æÈë×îÄÚ²ãÊı¾İ
+						inMapList.put(key2, value2);// å­˜å…¥æœ€å†…å±‚æ•°æ®
 					}
-					list.add(inMapList);// ÉÏÒ»¼¶Êı¾İ£¬¶à¸ö
+					list.add(inMapList);// ä¸Šä¸€çº§æ•°æ®ï¼Œå¤šä¸ª
 				}
-				outMap.put(key1, list);// ÄÒÀ¨Ö®Ç° ½âÎöµÄÊı¾İ
-			} else {// ·ñÔò1Î¬Êı×é×÷2Î¬´æ´¢
+				outMap.put(key1, list);// å›Šæ‹¬ä¹‹å‰ è§£æçš„æ•°æ®
+			} else {// å¦åˆ™1ç»´æ•°ç»„ä½œ2ç»´å­˜å‚¨
 				value1 = jsonObject.getString(key1);
 				HashMap<String, String> inMapValue = new HashMap<String, String>();
 				inMapValue.put(key1, value1);
 				list.add(inMapValue);
-				outMap.put(key1, list);// ÄÒÀ¨½âÎöµÄÊı¾İ
+				outMap.put(key1, list);// å›Šæ‹¬è§£æçš„æ•°æ®
 			}
 		}
-		listAll.add(outMap);// ´æÈëÍêÕûµÄÊı¾İ
+		listAll.add(outMap);// å­˜å…¥å®Œæ•´çš„æ•°æ®
 
 		return listAll;
 	}

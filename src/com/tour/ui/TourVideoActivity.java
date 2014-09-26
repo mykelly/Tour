@@ -53,9 +53,9 @@ import android.widget.Toast;
 import android.widget.VideoView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 /**
- * ÊÓÆµ²¥·ÅÀà </p>
+ * è§†é¢‘æ’­æ”¾ç±» </p>
  * 
- * Ìø×ªÇëÎñ±ØĞ¯´øÊÓÆµµØÖ·ºÍÊÓÆµSD¿¨Â·¾¶²ÎÊı£º</br>
+ * è·³è½¬è¯·åŠ¡å¿…æºå¸¦è§†é¢‘åœ°å€å’Œè§†é¢‘SDå¡è·¯å¾„å‚æ•°ï¼š</br>
  * <b>intent.putExtra("VideoPlayer.VIDEO_URL",url=???);</b>
  * <b>intent.putExtra("VideoPlayer.VIDEO_PATH",path=???);</b></p>
  * 
@@ -69,7 +69,7 @@ public class TourVideoActivity extends NotTitleActivity {
 	private ProgressBar progressBar;
 	private static SeekBar seekBar;
 	private SurfaceView surfaceView;
-	// ²¥·Å¿ØÖÆÆ÷
+	// æ’­æ”¾æ§åˆ¶å™¨
 	private LinearLayout playControl;
 	private ImageButton playBtn;
 	private static TextView currentTime;
@@ -78,26 +78,26 @@ public class TourVideoActivity extends NotTitleActivity {
 	Button pause;
 	Button play;
 	static MediaPlayer videoPlayer;
-	// ÊÇ·ñÔİÍ£
+	// æ˜¯å¦æš‚åœ
 	private static boolean isPaused = false;
-	// ÊÇ·ñÒÑ½áÊøÒ³Ãæ
+	// æ˜¯å¦å·²ç»“æŸé¡µé¢
 	private boolean isFinish = false;
-	// ÊÇ·ñ²¥·ÅÍê±Ï
+	// æ˜¯å¦æ’­æ”¾å®Œæ¯•
 	private boolean isPlayComplete = false;
-	// ×Ô¶¯Òş²Ø²¥·Å¿ØÖÆÆ÷µÄÊ±¼ä
+	// è‡ªåŠ¨éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ—¶é—´
 	private final int HIDE_CONTROL_TIME = 5000;
-	// ÊÓÆµ¸üĞÂ×´Ì¬
+	// è§†é¢‘æ›´æ–°çŠ¶æ€
 	private static final int VIDEO_STATE_UPDATE = 0;
-	// ÊÓÆµ»º³åÍê³É
+	// è§†é¢‘ç¼“å†²å®Œæˆ
 	private static final int VIDEO_CACHE_READY = 1;
-	// ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+	// æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 	private static final int VIDEO_SHOW_CONTROL = 2;
-	// ÖØĞÂ²¥·ÅÊÓÆµ
+	// é‡æ–°æ’­æ”¾è§†é¢‘
 	private static final int VIDEO_RESTART = 3;
-	// ÖØĞÂ²¥·ÅÊÓÆµ
+	// é‡æ–°æ’­æ”¾è§†é¢‘
 	private static final int VIDEO_DOWNLOAD_ERROR = 4;
 	private IntentFilter videoFilter = null;
-	// ÊÓÆµ×ÜÊ±¼ä
+	// è§†é¢‘æ€»æ—¶é—´
 		private int duration = 0;
 	private static VideoHandler mHandler = null;
 	String videoUrl ="",localPath="",videoName="";
@@ -113,12 +113,12 @@ public class TourVideoActivity extends NotTitleActivity {
 					if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 						   videoUrl = getIntent().getExtras().getString("VideoUrl");
 								if (videoUrl != null) {
-									// »ñµÃÎÄ¼şÃû
+									// è·å¾—æ–‡ä»¶å
 									videoName = videoUrl.substring(videoUrl.lastIndexOf("/") + 1, videoUrl.length());
 								}
 						String path = getIntent().getExtras().getString("VideoPath");
 								if (path != null) {
-									// »ñµÃ´æ´¢Â·¾¶
+									// è·å¾—å­˜å‚¨è·¯å¾„
 									localPath = Environment.getExternalStorageDirectory().getAbsolutePath() + path + videoName;
 								}
 
@@ -131,21 +131,21 @@ public class TourVideoActivity extends NotTitleActivity {
 										PhoneStateListener.LISTEN_CALL_STATE);
 						
 								videoFilter = new IntentFilter();
-								// ¼àÌıhome¼ü
+								// ç›‘å¬homeé”®
 								videoFilter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-								// ¼àÌıµçÔ´¼ü
+								// ç›‘å¬ç”µæºé”®
 								videoFilter.addAction(Intent.ACTION_SCREEN_OFF);
 								registerReceiver(systemStateReceiver, videoFilter);
 								 }else{
-										Toast.makeText(getApplicationContext(), "ÊÓÆµÎÄ¼ş²»´æÔÚ£¬ÎŞ·¨²¥·ÅÊÓÆµ£¡",Toast.LENGTH_LONG).show();
+										Toast.makeText(getApplicationContext(), "è§†é¢‘æ–‡ä»¶ä¸å­˜åœ¨ï¼Œæ— æ³•æ’­æ”¾è§†é¢‘ï¼",Toast.LENGTH_LONG).show();
 										finish();
 								 }
 					} else {
-						Toast.makeText(getApplicationContext(), "ÄúµÄÊÖ»úÎ´°²×°SD¿¨£¬ÎŞ·¨²¥·ÅÊÓÆµ£¡",Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "æ‚¨çš„æ‰‹æœºæœªå®‰è£…SDå¡ï¼Œæ— æ³•æ’­æ”¾è§†é¢‘ï¼",Toast.LENGTH_LONG).show();
 						finish();
 					}
 		} else {
-			Toast.makeText(getApplicationContext(), "ÏÂÔØµØÖ·Òì³££¬ÎŞ·¨²¥·ÅÊÓÆµ£¡",Toast.LENGTH_LONG).show();//Ã»ÓĞ´«Èë²¥·ÅµØÖ·»òÕß¸ÃµØÖ·Ã»ÓĞÊÓÆµ
+			Toast.makeText(getApplicationContext(), "ä¸‹è½½åœ°å€å¼‚å¸¸ï¼Œæ— æ³•æ’­æ”¾è§†é¢‘ï¼",Toast.LENGTH_LONG).show();//æ²¡æœ‰ä¼ å…¥æ’­æ”¾åœ°å€æˆ–è€…è¯¥åœ°å€æ²¡æœ‰è§†é¢‘
 			finish();
 		}
 		if (videoUrl == null || localPath == null) {
@@ -177,11 +177,11 @@ public class TourVideoActivity extends NotTitleActivity {
 			@Override
 			public void onPrepared(MediaPlayer mp) {
 				// TODO Auto-generated method stub
-				System.out.println("¿ªÊ¼²¥·ÅÊÓÆµ");
+				System.out.println("å¼€å§‹æ’­æ”¾è§†é¢‘");
 				videoPlayer.start();
 				duration = videoPlayer.getDuration();
 				seekBar.setMax(duration);
-				// ÊÓÆµ×ÜÊ±¼ä
+				// è§†é¢‘æ€»æ—¶é—´
 				totalTime.setText(transTimeToStr(duration));
 				mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 			}
@@ -191,7 +191,7 @@ public class TourVideoActivity extends NotTitleActivity {
 			@Override
 			public boolean onError(MediaPlayer mp, int what, int extra) {
 				// TODO Auto-generated method stub
-				System.out.println("ÊÓÆµåeÕ`");
+				System.out.println("è§†é¢‘éŒ¯èª¤");
 				return false;
 			}
 		});
@@ -200,7 +200,7 @@ public class TourVideoActivity extends NotTitleActivity {
 			@Override
 			public void onCompletion(MediaPlayer mp) {
 				// TODO Auto-generated method stub
-				System.out.println("ÊÓÆµ²¥·ÅÍê³É");
+				System.out.println("è§†é¢‘æ’­æ”¾å®Œæˆ");
 			}
 		});*/
 		  surfaceHolder = surfaceView.getHolder();
@@ -232,7 +232,7 @@ public class TourVideoActivity extends NotTitleActivity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				// ³õÊ¼²»ÔÊĞí»¬¶¯£ºtrue²»ÔÊĞí»¬¶¯£¬falseÔÊĞí
+				// åˆå§‹ä¸å…è®¸æ»‘åŠ¨ï¼štrueä¸å…è®¸æ»‘åŠ¨ï¼Œfalseå…è®¸
 				return false;
 			}
 		});
@@ -249,9 +249,9 @@ public class TourVideoActivity extends NotTitleActivity {
 			
 				isPaused = false;
 				videoPlayer.seekTo(seekPosition);
-				// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+				// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 				sendHideControlMsg();
-				// ¸üĞÂUI×´Ì¬
+				// æ›´æ–°UIçŠ¶æ€
 				mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 			}
 
@@ -261,9 +261,9 @@ public class TourVideoActivity extends NotTitleActivity {
 				playBtn.setImageResource(R.drawable.video_btn_play);
 				videoPlayer.pause();
 				isPaused = true;
-				// ÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+				// ç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 				removeHideControlMsg();
-				// Í£Ö¹¸üĞÂUI
+				// åœæ­¢æ›´æ–°UI
 				removeVideoUpadteMsg();
 			}
 
@@ -284,16 +284,16 @@ public class TourVideoActivity extends NotTitleActivity {
 				// TODO Auto-generated method stub
 				final int action = event.getAction();
 				switch (action) {
-				// ÊÖÖ¸°´ÏÂÊÂ¼ş
+				// æ‰‹æŒ‡æŒ‰ä¸‹äº‹ä»¶
 				case MotionEvent.ACTION_DOWN:
-					// ÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+					// ç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 					removeHideControlMsg();
-					// ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+					// æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 					showPlayControl();
 					return true;
-					// ÊÖÖ¸Àë¿ªÊÂ¼ş
+					// æ‰‹æŒ‡ç¦»å¼€äº‹ä»¶
 				case MotionEvent.ACTION_UP:
-					// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+					// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 					sendHideControlMsg();
 					return true;
 				}
@@ -309,14 +309,14 @@ public class TourVideoActivity extends NotTitleActivity {
 				// TODO Auto-generated method stub
 				final int action = event.getAction();
 				switch (action) {
-				// ÊÖÖ¸°´ÏÂÊÂ¼ş
+				// æ‰‹æŒ‡æŒ‰ä¸‹äº‹ä»¶
 				case MotionEvent.ACTION_DOWN:
-					// ÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+					// ç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 					removeHideControlMsg();
 					return true;
-					// ÊÖÖ¸Àë¿ªÊÂ¼ş
+					// æ‰‹æŒ‡ç¦»å¼€äº‹ä»¶
 				case MotionEvent.ACTION_UP:
-					// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+					// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 					sendHideControlMsg();
 					return true;
 				}
@@ -345,11 +345,11 @@ public class TourVideoActivity extends NotTitleActivity {
 				break;
 			case R.id.pause:
 				videoPlayer.pause();
-				System.out.println("ÊÓÆµ²¥·ÅÔİÍ£");
+				System.out.println("è§†é¢‘æ’­æ”¾æš‚åœ");
 				break;
 			case R.id.play:
 				videoPlayer.start();
-				System.out.println("ÊÓÆµ²¥·Å¿ªÊ¼");
+				System.out.println("è§†é¢‘æ’­æ”¾å¼€å§‹");
 				break;
 			default:
 				break;
@@ -367,7 +367,7 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ´´½¨ÊÓÆµ²¥·ÅÆ÷
+	 * åˆ›å»ºè§†é¢‘æ’­æ”¾å™¨
 	 */
 	private void createVideoPlayer(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
@@ -391,7 +391,7 @@ public class TourVideoActivity extends NotTitleActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// ²¥·ÅÆ÷×¼±¸Íê³É
+		// æ’­æ”¾å™¨å‡†å¤‡å®Œæˆ
 		videoPlayer.setOnPreparedListener(new OnPreparedListener() {
 
 			@Override
@@ -399,51 +399,51 @@ public class TourVideoActivity extends NotTitleActivity {
 				// TODO Auto-generated method stub
 				 
 					 
-					// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+					// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 					sendHideControlMsg();
                 					 
 					duration = videoPlayer.getDuration();
 					seekBar.setMax(duration);
-					// ÊÓÆµ×ÜÊ±¼ä
+					// è§†é¢‘æ€»æ—¶é—´
 					totalTime.setText(transTimeToStr(duration));
-					// ¸üĞÂUI×´Ì¬
+					// æ›´æ–°UIçŠ¶æ€
 					mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 					videoPlayer.start();
 				 
 			}
 		});
 
-		// ²¥·ÅÆ÷²¥·ÅÍê³É
+		// æ’­æ”¾å™¨æ’­æ”¾å®Œæˆ
 		videoPlayer.setOnCompletionListener(new OnCompletionListener() {
 
 			@Override
 			public void onCompletion(MediaPlayer mp) {
 				// TODO Auto-generated method stub
 				mp.pause();
-				// ÏÈÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+				// å…ˆç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 				removeHideControlMsg();
-				// ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+				// æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 				showPlayControl();
 
 				final int duration = videoPlayer.getDuration();
 				currentTime.setText(transTimeToStr(duration));
-				// ²¥·ÅÍê±ÏÉèÖÃ×îºóµÄÊ±¼ä
+				// æ’­æ”¾å®Œæ¯•è®¾ç½®æœ€åçš„æ—¶é—´
 				seekBar.setProgress(duration);
 				isPlayComplete = true;
 				showDialog();
 			}
 		});
 
-		// ²¥·¢Æ÷²¥·Å³ö´í
+		// æ’­å‘å™¨æ’­æ”¾å‡ºé”™
 		videoPlayer.setOnErrorListener(new OnErrorListener() {
 
 			@Override
 			public boolean onError(MediaPlayer mp, int what, int extra) {
 				// TODO Auto-generated method stub
-				// Í£Ö¹¸üĞÂUI
+				// åœæ­¢æ›´æ–°UI
 				removeVideoUpadteMsg();
-				// ÌáÊ¾³ö´í
-				sendErrorMsg("±§Ç¸£¬ÊÓÆµ²¥·Å³ö´í£¡");
+				// æç¤ºå‡ºé”™
+				sendErrorMsg("æŠ±æ­‰ï¼Œè§†é¢‘æ’­æ”¾å‡ºé”™ï¼");
 				mp.stop();
 				mp.reset();
 				return true;
@@ -453,10 +453,10 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ·¢ËÍ³ö´íĞÅÏ¢
+	 * å‘é€å‡ºé”™ä¿¡æ¯
 	 * 
 	 * @param msg
-	 *            ³ö´íĞÅÏ¢
+	 *            å‡ºé”™ä¿¡æ¯
 	 */
 	private void sendErrorMsg(String msg) {
 		Message message = mHandler.obtainMessage(VIDEO_DOWNLOAD_ERROR, msg);
@@ -464,7 +464,7 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ²¥·ÅÍê±Ï¶Ô»°¿ò
+	 * æ’­æ”¾å®Œæ¯•å¯¹è¯æ¡†
 	 */
 	private void showDialog() {
 		// TODO Auto-generated method stub
@@ -473,8 +473,8 @@ public class TourVideoActivity extends NotTitleActivity {
 			return;
 		}
 		Dialog alertDialog = new AlertDialog.Builder(this)
-				.setMessage("ÊÓÆµ²¥·ÅÍê±Ï")
-				.setPositiveButton("ÖØ²¥", new DialogInterface.OnClickListener() {
+				.setMessage("è§†é¢‘æ’­æ”¾å®Œæ¯•")
+				.setPositiveButton("é‡æ’­", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -492,7 +492,7 @@ public class TourVideoActivity extends NotTitleActivity {
 						dialog.dismiss();
 					}
 				})
-				.setNegativeButton("¹Ø±Õ", new DialogInterface.OnClickListener() {
+				.setNegativeButton("å…³é—­", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -506,7 +506,7 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ²¥·Å³ö´í¶Ô»°¿ò
+	 * æ’­æ”¾å‡ºé”™å¯¹è¯æ¡†
 	 */
 	private void showErrorDialog(String msg) {
 		// TODO Auto-generated method stub
@@ -514,7 +514,7 @@ public class TourVideoActivity extends NotTitleActivity {
 			return;
 		}
 		Dialog alertDialog = new AlertDialog.Builder(this).setMessage(msg)
-				.setNegativeButton("¹Ø±Õ", new DialogInterface.OnClickListener() {
+				.setNegativeButton("å…³é—­", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -528,9 +528,9 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ½áÊøÒ³Ãæ</p> ·¢ËÍÊÓÆµ²¥·Å×´Ì¬¹ã²¥</p>
-	 * intent.getBooleanExtra(<b>VIDEO_PLAY_COMPLETE</b>)»ñµÃ<b>isPlayComplete
-	 * </b>ÊÇ·ñ²¥·ÅÍê±ÏµÄÖµ
+	 * ç»“æŸé¡µé¢</p> å‘é€è§†é¢‘æ’­æ”¾çŠ¶æ€å¹¿æ’­</p>
+	 * intent.getBooleanExtra(<b>VIDEO_PLAY_COMPLETE</b>)è·å¾—<b>isPlayComplete
+	 * </b>æ˜¯å¦æ’­æ”¾å®Œæ¯•çš„å€¼
 	 * 
 	 */
 	private void finishActivity() {
@@ -542,7 +542,7 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+	 * æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 	 */
 	private void showPlayControl() {
 		// TODO Auto-generated method stub
@@ -559,7 +559,7 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * Òş²Ø²¥·Å¿ØÖÆÆ÷
+	 * éšè—æ’­æ”¾æ§åˆ¶å™¨
 	 */
 	private void hidePlayControl() {
 		// TODO Auto-generated method stub
@@ -592,7 +592,7 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ·¢ËÍÏûÏ¢ÏÔÊ¾²¥·Å¿ØÖÆÌ¨
+	 * å‘é€æ¶ˆæ¯æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å°
 	 */
 	private void sendHideControlMsg() {
 		Message msg = mHandler.obtainMessage(VIDEO_SHOW_CONTROL);
@@ -600,16 +600,16 @@ public class TourVideoActivity extends NotTitleActivity {
 	}
 
 	/**
-	 * ÒÆ³ıÒòÎªÑÓÊ±¶øÉĞÎ´Ö´ĞĞµÄÒş²Ø²¥·Å¿ØÖÆÌ¨ÈÎÎñµÄÏûÏ¢
+	 * ç§»é™¤å› ä¸ºå»¶æ—¶è€Œå°šæœªæ‰§è¡Œçš„éšè—æ’­æ”¾æ§åˆ¶å°ä»»åŠ¡çš„æ¶ˆæ¯
 	 */
 	private void removeHideControlMsg() {
-		// ÏÈ¼ì²éÊÇ·ñ´æÔÚ¸ÃÏûÏ¢
+		// å…ˆæ£€æŸ¥æ˜¯å¦å­˜åœ¨è¯¥æ¶ˆæ¯
 		if (mHandler.hasMessages(VIDEO_SHOW_CONTROL)) {
 			mHandler.removeMessages(VIDEO_SHOW_CONTROL);
 		}
 	}
 	/**
-	 * Í£Ö¹¸üĞÂUI£¬ÈçÊ±¼ä¡¢½ø¶ÈÌõµÈ
+	 * åœæ­¢æ›´æ–°UIï¼Œå¦‚æ—¶é—´ã€è¿›åº¦æ¡ç­‰
 	 */
 	private void removeVideoUpadteMsg() {
 		if (mHandler != null && mHandler.hasMessages(VIDEO_STATE_UPDATE)) {
@@ -617,11 +617,11 @@ public class TourVideoActivity extends NotTitleActivity {
 		}
 	}
 	/**
-	 * ½«½ø¶ÈÖµ»»ËãÎªÊ±¼ä
+	 * å°†è¿›åº¦å€¼æ¢ç®—ä¸ºæ—¶é—´
 	 * 
 	 * @param time
-	 *            ½ø¶ÈÖµ
-	 * @return Ê±¼ä
+	 *            è¿›åº¦å€¼
+	 * @return æ—¶é—´
 	 */
 	private static String transTimeToStr(int time) {
 		// TODO Auto-generated method stub
@@ -649,47 +649,47 @@ public class TourVideoActivity extends NotTitleActivity {
 				TourVideoActivity theActivity = mReference.get();
 				switch (msg.what) {
 				case VIDEO_CACHE_READY:
-					// »º´æ²Ù×÷
+					// ç¼“å­˜æ“ä½œ
 					 
 					break;
 				case VIDEO_STATE_UPDATE:
-					// ²¥·Å²Ù×÷
+					// æ’­æ”¾æ“ä½œ
 					int position = videoPlayer.getCurrentPosition();
 					final int seekPosition = seekBar.getProgress();
-					// ÓĞÍÏ¶¯Çé¿öÎ´³¬¹ıÒÑ»º´æÖµÈ¡½ø¶ÈÌõ½ø¶ÈÖµ£¬Î´ÍÏ¶¯¹ı»òÕß³¬¹ıÒÑ»º´æÖµÈ¡²¥·ÅµÄµ±Ç°Öµ
+					// æœ‰æ‹–åŠ¨æƒ…å†µæœªè¶…è¿‡å·²ç¼“å­˜å€¼å–è¿›åº¦æ¡è¿›åº¦å€¼ï¼Œæœªæ‹–åŠ¨è¿‡æˆ–è€…è¶…è¿‡å·²ç¼“å­˜å€¼å–æ’­æ”¾çš„å½“å‰å€¼
 					position = position > seekPosition ? position : seekPosition;
 					if (videoPlayer.isPlaying()) {
-						// µ±Ç°²¥·ÅÊ±¼ä
+						// å½“å‰æ’­æ”¾æ—¶é—´
 						currentTime.setText(transTimeToStr(position));
-						// µ±Ç°²¥·Å½ø¶È
+						// å½“å‰æ’­æ”¾è¿›åº¦
 						seekBar.setProgress(position);						 
 					} else {
 						if (!isPaused ) {
 						videoPlayer.seekTo(position);
-						// »º´æÍê³É¿ÉÒÔ²¥·ÅÊÓÆµ
+						// ç¼“å­˜å®Œæˆå¯ä»¥æ’­æ”¾è§†é¢‘
 						videoPlayer.start();
 						}
 						}
 					mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 					break;
 				case VIDEO_SHOW_CONTROL:
-					// Ö´ĞĞÒş²Ø²¥·Å¿ØÖÆÌ¨²Ù×÷
+					// æ‰§è¡Œéšè—æ’­æ”¾æ§åˆ¶å°æ“ä½œ
 					theActivity.hidePlayControl();
 					break;
 				case VIDEO_RESTART:
-					// ÊÓÆµÖØĞÂ²¥·Å²Ù×÷
+					// è§†é¢‘é‡æ–°æ’­æ”¾æ“ä½œ
 					theActivity.handlerVideoRestart();
 					break;
 				case VIDEO_DOWNLOAD_ERROR:
-					// ÊÓÆµÏÂÔØ³ö´í²Ù×÷
+					// è§†é¢‘ä¸‹è½½å‡ºé”™æ“ä½œ
 //					theActivity.showErrorDialog(msg.obj.toString());
 					break;
 				case VideoDownloader.MSG_DOWNLOAD_FINISH:
-					// ÏÂÔØÍê³É²Ù×÷
+					// ä¸‹è½½å®Œæˆæ“ä½œ
 //					theActivity.handlerDownloadFinish();
 					break;
 				case VideoDownloader.MSG_DOWNLOAD_UPDATE:
-					// ´¦ÓÚÏÂÔØ¹ı³ÌÖĞµÄ²Ù×÷
+					// å¤„äºä¸‹è½½è¿‡ç¨‹ä¸­çš„æ“ä½œ
 //					theActivity.handlerDownloadUpdate(msg);
 					break;
 				}
@@ -697,26 +697,26 @@ public class TourVideoActivity extends NotTitleActivity {
 		}
 	}
 	/**
-	 * ÊÓÆµÖØĞÂ²¥·Å²Ù×÷
+	 * è§†é¢‘é‡æ–°æ’­æ”¾æ“ä½œ
 	 */
 	public void handlerVideoRestart() {
 		// TODO Auto-generated method stub
 		videoPlayer.seekTo(0);
 		seekBar.setProgress(0);
 	 
-		// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+		// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 		sendHideControlMsg();
-		// ¸üĞÂUI×´Ì¬
+		// æ›´æ–°UIçŠ¶æ€
 		mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 	}
-	// À´µç¼àÌı
+	// æ¥ç”µç›‘å¬
 		private final PhoneStateListener videoPhoneStateListener = new PhoneStateListener() {
 			@Override
 			public void onCallStateChanged(int state, String incomingNumber) {
 				// TODO Auto-generated method stub
 				if (videoPlayer != null) {
 					if (state == TelephonyManager.CALL_STATE_RINGING) {
-						// ÏìÁåÊ±
+						// å“é“ƒæ—¶
 						finishActivity();
 					}
 				}

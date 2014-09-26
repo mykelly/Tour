@@ -23,7 +23,7 @@ import com.tour.util.PublicData;
 import com.tour.view.GalleryimageFlow;
 /**
  *
- * @author wl  ¡°ĞĞ³ÌÒ³Ãæ¡±
+ * @author wl  â€œè¡Œç¨‹é¡µé¢â€
  *
  */
 public class TourJourneyActivity extends NotTitleActivity {
@@ -45,7 +45,7 @@ public class TourJourneyActivity extends NotTitleActivity {
 		gridview=(GridView)findViewById(R.id.journey_gv);
 		gallery = (Gallery) findViewById(R.id.journey_gy); 
 //		gallery.setLayoutParams(new LayoutParams(400, 300));
-		gallery.setSpacing(5);// ¼ä¾à
+		gallery.setSpacing(5);// é—´è·
 		if(PublicData.dataTourDateInfos.size()>0){
 //			gridview.setAdapter(new journeyListAdtapter());
 			gallery.setAdapter(new journeyListAdtapter());
@@ -96,10 +96,10 @@ public class TourJourneyActivity extends NotTitleActivity {
 //			TextView journeyHotel = (TextView) convertView
 //					.findViewById(R.id.journeyhotel);
 //			journeyTime.setText(" 2012-8-19");
-//			journeyMorning.setText("ÔçÉÏ:" + "µ½·¿¼äÀï½ø·¿¼äÀË·Ñ");
-//			journeyNoon.setText("ÖĞÎç:" + "¾ª¶¯ÁË·¿¼äÀ¬»ø·Û");
-//			journeyNight.setText("ÍíÉÏ:" + "¾ª¶¯ÁË·â½¨Ê±´úÀ­¿Ë·¿¼äÀï");
-//			journeyHotel.setText("½»½ç¸½½üÊ±¶¡À³·ò");
+//			journeyMorning.setText("æ—©ä¸Š:" + "åˆ°æˆ¿é—´é‡Œè¿›æˆ¿é—´æµªè´¹");
+//			journeyNoon.setText("ä¸­åˆ:" + "æƒŠåŠ¨äº†æˆ¿é—´åƒåœ¾ç²‰");
+//			journeyNight.setText("æ™šä¸Š:" + "æƒŠåŠ¨äº†å°å»ºæ—¶ä»£æ‹‰å…‹æˆ¿é—´é‡Œ");
+//			journeyHotel.setText("äº¤ç•Œé™„è¿‘æ—¶ä¸è±å¤«");
 //			journeyHotel.setOnClickListener(new OnClickListener() {
 //
 //				@Override
@@ -125,7 +125,7 @@ public class TourJourneyActivity extends NotTitleActivity {
 				vh.tv_dinner = (TextView) convertView.findViewById(R.id.journeyitem_dinner);
 				vh.tv_supper = (TextView) convertView.findViewById(R.id.journeyitem_supper);
 				vh.tv_transport = (TextView) convertView.findViewById(R.id.journeyitem_transport);
-				vh.tv_travel_agency = (TextView) convertView.findViewById(R.id.journeyitem_travel_agency);//µØ½ÓÉç
+				vh.tv_travel_agency = (TextView) convertView.findViewById(R.id.journeyitem_travel_agency);//åœ°æ¥ç¤¾
 				vh.tv_hotel = (TextView) convertView.findViewById(R.id.journeyitem_hotel);
 				vh.tv_remark = (TextView) convertView.findViewById(R.id.journeyitem_remark);
 				vh.relyt_hotel = (RelativeLayout) convertView.findViewById(R.id.journeyitem_hotel_relyt); 
@@ -151,8 +151,8 @@ public class TourJourneyActivity extends NotTitleActivity {
 			}
 			try {
 
-				vh.tv_date.setText(PublicData.dataTourDateInfos.get(position).getTourDate());//ÈÕÆÚ
-				vh.tv_week.setText(PublicData.dataTourDateInfos.get(position).getTourWeek());//ĞÇÆÚ
+				vh.tv_date.setText(PublicData.dataTourDateInfos.get(position).getTourDate());//æ—¥æœŸ
+				vh.tv_week.setText(PublicData.dataTourDateInfos.get(position).getTourWeek());//æ˜ŸæœŸ
 				vh.tv_destination.setText(PublicData.dataTourDateInfos.get(position).getDateDestination());
 				vh.tv_content.setText(PublicData.dataTourDateInfos.get(position).getDateContent());
 				vh.tv_breakfast.setText(PublicData.dataTourDateInfos.get(position).getDateBreakfast());
@@ -160,7 +160,7 @@ public class TourJourneyActivity extends NotTitleActivity {
 				vh.tv_dinner.setText(PublicData.dataTourDateInfos.get(position).getDateDinner());
 				vh.tv_supper.setText(PublicData.dataTourDateInfos.get(position).getDateSupper());
 				vh.tv_transport.setText(PublicData.dataTourDateInfos.get(position).getDateTransport());
-//				vh.tv_travel_agency.setText(PublicData.dataTourDateInfos.get(position).getDatePlace());//µØ½ÓÉç
+//				vh.tv_travel_agency.setText(PublicData.dataTourDateInfos.get(position).getDatePlace());//åœ°æ¥ç¤¾
 				vh.tv_hotel.setText(PublicData.dataTourDateInfos.get(position).getDateHotel());
 				vh.tv_remark.setText(PublicData.dataTourDateInfos.get(position).getDateRemark());
 				

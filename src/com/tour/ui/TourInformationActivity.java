@@ -36,7 +36,7 @@ import com.tour.util.TimeUtil;
 import com.tour.view.WaitDialog;
 /**
  * 
- * @author wl "ÍÅĞÅÏ¢Ò³Ãæ"
+ * @author wl "å›¢ä¿¡æ¯é¡µé¢"
  *
  */
 public class TourInformationActivity extends NotTitleActivity {
@@ -44,7 +44,7 @@ public class TourInformationActivity extends NotTitleActivity {
 	Button bt_callname,bt_detail_tour,bt_detail_customer;
 	GridView gridview;
 	private NetworkConnectionReceiver networkReceiver = null;
-	private WaitDialog dialog;// ¡°µÈ´ı¡±¶Ô»°¿ò
+	private WaitDialog dialog;// â€œç­‰å¾…â€å¯¹è¯æ¡†
 	public static Handler mHandler;
 	TourDataInfo tourDataInfo;
 	List<DataCustomerInfo> dataCustomerInfos;
@@ -60,7 +60,7 @@ public class TourInformationActivity extends NotTitleActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tab_tour_info);
-		isHasNetWork();//¼ì²éÁªÍøÇé¿ö
+		isHasNetWork();//æ£€æŸ¥è”ç½‘æƒ…å†µ
 		init();
 		dialog=new WaitDialog(TourInformationActivity.this, android.R.style.Theme_Translucent);
 		dialog.show();
@@ -70,17 +70,17 @@ public class TourInformationActivity extends NotTitleActivity {
 			public void run() {
 				// TODO Auto-generated method stub
 				//				 NetWorkStatus networkstatus=new NetWorkStatus();
-				//				 PublicData.isNetWork=networkstatus.isNetWork(getApplicationContext());//¼ì²éÁªÍøÇé¿ö
+				//				 PublicData.isNetWork=networkstatus.isNetWork(getApplicationContext());//æ£€æŸ¥è”ç½‘æƒ…å†µ
 //				PublicData.isUpgrade=true;
 				if(PublicData.isNetWork){
 					if(PublicData.isUpgrade){
 						PublicData.isUpgrade=false;					 
 						DBTour dbTour=new DBTour(getApplicationContext());
-						dbTour.onUpgrade(null, 2, 3);//µ¼ÈëÊı¾İ
+						dbTour.onUpgrade(null, 2, 3);//å¯¼å…¥æ•°æ®
 					}
 				}else{
 					SaveDataClass saveDataClass=new SaveDataClass();
-					PublicData.tour_id=saveDataClass.getTourId(getApplicationContext());//»ñÈ¡ÍÅid
+					PublicData.tour_id=saveDataClass.getTourId(getApplicationContext());//è·å–å›¢id
 				}
 
 				PublicData.tourDataInfo=TourData.queryTourInfobyId(TourInformationActivity.this,PublicData.tour_id);
@@ -90,7 +90,7 @@ public class TourInformationActivity extends NotTitleActivity {
 				PublicData.tourFood = TourData.getFoodData(TourInformationActivity.this);
 				PublicData.moviephone=TourData.getMoveData(TourInformationActivity.this);
 
-				//				 System.out.println("ÍÅĞÅÏ¢PublicData.tourDataInfo="+PublicData.tourDataInfo);
+				//				 System.out.println("å›¢ä¿¡æ¯PublicData.tourDataInfo="+PublicData.tourDataInfo);
 				if(PublicData.tourDataInfo!=null&&!"".equals(PublicData.tourDataInfo)){
 					mHandler.sendEmptyMessage(1);
 				}else{
@@ -100,7 +100,7 @@ public class TourInformationActivity extends NotTitleActivity {
 			}
 		}) ;
 		thread.start();
-//		clock="ÔçÉÏÆğ´²,1405686502|ÖĞÎç³Ô·¹,1405626502|Íí²Í,1405679502";
+//		clock="æ—©ä¸Šèµ·åºŠ,1405686502|ä¸­åˆåƒé¥­,1405626502|æ™šé¤,1405679502";
 //		if(clock!=null){
 //			clock =clock + "|";
 //			initDate();
@@ -145,8 +145,8 @@ public class TourInformationActivity extends NotTitleActivity {
 						data=PublicData.tourDataInfo.getTourDate();
 						type=PublicData.tourDataInfo.getTourType();
 						comment=PublicData.tourDataInfo.getRemark(); 	
-						clock=PublicData.tourDataInfo.getClock();//Êı¾İ¸ñÊ½Èç£ºÔçÉÏÆğ´²,6:30|ÖĞÎç³Ô·¹,12:30|Íí²Í,18:00
-						//						System.out.println("ÄÖÖÓclock="+clock);
+						clock=PublicData.tourDataInfo.getClock();//æ•°æ®æ ¼å¼å¦‚ï¼šæ—©ä¸Šèµ·åºŠ,6:30|ä¸­åˆåƒé¥­,12:30|æ™šé¤,18:00
+						//						System.out.println("é—¹é’Ÿclock="+clock);
 						/*if (clock != null) {
 							String clocks =clock + "|";
 							if (clocks != null&& clocks.indexOf("|") != -1) {
@@ -159,9 +159,9 @@ public class TourInformationActivity extends NotTitleActivity {
 								clockhourlist.add(clockhour);	
 								String clockmin = newclock.substring(newclock.indexOf(":")+1,newclock.length());
 								clockminlist.add(clockmin);	
-								// Ê£ÓàURL
+								// å‰©ä½™URL
 								String lastclock = clocks.substring(clocks.indexOf("|") + 1,clocks.length());
-								// Ö±µ½²»´æÔÚ¡°|¡±
+								// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 								while (lastclock.contains("|")) {
 									if (lastclock.length() > 0) {
 										newclock = lastclock.substring(0,lastclock.indexOf("|"));
@@ -177,7 +177,7 @@ public class TourInformationActivity extends NotTitleActivity {
 										lastclock = lastclock.substring(lastclock.indexOf("|") + 1,lastclock.length());
 								}
 							}
-							//						System.out.println("ÄÖÖÓclocklist="+clocklist);
+							//						System.out.println("é—¹é’Ÿclocklist="+clocklist);
 													
 						}*/
 //						TTLog.s("clock========="+clock);
@@ -185,9 +185,9 @@ public class TourInformationActivity extends NotTitleActivity {
 							clock =clock + "|";
 							initDate();
 						}
-//						System.out.println("ÄÖÖÓ±êÇ©clocktaglist="+clocktaglist);
-//						System.out.println("ÄÖÖÓĞ¡Ê±clockhourlist="+clockhourlist);
-//						System.out.println("ÄÖÖÓ·ÖÖÓclockminlist="+clockminlist);
+//						System.out.println("é—¹é’Ÿæ ‡ç­¾clocktaglist="+clocktaglist);
+//						System.out.println("é—¹é’Ÿå°æ—¶clockhourlist="+clockhourlist);
+//						System.out.println("é—¹é’Ÿåˆ†é’Ÿclockminlist="+clockminlist);
 						TourData.insterAlarm(TourInformationActivity.this);
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -226,9 +226,9 @@ public class TourInformationActivity extends NotTitleActivity {
 
 			}
 		}
-//		System.out.println("ÄÖÖÓ±êÇ©clocktaglist="+clocktaglist);
-//		System.out.println("ÄÖÖÓĞ¡Ê±clockhourlist="+clockhourlist);
-//		System.out.println("ÄÖÖÓ·ÖÖÓclockminlist="+clockminlist);
+//		System.out.println("é—¹é’Ÿæ ‡ç­¾clocktaglist="+clocktaglist);
+//		System.out.println("é—¹é’Ÿå°æ—¶clockhourlist="+clockhourlist);
+//		System.out.println("é—¹é’Ÿåˆ†é’Ÿclockminlist="+clockminlist);
 	}
 
 	private void init() {
@@ -290,7 +290,7 @@ public class TourInformationActivity extends NotTitleActivity {
 		mDate.setText(data);
 		mType.setText(type);
 		mComment.setText(comment);
-		tv_customer_total.setText(PublicData.dataCustomerInfos.size()+"ÈË");
+		tv_customer_total.setText(PublicData.dataCustomerInfos.size()+"äºº");
 		gridview.setAdapter(new TourMemberAdapter(this,PublicData.dataCustomerInfos));
 	}
 	private void isHasNetWork() {
@@ -301,7 +301,7 @@ public class TourInformationActivity extends NotTitleActivity {
 		registerReceiver(networkReceiver, filter);
 	}
 	/**
-	 * ÊµÊ±ÅĞ¶ÏÍøÂç×´Ì¬
+	 * å®æ—¶åˆ¤æ–­ç½‘ç»œçŠ¶æ€
 	 * 
 	 * @author CWD
 	 * 
@@ -312,15 +312,15 @@ public class TourInformationActivity extends NotTitleActivity {
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 
-			// »ñµÃÍøÂçÁ¬½Ó·şÎñ
+			// è·å¾—ç½‘ç»œè¿æ¥æœåŠ¡
 			ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 			NetworkInfo info = manager.getActiveNetworkInfo();
 			if (info != null && info.isAvailable() && info.isConnected()) {
 				PublicData.isNetWork = true;
-				//				System.out.println("ÍøÂçÒÑÁ´½ÓPublicData.isNetWork ="+PublicData.isNetWork);
+				//				System.out.println("ç½‘ç»œå·²é“¾æ¥PublicData.isNetWork ="+PublicData.isNetWork);
 			} else {
 				PublicData.isNetWork = false;
-				//                System.out.println("ÍøÂç¶Ï¿ªÁ´½ÓPublicData.isNetWork ="+PublicData.isNetWork);
+				//                System.out.println("ç½‘ç»œæ–­å¼€é“¾æ¥PublicData.isNetWork ="+PublicData.isNetWork);
 			}
 
 		}
@@ -330,7 +330,7 @@ public class TourInformationActivity extends NotTitleActivity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		if (null != networkReceiver) {
-			unregisterReceiver(networkReceiver);// È¡ÏûÍøÂç¼àÌı
+			unregisterReceiver(networkReceiver);// å–æ¶ˆç½‘ç»œç›‘å¬
 		}
 	}
 }

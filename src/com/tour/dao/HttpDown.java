@@ -34,11 +34,11 @@ public class HttpDown {
 		String line = null;
 		BufferedReader buffer = null;
 		try {
-			// ´´½¨Ò»¸öURL¶ÔÏó
+			// åˆ›å»ºä¸€ä¸ªURLå¯¹è±¡
 			url = new URL(urlStr);
-			// ´´½¨Ò»¸öHttpÁ¬½Ó
+			// åˆ›å»ºä¸€ä¸ªHttpè¿æ¥
 			HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-			// Ê¹ÓÃIOÁ÷¶ÁÈ¡Êı¾İ
+			// ä½¿ç”¨IOæµè¯»å–æ•°æ®
 			buffer = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 			while ((buffer!=null)&&((line = buffer.readLine()) != null)) {
 				sb.append(line);
@@ -70,14 +70,14 @@ public class HttpDown {
 			while ((temp = input.read(buffer)) != -1) {  
 				output.write(buffer, 0, temp);    
 				
-			//	System.out.println("ÕıÔÚÏÂÔØ");
+			//	System.out.println("æ­£åœ¨ä¸‹è½½");
 			}
 			n++;
-           System.out.println("n==="+n+"ÏÂÔØÍê±Ï");						
+           System.out.println("n==="+n+"ä¸‹è½½å®Œæ¯•");						
 			output.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
-			Log.i("queue", "Òì³£");
+			Log.i("queue", "å¼‚å¸¸");
 		} finally {
 			try {
 				output.close();
@@ -130,7 +130,7 @@ public class HttpDown {
 		return file;
 	}
 
-	//ÏÂÔØÎÄ¼ş
+	//ä¸‹è½½æ–‡ä»¶
  	public void downFile(final String url,final String path,final String fileName) {	
 		Thread t =new Thread(){			
 			public void run() {
@@ -149,11 +149,11 @@ public class HttpDown {
 				
 				try {
 					   
-					//»ñµÃµ±Ç°Íâ²¿´¢´æÉè±¸µÄÄ¿Â¼
+					//è·å¾—å½“å‰å¤–éƒ¨å‚¨å­˜è®¾å¤‡çš„ç›®å½•
 				    String SDCardRoot = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;   							   				    								    				  			    
 				     File  dir = new File(SDCardRoot + path + File.separator);					       
 				    if(!dir.exists())
-				        dir.mkdirs();  //Èç¹û²»´æÔÚÔò´´½¨¡¢
+				        dir.mkdirs();  //å¦‚æœä¸å­˜åœ¨åˆ™åˆ›å»ºã€
 				    httpRequest = new HttpGet(url);
 					httpclient = new DefaultHttpClient();
 					httpResponse = httpclient.execute(httpRequest);
@@ -168,13 +168,13 @@ public class HttpDown {
 					 if(is != null){	    	 
 				 		File file = new File(Environment.getExternalStorageDirectory()+path, fileName);	
 						if(!file.exists()){		
-							fileOutputStream = new FileOutputStream(file);//Èç¹û²»´æÔÚÔò´´½¨		      
+							fileOutputStream = new FileOutputStream(file);//å¦‚æœä¸å­˜åœ¨åˆ™åˆ›å»º		      
 						    byte[] buf = new byte[1024];
 						    int ch = -1;
 						    while ((ch = is.read(buf)) != -1) {
 							   fileOutputStream.write(buf, 0, ch);							   							  
 						    }
-						    System.out.println("ÏÂÔØÍê³É");
+						    System.out.println("ä¸‹è½½å®Œæˆ");
 						    fileOutputStream.flush();
 						}
 					 }
@@ -189,7 +189,7 @@ public class HttpDown {
 					e.printStackTrace();
 				} 
 				
-			    //Í¨ÖªËùÓĞÔÚ´Ë¶ÔÏóÉÏµÈ´ıµÄÏß³Ì 
+			    //é€šçŸ¥æ‰€æœ‰åœ¨æ­¤å¯¹è±¡ä¸Šç­‰å¾…çš„çº¿ç¨‹ 
                 notifyAll(); 				  
 	        } 
 			}
@@ -198,12 +198,12 @@ public class HttpDown {
 		t.start();
         synchronized (t){
         	  try { 
-//                  System.out.println("µÈ´ıÏß³ÌtÍê³É¡£¡£¡£"); 
+//                  System.out.println("ç­‰å¾…çº¿ç¨‹tå®Œæˆã€‚ã€‚ã€‚"); 
                   t.wait(); 
               } catch (InterruptedException e) { 
                   e.printStackTrace(); 
               } 
-//              System.out.println("tÏß³ÌÍê³É"); 
+//              System.out.println("tçº¿ç¨‹å®Œæˆ"); 
         }
 	}
 }

@@ -72,8 +72,8 @@ public class RollListAdpater extends BaseAdapter {
 	}
 
 	public static class ViewHolder {
-		TextView mDate; // 日期
-		TextView mTitle; // 团名
+		TextView mDate; // 鏃ユ湡
+		TextView mTitle; // 鍥㈠悕
 		TextView mNumber;
 		TextView mDowanLoad;
 	}

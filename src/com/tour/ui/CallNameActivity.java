@@ -27,7 +27,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 /**
- * µãÃû
+ * ç‚¹å
  */
 public class CallNameActivity extends NotTitleActivity{
 	private ImageButton  ib_back;
@@ -93,9 +93,9 @@ public class CallNameActivity extends NotTitleActivity{
 			 
 			}
 		}
-		mCount.setText(count+"ÈË");
-		mAbsentCount.setText(absentCount+"ÈË");
-		mArriveCount.setText(arriveCount+"ÈË");
+		mCount.setText(count+"äºº");
+		mAbsentCount.setText(absentCount+"äºº");
+		mArriveCount.setText(arriveCount+"äºº");
 		gridView.setAdapter(new CallNameAdpater(this,mHandler));
 	
 	}
@@ -110,23 +110,23 @@ public class CallNameActivity extends NotTitleActivity{
 	public void handleMessage(Message msg) {
 		// TODO Auto-generated method stub
 		super.handleMessage(msg);
-		//È±Ï¯
+		//ç¼ºå¸­
 		if(msg.what==0){
 			arriveCount=arriveCount-1;
 			absentCount=count-arriveCount;
-			mAbsentCount.setText(absentCount+"ÈË");
-			mArriveCount.setText(arriveCount+"ÈË");
+			mAbsentCount.setText(absentCount+"äºº");
+			mArriveCount.setText(arriveCount+"äºº");
 		}else{
-	    //ÒÑµ½
+	    //å·²åˆ°
 			arriveCount=arriveCount+1;
 			absentCount=count-arriveCount;
-			mAbsentCount.setText(absentCount+"ÈË");
-			mArriveCount.setText(arriveCount+"ÈË");
+			mAbsentCount.setText(absentCount+"äºº");
+			mArriveCount.setText(arriveCount+"äºº");
 		}
 	}  
   };
   /*
-   * ¸üĞÂµãÃûĞÅÏ¢£¨¹Ë¿ÍÊÇ·ñÈ±Ï¯£©
+   * æ›´æ–°ç‚¹åä¿¡æ¯ï¼ˆé¡¾å®¢æ˜¯å¦ç¼ºå¸­ï¼‰
    */
   public static void  callname(String id,Boolean isAbsent){
 	  DBTour dbTour=new DBTour(mContext);

@@ -31,18 +31,18 @@ import com.tour.view.GalleryimageFlow;
 
 /**
  * 
- * @author ly ¾ÆµêÏêÇé
+ * @author ly é…’åº—è¯¦æƒ…
  */
 
 public class TourHotelActivity extends Activity {
 	private GalleryimageFlow gallery;
 	private ImageButton ib_back,videobutton;
-	private	TextView hotel_title; // ¾ÆµêÃû
-	private	TextView hotel_contact; // ÁªÏµÈË
-	private	TextView hotel_phone; // ÁªÏµµç»°
-	private	TextView hotel_fax; // ´«Õæ
-	private	TextView hotel_addr; // µØÖ·
-	private	TextView hotel_level; // ¾Æµê¼¶±ğ
+	private	TextView hotel_title; // é…’åº—å
+	private	TextView hotel_contact; // è”ç³»äºº
+	private	TextView hotel_phone; // è”ç³»ç”µè¯
+	private	TextView hotel_fax; // ä¼ çœŸ
+	private	TextView hotel_addr; // åœ°å€
+	private	TextView hotel_level; // é…’åº—çº§åˆ«
 	public static Handler mHandler;
 	private	List<DataHotelInfo> tourHotel = new ArrayList<DataHotelInfo>();
 	private	List<String> ImageUrls = new ArrayList<String>();
@@ -110,11 +110,11 @@ public class TourHotelActivity extends Activity {
 		hotel_fax = (TextView) findViewById(R.id.hotel_fax);
 		hotel_addr = (TextView) findViewById(R.id.hotel_addr);
 		hotel_level= (TextView) findViewById(R.id.hotel_level);
-		gallery = (GalleryimageFlow) findViewById(R.id.gy);// Ê¹ÓÃGalleryÏÔÊ¾ÉÌÆ·ÏêÇéÍ¼
-		gallery.setSpacing(5);// Í¼Æ¬¼ä¾à
+		gallery = (GalleryimageFlow) findViewById(R.id.gy);// ä½¿ç”¨Galleryæ˜¾ç¤ºå•†å“è¯¦æƒ…å›¾
+		gallery.setSpacing(5);// å›¾ç‰‡é—´è·
 		gallery.setSelection(4);
-		int screenWidth = getWindowManager().getDefaultDisplay().getWidth(); // ÆÁÄ»¿í£¨ÏñËØ£¬Èç£º480px£©
-		int screenHeight = getWindowManager().getDefaultDisplay().getHeight(); // ÆÁÄ»¸ß£¨ÏñËØ£¬Èç£º800p£©
+		int screenWidth = getWindowManager().getDefaultDisplay().getWidth(); // å±å¹•å®½ï¼ˆåƒç´ ï¼Œå¦‚ï¼š480pxï¼‰
+		int screenHeight = getWindowManager().getDefaultDisplay().getHeight(); // å±å¹•é«˜ï¼ˆåƒç´ ï¼Œå¦‚ï¼š800pï¼‰
 //		System.out.println("screenWidth" + screenWidth + "screenHeight"+ screenHeight);
 		gallery.setMinimumHeight(185);
 		gallery.setMinimumWidth(screenWidth * 100 / 100);
@@ -135,11 +135,11 @@ public class TourHotelActivity extends Activity {
 		// TODO Auto-generated method stub
 		
 		 hotel_title.setText(PublicData.dataHotelData.get(position).getHotelTitle());
-		 hotel_contact.setText("ÁªÏµÈË£º"+PublicData.dataHotelData.get(position).getHotelContact());
-		 hotel_phone.setText("µç»°ºÅÂë£º"+PublicData.dataHotelData.get(position).getHotelPhone());
-		 hotel_fax.setText("´«ÕæºÅÂë£º"+PublicData.dataHotelData.get(position).getHotelFax());
-		 hotel_addr.setText("µØÖ·£º"+PublicData.dataHotelData.get(position).getHotelArea());
-		 hotel_level.setText("¾Æµê¼¶±ğ£º"+PublicData.dataHotelData.get(position).getHotelLevel());
+		 hotel_contact.setText("è”ç³»äººï¼š"+PublicData.dataHotelData.get(position).getHotelContact());
+		 hotel_phone.setText("ç”µè¯å·ç ï¼š"+PublicData.dataHotelData.get(position).getHotelPhone());
+		 hotel_fax.setText("ä¼ çœŸå·ç ï¼š"+PublicData.dataHotelData.get(position).getHotelFax());
+		 hotel_addr.setText("åœ°å€ï¼š"+PublicData.dataHotelData.get(position).getHotelArea());
+		 hotel_level.setText("é…’åº—çº§åˆ«ï¼š"+PublicData.dataHotelData.get(position).getHotelLevel());
 		 ImageUrls=getImageUrlList(position);
 //		 System.out.println("ImageUrls.size()="+ImageUrls.size());
 		 if(ImageUrls.size()>0){
@@ -170,10 +170,10 @@ public class TourHotelActivity extends Activity {
 		}
 
 		/**
-		 * ÓÃÀ´µÃµ½µ±Ç°ÏîµÄ¶ÔÏóµÄID
+		 * ç”¨æ¥å¾—åˆ°å½“å‰é¡¹çš„å¯¹è±¡çš„ID
 		 * 
 		 * @param position
-		 *            ×÷ÓÃÊÇµÚ¼¸Ïî
+		 *            ä½œç”¨æ˜¯ç¬¬å‡ é¡¹
 		 */
 
 		public long getItemId(int position) {
@@ -182,26 +182,26 @@ public class TourHotelActivity extends Activity {
 		}
 
 		/**
-		 * ÓÃÀ´¿ØÖÆ¿ØÖÆÏÔÊ¾ÊÊÅäÆ÷ÖĞÃ¿Ò»ÏîµÄ¾ßÌåÏÔÊ¾ÄÚÈİ
+		 * ç”¨æ¥æ§åˆ¶æ§åˆ¶æ˜¾ç¤ºé€‚é…å™¨ä¸­æ¯ä¸€é¡¹çš„å…·ä½“æ˜¾ç¤ºå†…å®¹
 		 * 
 		 * @param position
-		 *            ¾ßÌåµÄÃ¿Ò»ÏîµÄÎ»ÖÃ
+		 *            å…·ä½“çš„æ¯ä¸€é¡¹çš„ä½ç½®
 		 * @param convertView
-		 *            Ö¸´ú±¾·½·¨ÖĞ·µ»ØµÄViewÀàĞÍ£¬´Ë´¦ÊÇImageView
+		 *            æŒ‡ä»£æœ¬æ–¹æ³•ä¸­è¿”å›çš„Viewç±»å‹ï¼Œæ­¤å¤„æ˜¯ImageView
 		 * @param parent
-		 *            Ö¸´úµ÷ÓÃ´ËÊÊÅäÆ÷µÄÄÇ¸öView ,´Ë´¦Ö¸´úGallery
+		 *            æŒ‡ä»£è°ƒç”¨æ­¤é€‚é…å™¨çš„é‚£ä¸ªView ,æ­¤å¤„æŒ‡ä»£Gallery
 		 */
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView i = new ImageView(TourHotelActivity.this);
 			Display display = TourHotelActivity.this.getWindowManager()
 					.getDefaultDisplay();
-			int w = display.getWidth();// ÀıÈçw=480
-			int h = display.getHeight();// ÀıÈçh=800
+			int w = display.getWidth();// ä¾‹å¦‚w=480
+			int h = display.getHeight();// ä¾‹å¦‚h=800
 //			System.out.println("w" + w + "h" + h);
 			i.setPadding(0, 10, 20, 10);
-			i.setLayoutParams(new GalleryFlow.LayoutParams(240, 180));// Í¼Æ¬¹æ¸ñ240*180
-			i.setScaleType(ImageView.ScaleType.FIT_CENTER);// ÉèÖÃÍ¼Æ¬ÏÔÊ¾µÄËõ·ÅÀàĞÍ,´Ë´¦ÊÇ¾ÓÖĞÏÔÊ¾
+			i.setLayoutParams(new GalleryFlow.LayoutParams(240, 180));// å›¾ç‰‡è§„æ ¼240*180
+			i.setScaleType(ImageView.ScaleType.FIT_CENTER);// è®¾ç½®å›¾ç‰‡æ˜¾ç¤ºçš„ç¼©æ”¾ç±»å‹,æ­¤å¤„æ˜¯å±…ä¸­æ˜¾ç¤º
 //			i.setBackgroundResource(R.drawable.tt);
 			 Drawable	d=getImageUrl(position);
 			  i.setBackgroundDrawable(d);
@@ -227,11 +227,11 @@ public class TourHotelActivity extends Activity {
 							String newUrl = imageUrl.substring(0,
 									imageUrl.indexOf("|"));
 							imageurl.add(newUrl);
-							// Ê£ÓàURL
+							// å‰©ä½™URL
 							String remainUrl = imageUrl.substring(
 									imageUrl.indexOf("|") + 1,
 									imageUrl.length());
-							// Ö±µ½²»´æÔÚ¡°|¡±
+							// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 							while (remainUrl.contains("|")) {
 								if (remainUrl.length() > 0) {
 									newUrl = remainUrl.substring(0,

@@ -29,7 +29,7 @@ public class DBTour extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-//		System.out.println("´´½¨Êı¾İ¿â");
+//		System.out.println("åˆ›å»ºæ•°æ®åº“");
 	    db.execSQL(Constant.CREATE_DATA_TOUR_TABLE);
 	    db.execSQL(Constant.CREATE_DATA_TOUR_DATA_TABLE);
 	    db.execSQL(Constant.CREATE_DATA_CUSTOMER_TABLE);
@@ -47,10 +47,10 @@ public class DBTour extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
 		
-		//´Ë´¦Ó¦ÏÈÉ¾³ıÔ­À´µÄÊı¾İ
+		//æ­¤å¤„åº”å…ˆåˆ é™¤åŸæ¥çš„æ•°æ®
 		deleteDatabase(mCotenxt);
 		
-//		System.out.println("½«sql.sqlÎÄ¼şÄÚÈİµ¼ÈëÊı¾İ¿â");
+//		System.out.println("å°†sql.sqlæ–‡ä»¶å†…å®¹å¯¼å…¥æ•°æ®åº“");
 		try {
 			String SDCardRoot = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
 			File factoryIdfile = new File(SDCardRoot + File.separator + "DaMeiTour"+ File.separator+ "zip"+ File.separator+ PublicData.tour_zip+ File.separator, "sql.sql");
@@ -87,17 +87,17 @@ public class DBTour extends SQLiteOpenHelper{
 	
 	}
 	 /**
-     * É¾³ıÊı¾İ¿â
+     * åˆ é™¤æ•°æ®åº“
      * @param context
      * @return
      */  
     public void deleteDatabase(Context context) {  
     	TourData tourdata=new TourData();
-    	tourdata.delAllTab(context);//É¾³ıÖ®Ç°µÄĞĞ³Ì¼ÇÂ¼
+    	tourdata.delAllTab(context);//åˆ é™¤ä¹‹å‰çš„è¡Œç¨‹è®°å½•
     	  DatabaseHelper database_helper = new DatabaseHelper(mCotenxt);
           SQLiteDatabase db = database_helper.getWritableDatabase();
-          //Ö±½ÓÉ¾³ı±íÃûÎªalarms¶ÔÓ¦µÄÄÇÌõ¼ÇÂ¼
-          db.execSQL("DROP TABLE IF EXISTS alarms");//É¾³ıÖ®Ç°µÄÄÖÖÓ
+          //ç›´æ¥åˆ é™¤è¡¨åä¸ºalarmså¯¹åº”çš„é‚£æ¡è®°å½•
+          db.execSQL("DROP TABLE IF EXISTS alarms");//åˆ é™¤ä¹‹å‰çš„é—¹é’Ÿ
           db.execSQL("CREATE TABLE alarms (" +
                   "_id INTEGER PRIMARY KEY," +
                   "hour INTEGER, " +
@@ -108,7 +108,7 @@ public class DBTour extends SQLiteOpenHelper{
                   "vibrate INTEGER, " +              
                   "message TEXT, " +
                   "alert TEXT, " +
-                  "isdelete INTEGER);");//ÖØĞÂ´´½¨alarms±í
+                  "isdelete INTEGER);");//é‡æ–°åˆ›å»ºalarmsè¡¨
           db.close();
     } 
 

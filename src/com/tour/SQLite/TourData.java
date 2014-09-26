@@ -27,12 +27,12 @@ import com.tour.ui.TourInformationActivity;
 import com.tour.util.TTLog;
 /*
  * 
- * ÓÃÓÚÊı¾İ¿âµÄ²éÑ¯£¬É¾³ı£¬Ìí¼Ó
+ * ç”¨äºæ•°æ®åº“çš„æŸ¥è¯¢ï¼Œåˆ é™¤ï¼Œæ·»åŠ 
  */
 public class TourData {
 	/**
 	 * 
-	 * @param  É¾³ıËùÓĞµÄÊı¾İ
+	 * @param  åˆ é™¤æ‰€æœ‰çš„æ•°æ®
 	 */
 	public static void delAllTab(Context mContext){
 		DBTour dbTour=new DBTour(mContext);
@@ -53,13 +53,13 @@ public class TourData {
 		database.execSQL("update sqlite_sequence set seq=0 where name='data_movie'");
 		database.endTransaction(); 
 		database.close();
-		//		System.out.println("ÏÈÉ¾³ıÔ­À´µÄÊı¾İ");
+		//		System.out.println("å…ˆåˆ é™¤åŸæ¥çš„æ•°æ®");
 	}
 
 
 
 	/**
-	 * @param data ÓÃÈÕÆÚ±È½Ï¹ıÆÚÊı¾İ
+	 * @param data ç”¨æ—¥æœŸæ¯”è¾ƒè¿‡æœŸæ•°æ®
 	 */
 	public static void queryByData(Context mContext,String data){
 		DBTour dbTour=new DBTour(mContext);
@@ -73,7 +73,7 @@ public class TourData {
 		database.close();
 	}
 	/**
-	 * @param user ÓÃ»§Ãû²éÑ¯Êı¾İ
+	 * @param user ç”¨æˆ·åæŸ¥è¯¢æ•°æ®
 	 */
 	public static String queryByUser(Context mContext,String userid){
 		String tourid="";
@@ -103,7 +103,7 @@ public class TourData {
 
 	/**
 	 * 
-	 * @param rool_id ¸ù¾İÍÅºÅÉ¾³ıÊı¾İ
+	 * @param rool_id æ ¹æ®å›¢å·åˆ é™¤æ•°æ®
 	 */
 	public static void delTourByRoolId(Context mContext,int tour_id){
 		DBTour dbTour=new DBTour(mContext);
@@ -114,7 +114,7 @@ public class TourData {
 
 	/**
 	 * 
-	 * @param place_tid ¸ù¾İÍÅIdÉ¾³ı¶ÔÓ¦µÄ¾°µã
+	 * @param place_tid æ ¹æ®å›¢Idåˆ é™¤å¯¹åº”çš„æ™¯ç‚¹
 	 */
 	public static void delJourneyById(Context mContext,int place_tid){
 		DBTour dbTour=new DBTour(mContext);
@@ -126,7 +126,7 @@ public class TourData {
 
 	/**
 	 * 
-	 * @param hotel_tid ¸ù¾İÍÅIdÉ¾³ı¶ÔÓ¦µÄ¾ÆµêÊı¾İ
+	 * @param hotel_tid æ ¹æ®å›¢Idåˆ é™¤å¯¹åº”çš„é…’åº—æ•°æ®
 	 */
 	public static void delHotelById(Context mContext,int hotel_tid){
 		DBTour dbTour=new DBTour(mContext);
@@ -138,7 +138,7 @@ public class TourData {
 
 	/**
 	 * 
-	 * @param food_tid ÍÅid É¾³ıÏà¶ÔÓ¦µÄÊ³ÎïÊı¾İ
+	 * @param food_tid å›¢id åˆ é™¤ç›¸å¯¹åº”çš„é£Ÿç‰©æ•°æ®
 	 */
 	public static void delFoodById(Context mContext,int food_tid){
 		DBTour dbTour=new DBTour(mContext);
@@ -147,7 +147,7 @@ public class TourData {
 		database.close();
 	}
 	/**
-	 * ²éÕÒÍÅĞÅÏ¢
+	 * æŸ¥æ‰¾å›¢ä¿¡æ¯
 	 * @param tourId
 	 */
 	public static TourDataInfo queryTourInfobyId(Context mContext,String tourId){
@@ -181,7 +181,7 @@ public class TourData {
 		return dataInfo;
 	}
 	/**
-	 * ²éÕÒ¹Ë¿ÍĞÅÏ¢
+	 * æŸ¥æ‰¾é¡¾å®¢ä¿¡æ¯
 	 * @param tourId
 	 */
 	public static List<DataCustomerInfo> queryCustomerbyId(Context mContext,String tourId){
@@ -219,7 +219,7 @@ public class TourData {
 		return customerInfoList;
 	}
 	/**
-	 * ²éÕÒ¾°µã
+	 * æŸ¥æ‰¾æ™¯ç‚¹
 	 * @param tourId
 	 */
 	//	public static List<DataPlaceInfo> queryPlacebyId(Context mContext,String tourId){
@@ -250,7 +250,7 @@ public class TourData {
 	}
 	/**
 	 * 
-	 * @param ²éÑ¯ÍÅÖĞ¶ÔÓ¦µÄÊ³Îï
+	 * @param æŸ¥è¯¢å›¢ä¸­å¯¹åº”çš„é£Ÿç‰©
 	 * @return
 	 */
 	public static List<DataFoodInfo> getFoodData(Context mContext){
@@ -288,7 +288,7 @@ public class TourData {
 
 	}
 	/***
-	 * ²éÑ¯¾Æµê
+	 * æŸ¥è¯¢é…’åº—
 	 * @param mContext
 	 * @param hotel_id
 	 * @return
@@ -334,7 +334,7 @@ public class TourData {
 	}
 
 	/***
-	 * ²éÑ¯ÊÓÆµ
+	 * æŸ¥è¯¢è§†é¢‘
 	 * @param mContext
 	 * @return
 	 */
@@ -368,7 +368,7 @@ public class TourData {
 
 	}
 	/***
-	 * ²éÑ¯ĞĞ³Ì
+	 * æŸ¥è¯¢è¡Œç¨‹
 	 * @param mContext
 	 * @return
 	 */
@@ -446,10 +446,10 @@ public class TourData {
 			int id=1000;
 //			Intent intent=new Intent(context,AlarmInitReceiver.class);  
 //			intent.putExtra("id", Integer.valueOf(id));
-//			PendingIntent pi = PendingIntent.getBroadcast(context, Integer.valueOf(id) ,intent, PendingIntent.FLAG_CANCEL_CURRENT); //Í¨¹ıgetBroadcastµÚ¶ş¸ö²ÎÊıÇø·ÖÄÖÖÓ£¬½«²éÑ¯µÃµ½µÄnoteµÄIDÖµ×÷ÎªµÚ¶ş¸ö²ÎÊı¡£
+//			PendingIntent pi = PendingIntent.getBroadcast(context, Integer.valueOf(id) ,intent, PendingIntent.FLAG_CANCEL_CURRENT); //é€šè¿‡getBroadcastç¬¬äºŒä¸ªå‚æ•°åŒºåˆ†é—¹é’Ÿï¼Œå°†æŸ¥è¯¢å¾—åˆ°çš„noteçš„IDå€¼ä½œä¸ºç¬¬äºŒä¸ªå‚æ•°ã€‚
 //
 //			AlarmManager am = (AlarmManager)context. getSystemService(Activity.ALARM_SERVICE); 
-//			am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, pi);//ÉèÖÃÄÖÁå 
+//			am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, pi);//è®¾ç½®é—¹é“ƒ 
 			for(int i=0;i<TourInformationActivity.clocktaglist.size();i++){
 //				TTLog.s("i===="+i);
 				id=1000+i;
@@ -475,12 +475,12 @@ public class TourData {
 //				                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 						Intent intent=new Intent(context,AlarmInitReceiver.class);  
 						intent.putExtra("id", Integer.valueOf(id));
-						PendingIntent pi = PendingIntent.getBroadcast(context, Integer.valueOf(id) ,intent, PendingIntent.FLAG_CANCEL_CURRENT); //Í¨¹ıgetBroadcastµÚ¶ş¸ö²ÎÊıÇø·ÖÄÖÖÓ£¬½«²éÑ¯µÃµ½µÄnoteµÄIDÖµ×÷ÎªµÚ¶ş¸ö²ÎÊı¡£
+						PendingIntent pi = PendingIntent.getBroadcast(context, Integer.valueOf(id) ,intent, PendingIntent.FLAG_CANCEL_CURRENT); //é€šè¿‡getBroadcastç¬¬äºŒä¸ªå‚æ•°åŒºåˆ†é—¹é’Ÿï¼Œå°†æŸ¥è¯¢å¾—åˆ°çš„noteçš„IDå€¼ä½œä¸ºç¬¬äºŒä¸ªå‚æ•°ã€‚
 
 						AlarmManager am = (AlarmManager)context. getSystemService(Activity.ALARM_SERVICE); 
 //						TTLog.s(System.currentTimeMillis()+"TourInformationActivity.clockUnixlist.get(i)==="+TourInformationActivity.clockUnixlist.get(i));
-						am.set(AlarmManager.RTC_WAKEUP, Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000, pi);//ÉèÖÃÄÖÁå 
-//						am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+60000*i , pi);//ÉèÖÃÄÖÁå 
+						am.set(AlarmManager.RTC_WAKEUP, Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000, pi);//è®¾ç½®é—¹é“ƒ 
+//						am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+60000*i , pi);//è®¾ç½®é—¹é“ƒ 
 					}else{
 						db.execSQL(insertMe + "("+(id)+","+hour+","+ min+","+0+","+ 1+","+ 0+","+ 0+","+"'"+tag+"'"+", '',0);");
 					}

@@ -41,16 +41,16 @@ import android.widget.Toast;
 
 /*
  * 
- * ÏÔÊ¾ÃÀÊ³/¾ÆµêÏêÇé
+ * æ˜¾ç¤ºç¾é£Ÿ/é…’åº—è¯¦æƒ…
  */
 public class TourDetailsActivity extends NotTitleActivity {
 	private Gallery gallery;
 	private ImageButton videobutton,ib_back;
 	private TextView tv_title,tv_name,tv_addr,tv_classify,tv_introduction;
-	private	TextView hotel_contact; // ÁªÏµÈË
-	private	TextView hotel_phone; // ÁªÏµµç»°
-	private	TextView hotel_fax; // ´«Õæ
-	private	TextView hotel_level; // ¾Æµê¼¶±ğ
+	private	TextView hotel_contact; // è”ç³»äºº
+	private	TextView hotel_phone; // è”ç³»ç”µè¯
+	private	TextView hotel_fax; // ä¼ çœŸ
+	private	TextView hotel_level; // é…’åº—çº§åˆ«
 	private	LinearLayout lilyt_addr,lilyt_hotel;
     private String type="";
     private int id=0,position=0;
@@ -111,11 +111,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 		hotel_phone = (TextView) findViewById(R.id.tourdetalils_hotel_phone);
 		hotel_fax = (TextView) findViewById(R.id.tourdetalils_hotel_fax);		
 		hotel_level= (TextView) findViewById(R.id.tourdetalils_hotel_level);
-		gallery = (Gallery) findViewById(R.id.tourdetalils_gy);// Ê¹ÓÃGalleryÏÔÊ¾ÉÌÆ·ÏêÇéÍ¼
-		gallery.setSpacing(5);// Í¼Æ¬¼ä¾à
+		gallery = (Gallery) findViewById(R.id.tourdetalils_gy);// ä½¿ç”¨Galleryæ˜¾ç¤ºå•†å“è¯¦æƒ…å›¾
+		gallery.setSpacing(5);// å›¾ç‰‡é—´è·
 		gallery.setSelection(4);
-		int screenWidth = getWindowManager().getDefaultDisplay().getWidth(); // ÆÁÄ»¿í£¨ÏñËØ£¬Èç£º480px£©
-		int screenHeight = getWindowManager().getDefaultDisplay().getHeight(); // ÆÁÄ»¸ß£¨ÏñËØ£¬Èç£º800p£©
+		int screenWidth = getWindowManager().getDefaultDisplay().getWidth(); // å±å¹•å®½ï¼ˆåƒç´ ï¼Œå¦‚ï¼š480pxï¼‰
+		int screenHeight = getWindowManager().getDefaultDisplay().getHeight(); // å±å¹•é«˜ï¼ˆåƒç´ ï¼Œå¦‚ï¼š800pï¼‰
 //		System.out.println("screenWidth" + screenWidth + "screenHeight"+ screenHeight);
 		gallery.setMinimumHeight(185);
 		gallery.setMinimumWidth(screenWidth * 100 / 100);
@@ -124,50 +124,50 @@ public class TourDetailsActivity extends NotTitleActivity {
 	private void setdata() {
 		// TODO Auto-generated method stub
 		if("food".equals(type)){
-			tv_title.setText("²ÍÌüÏêÇé");	
+			tv_title.setText("é¤å…è¯¦æƒ…");	
 			tv_name.setText(PublicData.tourFood.get(position).getFoodTitle());	
-			tv_addr.setText("µØÖ·£º"+PublicData.tourFood.get(position).getFoodArea());	
-			 tv_classify.setText("·ÖÀà£º"+PublicData.tourFood.get(position).getFoodType());
+			tv_addr.setText("åœ°å€ï¼š"+PublicData.tourFood.get(position).getFoodArea());	
+			 tv_classify.setText("åˆ†ç±»ï¼š"+PublicData.tourFood.get(position).getFoodType());
 			 if(!"".equals(PublicData.tourFood.get(position).getFoodContent())&&!"null".equals(PublicData.tourFood.get(position).getFoodContent())){
-			tv_introduction.setText("¼ò½é£º"+PublicData.tourFood.get(position).getFoodContent());
+			tv_introduction.setText("ç®€ä»‹ï¼š"+PublicData.tourFood.get(position).getFoodContent());
 			 }else{
 				 tv_introduction.setVisibility(View.GONE);
 			 }
 			lilyt_hotel.setVisibility(View.VISIBLE);
-			 hotel_contact.setText("ÁªÏµÈË    £º"+PublicData.tourFood.get(position).getFoodContact());
-			 hotel_phone.setText("µç»°ºÅÂë£º"+PublicData.tourFood.get(position).getFoodPhone());
+			 hotel_contact.setText("è”ç³»äºº    ï¼š"+PublicData.tourFood.get(position).getFoodContact());
+			 hotel_phone.setText("ç”µè¯å·ç ï¼š"+PublicData.tourFood.get(position).getFoodPhone());
 			 hotel_fax.setVisibility(View.GONE);
 			 hotel_level.setVisibility(View.GONE);
 		}else if("hotel".equals(type)){
-			tv_title.setText("¾ÆµêÏêÇé");	
+			tv_title.setText("é…’åº—è¯¦æƒ…");	
 			tv_name.setText(PublicData.dataHotelData.get(position).getHotelTitle());	
-			tv_addr.setText("µØÖ·£º"+PublicData.dataHotelData.get(position).getHotelArea());	
+			tv_addr.setText("åœ°å€ï¼š"+PublicData.dataHotelData.get(position).getHotelArea());	
 			 tv_classify.setText("");
 			
 			 if(!"".equals(PublicData.dataHotelData.get(position).getHotelContent())&&!"null".equals(PublicData.dataHotelData.get(position).getHotelContent())){
-				 tv_introduction.setText("¼ò½é£º"+PublicData.dataHotelData.get(position).getHotelContent());
+				 tv_introduction.setText("ç®€ä»‹ï¼š"+PublicData.dataHotelData.get(position).getHotelContent());
 					 }else{
 						 tv_introduction.setVisibility(View.GONE);
 					 }
 			lilyt_hotel.setVisibility(View.VISIBLE);
-			 hotel_contact.setText("ÁªÏµÈË    £º"+PublicData.dataHotelData.get(position).getHotelContact());
-			 hotel_phone.setText("µç»°ºÅÂë£º"+PublicData.dataHotelData.get(position).getHotelPhone());
-			 hotel_fax.setText("´«ÕæºÅÂë£º"+PublicData.dataHotelData.get(position).getHotelFax());
-			 hotel_level.setText("¾Æµê¼¶±ğ£º"+PublicData.dataHotelData.get(position).getHotelLevel());
+			 hotel_contact.setText("è”ç³»äºº    ï¼š"+PublicData.dataHotelData.get(position).getHotelContact());
+			 hotel_phone.setText("ç”µè¯å·ç ï¼š"+PublicData.dataHotelData.get(position).getHotelPhone());
+			 hotel_fax.setText("ä¼ çœŸå·ç ï¼š"+PublicData.dataHotelData.get(position).getHotelFax());
+			 hotel_level.setText("é…’åº—çº§åˆ«ï¼š"+PublicData.dataHotelData.get(position).getHotelLevel());
 		}else if("scenic".equals(type)){
-			tv_title.setText("¾°µãÏêÇé");	
+			tv_title.setText("æ™¯ç‚¹è¯¦æƒ…");	
 			tv_name.setText(PublicData.tourScenic.get(position).getPlaceTitle());	
-			tv_addr.setText("µØÖ·£º"+PublicData.tourScenic.get(position).getPlaceArea());	
+			tv_addr.setText("åœ°å€ï¼š"+PublicData.tourScenic.get(position).getPlaceArea());	
 			 tv_classify.setText("");
 		 
 			 if(!"".equals(PublicData.tourScenic.get(position).getPlaceContent())&&!"null".equals(PublicData.tourScenic.get(position).getPlaceContent())){
-				 tv_introduction.setText("¼ò½é£º"+PublicData.tourScenic.get(position).getPlaceContent());
+				 tv_introduction.setText("ç®€ä»‹ï¼š"+PublicData.tourScenic.get(position).getPlaceContent());
 					 }else{
 						 tv_introduction.setVisibility(View.GONE);
 					 }
 			lilyt_hotel.setVisibility(View.VISIBLE);
-			 hotel_contact.setText("ÁªÏµÈË    £º"+PublicData.tourScenic.get(position).getPlaceContact());
-			 hotel_phone.setText("µç»°ºÅÂë£º"+PublicData.tourScenic.get(position).getPlacePhone());
+			 hotel_contact.setText("è”ç³»äºº    ï¼š"+PublicData.tourScenic.get(position).getPlaceContact());
+			 hotel_phone.setText("ç”µè¯å·ç ï¼š"+PublicData.tourScenic.get(position).getPlacePhone());
 			 hotel_fax.setVisibility(View.GONE);
 			 hotel_level.setVisibility(View.GONE);
 		}
@@ -198,20 +198,20 @@ public class TourDetailsActivity extends NotTitleActivity {
 		}
 
 		/**
-		 * ÓÃÀ´¿ØÖÆ¿ØÖÆÏÔÊ¾ÊÊÅäÆ÷ÖĞÃ¿Ò»ÏîµÄ¾ßÌåÏÔÊ¾ÄÚÈİ
+		 * ç”¨æ¥æ§åˆ¶æ§åˆ¶æ˜¾ç¤ºé€‚é…å™¨ä¸­æ¯ä¸€é¡¹çš„å…·ä½“æ˜¾ç¤ºå†…å®¹
 		 * 
 		 * @param position
-		 *            ¾ßÌåµÄÃ¿Ò»ÏîµÄÎ»ÖÃ
+		 *            å…·ä½“çš„æ¯ä¸€é¡¹çš„ä½ç½®
 		 * @param convertView
-		 *            Ö¸´ú±¾·½·¨ÖĞ·µ»ØµÄViewÀàĞÍ£¬´Ë´¦ÊÇImageView
+		 *            æŒ‡ä»£æœ¬æ–¹æ³•ä¸­è¿”å›çš„Viewç±»å‹ï¼Œæ­¤å¤„æ˜¯ImageView
 		 * @param parent
-		 *            Ö¸´úµ÷ÓÃ´ËÊÊÅäÆ÷µÄÄÇ¸öView ,´Ë´¦Ö¸´úGallery
+		 *            æŒ‡ä»£è°ƒç”¨æ­¤é€‚é…å™¨çš„é‚£ä¸ªView ,æ­¤å¤„æŒ‡ä»£Gallery
 		 */
 
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			convertView = inflater.inflate(R.layout.tourgridview_spac, null);
 			 ImageView	 imageView=(ImageView)convertView.findViewById(R.id.scenic_imageView);
-			 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);// ÉèÖÃÍ¼Æ¬ÏÔÊ¾µÄËõ·ÅÀàĞÍ,´Ë´¦ÊÇ¾ÓÖĞÏÔÊ¾
+			 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);// è®¾ç½®å›¾ç‰‡æ˜¾ç¤ºçš„ç¼©æ”¾ç±»å‹,æ­¤å¤„æ˜¯å±…ä¸­æ˜¾ç¤º
 			 TextView scenic_title=(TextView)convertView.findViewById(R.id.scenic_title);
 
 			 Bitmap	d=getImageUrl(position);
@@ -240,11 +240,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 //			i.setPadding(0, 20, 20, 20);
 //			Display display = TourDetailsActivity.this.getWindowManager()
 //					.getDefaultDisplay();
-//			int w = display.getWidth();// ÀıÈçw=480
-//			int h = display.getHeight();// ÀıÈçh=800
+//			int w = display.getWidth();// ä¾‹å¦‚w=480
+//			int h = display.getHeight();// ä¾‹å¦‚h=800
 ////			System.out.println("w" + w + "h" + h);
-//			i.setLayoutParams(new GalleryFlow.LayoutParams(240, 180));// Í¼Æ¬¹æ¸ñ240*180
-//			i.setScaleType(ImageView.ScaleType.FIT_CENTER);// ÉèÖÃÍ¼Æ¬ÏÔÊ¾µÄËõ·ÅÀàĞÍ,´Ë´¦ÊÇ¾ÓÖĞÏÔÊ¾
+//			i.setLayoutParams(new GalleryFlow.LayoutParams(240, 180));// å›¾ç‰‡è§„æ ¼240*180
+//			i.setScaleType(ImageView.ScaleType.FIT_CENTER);// è®¾ç½®å›¾ç‰‡æ˜¾ç¤ºçš„ç¼©æ”¾ç±»å‹,æ­¤å¤„æ˜¯å±…ä¸­æ˜¾ç¤º
 ////			i.setBackgroundResource(R.drawable.tt);
 //			Bitmap	d=getImageUrl(position);
 //			  i.setImageBitmap(d);
@@ -264,10 +264,10 @@ public class TourDetailsActivity extends NotTitleActivity {
 			  File f=new File(pathName);		
 			  FileInputStream  fis = new FileInputStream(f);
 		
-		// Ñ¹ËõµÄÍ¼Æ¬£¨2µÄÕûÊı±¶£©£¬ÊıÖµÔ½Ğ¡£¬Ñ¹ËõÂÊÔ½Ğ¡£¬Í¼Æ¬Ô½ÇåÎú
+		// å‹ç¼©çš„å›¾ç‰‡ï¼ˆ2çš„æ•´æ•°å€ï¼‰ï¼Œæ•°å€¼è¶Šå°ï¼Œå‹ç¼©ç‡è¶Šå°ï¼Œå›¾ç‰‡è¶Šæ¸…æ™°
 			BitmapFactory.Options opts = new BitmapFactory.Options();
-			opts.inSampleSize = 4;//Ô­Í¼ËõĞ¡4±¶
-			// ½«InputStream±äÎªBitmap£¬ƒÈ´æÒç³ö’Òì³£
+			opts.inSampleSize = 4;//åŸå›¾ç¼©å°4å€
+			// å°†InputStreamå˜ä¸ºBitmapï¼Œå…§å­˜æº¢å‡ºæ‹‹å¼‚å¸¸
 			try {
 				
 				d = BitmapFactory.decodeStream(fis, null,opts);
@@ -294,11 +294,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 								String newUrl = imageUrl.substring(0,
 										imageUrl.indexOf("|"));
 								imageurl.add(newUrl);
-								// Ê£ÓàURL
+								// å‰©ä½™URL
 								String remainUrl = imageUrl.substring(
 										imageUrl.indexOf("|") + 1,
 										imageUrl.length());
-								// Ö±µ½²»´æÔÚ¡°|¡±
+								// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 								while (remainUrl.contains("|")) {
 									if (remainUrl.length() > 0) {
 										newUrl = remainUrl.substring(0,
@@ -320,11 +320,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 								String newUrl = imageUrl.substring(0,
 										imageUrl.indexOf("|"));
 								imagedsc.add(newUrl);
-								// Ê£ÓàURL
+								// å‰©ä½™URL
 								String remainUrl = imageUrl.substring(
 										imageUrl.indexOf("|") + 1,
 										imageUrl.length());
-								// Ö±µ½²»´æÔÚ¡°|¡±
+								// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 								while (remainUrl.contains("|")) {
 									if (remainUrl.length() > 0) {
 										newUrl = remainUrl.substring(0,
@@ -356,11 +356,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 									String newUrl = imageUrl.substring(0,
 											imageUrl.indexOf("|"));
 									imageurl.add(newUrl);
-									// Ê£ÓàURL
+									// å‰©ä½™URL
 									String remainUrl = imageUrl.substring(
 											imageUrl.indexOf("|") + 1,
 											imageUrl.length());
-									// Ö±µ½²»´æÔÚ¡°|¡±
+									// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 									while (remainUrl.contains("|")) {
 										if (remainUrl.length() > 0) {
 											newUrl = remainUrl.substring(0,
@@ -375,7 +375,7 @@ public class TourDetailsActivity extends NotTitleActivity {
 								}
 
 							}
-//							System.out.println("¾ÆµêÍ¼Æ¬ÃèÊö="+PublicData.dataHotelData.get(position).getHotelPhotoDsc());
+//							System.out.println("é…’åº—å›¾ç‰‡æè¿°="+PublicData.dataHotelData.get(position).getHotelPhotoDsc());
 							if (PublicData.dataHotelData.get(position).getHotelPhotoDsc() != null) {
 								String imageUrl =PublicData.dataHotelData.get(position).getHotelPhotoDsc() + "|";
 								if (imageUrl != null
@@ -383,11 +383,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 									String newUrl = imageUrl.substring(0,
 											imageUrl.indexOf("|"));
 									imagedsc.add(newUrl);
-									// Ê£ÓàURL
+									// å‰©ä½™URL
 									String remainUrl = imageUrl.substring(
 											imageUrl.indexOf("|") + 1,
 											imageUrl.length());
-									// Ö±µ½²»´æÔÚ¡°|¡±
+									// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 									while (remainUrl.contains("|")) {
 										if (remainUrl.length() > 0) {
 											newUrl = remainUrl.substring(0,
@@ -419,11 +419,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 									String newUrl = imageUrl.substring(0,
 											imageUrl.indexOf("|"));
 									imageurl.add(newUrl);
-									// Ê£ÓàURL
+									// å‰©ä½™URL
 									String remainUrl = imageUrl.substring(
 											imageUrl.indexOf("|") + 1,
 											imageUrl.length());
-									// Ö±µ½²»´æÔÚ¡°|¡±
+									// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 									while (remainUrl.contains("|")) {
 										if (remainUrl.length() > 0) {
 											newUrl = remainUrl.substring(0,
@@ -446,11 +446,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 									String newUrl = imageUrl.substring(0,
 											imageUrl.indexOf("|"));
 									imagedsc.add(newUrl);
-									// Ê£ÓàURL
+									// å‰©ä½™URL
 									String remainUrl = imageUrl.substring(
 											imageUrl.indexOf("|") + 1,
 											imageUrl.length());
-									// Ö±µ½²»´æÔÚ¡°|¡±
+									// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 									while (remainUrl.contains("|")) {
 										if (remainUrl.length() > 0) {
 											newUrl = remainUrl.substring(0,
@@ -480,7 +480,7 @@ public class TourDetailsActivity extends NotTitleActivity {
 		private Handler mHandler;
 		private Context mContext;
 		private TextView tv_tips;
-		private Button bt_support_confirm,bt_support_cancel;// È·¶¨ºÍÈ¡Ïû
+		private Button bt_support_confirm,bt_support_cancel;// ç¡®å®šå’Œå–æ¶ˆ
 		private int position=0;
 		public BigImageDialog(Context context, int theme,int i) {
 			super(context, theme);
@@ -499,7 +499,7 @@ public class TourDetailsActivity extends NotTitleActivity {
 		public void initDialog() {
 			// TODO Auto-generated method stub
 			 ImageView	 imageView=(ImageView)findViewById(R.id.tourdetails_dialog_imageView);
-//			 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);// ÉèÖÃÍ¼Æ¬ÏÔÊ¾µÄËõ·ÅÀàĞÍ,´Ë´¦ÊÇ¾ÓÖĞÏÔÊ¾
+//			 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);// è®¾ç½®å›¾ç‰‡æ˜¾ç¤ºçš„ç¼©æ”¾ç±»å‹,æ­¤å¤„æ˜¯å±…ä¸­æ˜¾ç¤º
 			 TextView scenic_title=(TextView)findViewById(R.id.tourdetails_dialog_title);
 			 Bitmap	d=getImageUrl(position);
 			   imageView.setImageBitmap(d);
@@ -537,10 +537,10 @@ public class TourDetailsActivity extends NotTitleActivity {
 				  File f=new File(pathName);		
 				  FileInputStream  fis = new FileInputStream(f);
 			
-			// Ñ¹ËõµÄÍ¼Æ¬£¨2µÄÕûÊı±¶£©£¬ÊıÖµÔ½Ğ¡£¬Ñ¹ËõÂÊÔ½Ğ¡£¬Í¼Æ¬Ô½ÇåÎú
+			// å‹ç¼©çš„å›¾ç‰‡ï¼ˆ2çš„æ•´æ•°å€ï¼‰ï¼Œæ•°å€¼è¶Šå°ï¼Œå‹ç¼©ç‡è¶Šå°ï¼Œå›¾ç‰‡è¶Šæ¸…æ™°
 				BitmapFactory.Options opts = new BitmapFactory.Options();
-				opts.inSampleSize = 2;//Ô­Í¼ËõĞ¡2±¶
-				// ½«InputStream±äÎªBitmap£¬ƒÈ´æÒç³ö’Òì³£
+				opts.inSampleSize = 2;//åŸå›¾ç¼©å°2å€
+				// å°†InputStreamå˜ä¸ºBitmapï¼Œå…§å­˜æº¢å‡ºæ‹‹å¼‚å¸¸
 				try {
 					
 					d = BitmapFactory.decodeStream(fis, null,opts);

@@ -26,7 +26,7 @@ public class DataDetailActivity extends Activity {
 	int count=0;
 	private	List<String> countlist = new ArrayList<String>();
 	/**
-	 * @param wl ¡°ÍÅÏêÏ¸ĞÅÏ¢¡±
+	 * @param wl â€œå›¢è¯¦ç»†ä¿¡æ¯â€
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,18 +88,18 @@ public class DataDetailActivity extends Activity {
 			count=PublicData.tourDataInfo.getTourCtCount();
 			count_list=PublicData.tourDataInfo.getTourCtCountList();
 			comment=PublicData.tourDataInfo.getRemark();	
-			//count_listÊı¾İ¸ñÊ½:0,0,0,0,0   ¶ÔÓ¦    Ğ¡Í¯,³ÉÈË,éLÕß,•ş†T,ÃâÙM¡¡ 
+			//count_listæ•°æ®æ ¼å¼:0,0,0,0,0   å¯¹åº”    å°ç«¥,æˆäºº,é•·è€…,æœƒå“¡,å…è²»ã€€ 
 			if (!"".equals(count_list)) {
 				String counts =count_list + ",";
 				if (counts != null&& counts.indexOf(",") != -1) {
 					String newUrl = counts.substring(0,
 							counts.indexOf(","));
 					countlist.add(newUrl);
-					// Ê£ÓàURL
+					// å‰©ä½™URL
 					String remainUrl = counts.substring(
 							counts.indexOf(",") + 1,
 							counts.length());
-					// Ö±µ½²»´æÔÚ¡°|¡±
+					// ç›´åˆ°ä¸å­˜åœ¨â€œ|â€
 					while (remainUrl.contains(",")) {
 						if (remainUrl.length() > 0) {
 							newUrl = remainUrl.substring(0,
@@ -115,7 +115,7 @@ public class DataDetailActivity extends Activity {
 
 			}
 			if( countlist.size()>=5){
-				count_list="¶ùÍ¯"+countlist.get(0)+",³ÉÈË"+countlist.get(1)+",éLÕß"+countlist.get(2)+",•ş†T"+countlist.get(3)+",ÃâÙM"+countlist.get(4);
+				count_list="å„¿ç«¥"+countlist.get(0)+",æˆäºº"+countlist.get(1)+",é•·è€…"+countlist.get(2)+",æœƒå“¡"+countlist.get(3)+",å…è²»"+countlist.get(4);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -20,7 +20,7 @@ import com.tour.info.DataPlaceInfo;
 import com.tour.util.PublicData;
 /**
  * 
- * @author wl "景点页面"
+ * @author wl "鏅偣椤甸潰"
  *
  */
 public class TourScenicActivity extends NotTitleActivity {
@@ -53,7 +53,7 @@ public class TourScenicActivity extends NotTitleActivity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				 System.out.println("取出景点");
+				 System.out.println("鍙栧嚭鏅偣");
 //				if (tourScenic.size() != 0)
 				tourScenic = TourData.queryPlacebyId(TourScenicActivity.this,PublicData.tour_id);
 				System.out.println("tourScenic.size()="+tourScenic.size());
@@ -79,7 +79,7 @@ public class TourScenicActivity extends NotTitleActivity {
 				}
 			}
 		};
-//		System.out.println("设置景点数据PublicData.tourScenic.size()="+PublicData.tourScenic.size());
+//		System.out.println("璁剧疆鏅偣鏁版嵁PublicData.tourScenic.size()="+PublicData.tourScenic.size());
 		if(PublicData.tourScenic.size()>0){
 			 mHandler.sendEmptyMessage(1);
 			}

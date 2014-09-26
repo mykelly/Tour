@@ -56,16 +56,16 @@ public class DowenLoadService extends Service {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-//		LogUtils.s("·şÎñËÀÁË");
+//		LogUtils.s("æœåŠ¡æ­»äº†");
 	}
 	/**
-	 * ¿ªÊ¼ÏÂÔØ
+	 * å¼€å§‹ä¸‹è½½
 	 */
 	public void DownloadStart(int position) {
 
 		String urlstr = PublicData.moviephone.get(position).getMovieUrl();
 		String id=PublicData.moviephone.get(position).getId()+"";
-		// ³õÊ¼»¯Ò»¸ödownloaderÏÂÔØÆ÷
+		// åˆå§‹åŒ–ä¸€ä¸ªdownloaderä¸‹è½½å™¨
 		Downloader downloader = downloaders.get(id);
 		if (downloader == null) {
 			downloader = new Downloader(id, urlstr, mContext);
@@ -73,12 +73,12 @@ public class DowenLoadService extends Service {
 		}
 		if (downloader.isdownloading())
 			return;
-//		LogUtils.s("·şÎñ¿ªÆôÏÂÔØ-----------2");
+//		LogUtils.s("æœåŠ¡å¼€å¯ä¸‹è½½-----------2");
 		downloader.getDownloaderInfors();
 	}
 
 	/**
-	 * ÔİÍ£ÏÂÔØ
+	 * æš‚åœä¸‹è½½
 	 */
 	public void DownloadPause(int position) {
 		String id=PublicData.moviephone.get(position).getId()+"";
@@ -86,12 +86,12 @@ public class DowenLoadService extends Service {
 	}
 
 	/**
-	 * ÖØĞÂÏÂÔØ
+	 * é‡æ–°ä¸‹è½½
 	 */
 
 	private void DownloadReStart(String url) {
 		/*
-		 * if(downloaders.get(url)!=null){ LogUtils.s("„h³ıÊı¾İ");
+		 * if(downloaders.get(url)!=null){ LogUtils.s("åˆªé™¤æ•°æ®");
 		 * downloaders.get(url).pause(); FileUtils.deleteFile(Configs.ASDKROOT +
 		 * FileUtils.subFileName(url));
 		 * DownMain.downloaders.get(url).delete(url);
@@ -100,7 +100,7 @@ public class DowenLoadService extends Service {
 		 * Intent(mContext,DowenLoadService.class); intent.putExtra("control",
 		 * "reset"); intent.putExtra("url", url); intent.putExtra("apkName",
 		 * apkName); intent.putExtra("notfi_id", notfi_id);
-		 * mContext.startService(intent); }else{ LogUtils.s("›]ÓĞ„h³ıÊı¾İ"); //
+		 * mContext.startService(intent); }else{ LogUtils.s("æ²’æœ‰åˆªé™¤æ•°æ®"); //
 		 * if(url!=null&&!"".equals(url)) // starDown(url,apkName);
 		 * 
 		 * }
