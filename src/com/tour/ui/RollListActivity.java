@@ -13,6 +13,7 @@ import java.util.zip.ZipException;
 
 import org.json.JSONObject;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -54,7 +56,7 @@ import com.tour.view.WaitDialog;
  * @param <RollListAdpater>
  */
 public class RollListActivity extends NotTitleActivity implements HttpCallBack{
-	private String url = "http://api.diaobao.in/index.php/wemedia_first/splash_screen?device_type=5&access_token=47aee53783c7b8f0aa726b5f31450472"; 
+	private Button bt_next;
 	private ImageButton ib_fresh,ib_exit;
 	private TextView mTitle;
 	private WaitDialog dialog;// “等待”对话框
@@ -170,6 +172,7 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 				finish();
 			}
 		});
+		
 		mTitle=(TextView)findViewById(R.id.tour_top_title);
 		mTitle.setText(getResources().getString(R.string.tour_list));
 		rollList = (ListView) findViewById(R.id.roolList);
@@ -199,15 +202,52 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub			
-			    DownloadZip downloadZip =new DownloadZip();
-			    String filename=PublicData.tour_zip+".zip";
-			    downloadZip.downloadzip(RollListActivity.this, filename, PublicData.zip_url);
+				// TODO Auto-generated method stub	
+				if("1".equals(PublicData.isnew)){//有新压缩包需要更新
+					relyt_download.setVisibility(View.VISIBLE);
+					tv_tip.setVisibility(View.GONE);
+					SaveDataClass saveDataClass=new SaveDataClass();	
+					String last_updata_time=saveDataClass.getLastUpDataTime(getApplicationContext());
+					if(!"".equals(last_updata_time)){
+						if(!last_updata_time.equals(PublicData.tour_update_time)){
+							 TipDialog tipDialog=new TipDialog(RollListActivity.this, R.style.exchange_dialog);
+							 tipDialog.show();
+						} 
+					} 
+					
+				}
+//			    DownloadZip downloadZip =new DownloadZip();
+//			    String filename=PublicData.tour_zip+".zip";
+//			    downloadZip.downloadzip(RollListActivity.this, filename, PublicData.zip_url);
 			}
 		});
-		if("1".equals(PublicData.isnew)){
+		bt_next=(Button)findViewById(R.id.tour_roll_next);
+		bt_next.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				 PublicData.isUpgrade=false;
+				Intent intent=new Intent(RollListActivity.this,TourTabActivity.class);
+			    startActivity(intent);
+			    finish();
+			}
+		});
+		if("1".equals(PublicData.isnew)){//有新压缩包需要更新
 			relyt_download.setVisibility(View.VISIBLE);
 			tv_tip.setVisibility(View.GONE);
+			SaveDataClass saveDataClass=new SaveDataClass();	
+			String last_updata_time=saveDataClass.getLastUpDataTime(getApplicationContext());
+			if(!"".equals(last_updata_time)){
+				if(!last_updata_time.equals(PublicData.tour_update_time)){
+					 bt_next.setVisibility(View.VISIBLE);//显示跳过按钮（可以不更新进入当前的团）
+				}else{
+					 bt_next.setVisibility(View.GONE);
+				}
+			}else{
+				 bt_next.setVisibility(View.GONE);
+			}
+			
 		}else{
 			relyt_download.setVisibility(View.GONE);
 			tv_tip.setVisibility(View.VISIBLE);
@@ -285,4 +325,56 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 		if (dialog != null && dialog.isShowing())
 			dialog.dismiss();
 	}
+	
+	public class  TipDialog extends Dialog {
+		private Handler mHandler;
+		private Context mContext;
+		private TextView tv_tips;
+		private Button bt_support_confirm,bt_support_cancel;// 确定和取消
+		public TipDialog(Context context, int theme) {
+			super(context, theme);
+			// TODO Auto-generated constructor stub
+			mContext = context;
+		}
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.tip_dialog);
+			initDialog();
+
+		}
+		public void initDialog() {
+			// TODO Auto-generated method stub
+			tv_tips=(TextView)findViewById(R.id.tip_dialog_tips);
+
+			bt_support_confirm = (Button) findViewById(R.id.tip_dialog_confirm);
+			bt_support_cancel=(Button)findViewById(R.id.tip_dialog_cancel);
+			bt_support_confirm.setOnClickListener(clickListener);
+			bt_support_cancel.setOnClickListener(clickListener);
+			tv_tips.setText("下载该团信息将清除之前团的数据！可直接进入当前的团。");
+		
+		}
+		private View.OnClickListener clickListener=new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				switch (v.getId()) {
+				case R.id.tip_dialog_confirm:
+					    DownloadZip downloadZip =new DownloadZip();
+					    String filename=PublicData.tour_zip+".zip";
+					    downloadZip.downloadzip(RollListActivity.this, filename, PublicData.zip_url);
+					dismiss();
+					break;
+
+				case R.id.tip_dialog_cancel:
+					dismiss();
+					break;
+				}
+			
+			}
+		};
+	}
+	
+	
 }
