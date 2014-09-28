@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Parcel;
 
+import com.tour.deskclock.Alarm;
 import com.tour.deskclock.AlarmInitReceiver;
 import com.tour.deskclock.AlarmProvider.DatabaseHelper;
 import com.tour.deskclock.Alarms;
@@ -51,7 +52,7 @@ public class TourData {
 		database.execSQL("update sqlite_sequence set seq=0 where name='data_hotel'");
 		database.execSQL("update sqlite_sequence set seq=0 where name='data_place'");
 		database.execSQL("update sqlite_sequence set seq=0 where name='data_movie'");
-		database.endTransaction(); 
+//		database.endTransaction(); 
 		database.close();
 		//		System.out.println("先删除原来的数据");
 	}
@@ -453,34 +454,47 @@ public class TourData {
 			for(int i=0;i<TourInformationActivity.clocktaglist.size();i++){
 //				TTLog.s("i===="+i);
 				id=1000+i;
-				boolean alarmFlag=isAlarmExist(db,id);
+				String time=Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000+"";
+				boolean alarmFlag=isAlarmExist(db,time);
 				if(!alarmFlag){
 					boolean isAlarm=System.currentTimeMillis()<Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000;
-					String time=Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000+"";
 					String hour=TourInformationActivity.clockhourlist.get(i);
 					String min=TourInformationActivity.clockminlist.get(i);
 					String tag=TourInformationActivity.clocktaglist.get(i);
 //					isAlarm=true;
 					if(isAlarm){
 //						db.execSQL(insertMe + "("+(id)+","+hour+","+ min+","+0+","+ System.currentTimeMillis()+60000*i+","+ 1+","+ 1+","+"'"+tag+"'"+", '',0);");
-						db.execSQL(insertMe + "("+(id)+","+hour+","+ min+","+0+","+ time+","+ 1+","+ 1+","+"'"+tag+"'"+", '',0);");
-//						Intent intent = new Intent(Alarms.ALARM_ALERT_ACTION);
-//	                    intent.setClass(context, AlarmInitReceiver.class);
-//				     
-//				        PendingIntent sender = PendingIntent.getBroadcast(
-//				                context,  Integer.valueOf(id), intent, PendingIntent.FLAG_CANCEL_CURRENT);
-//				        AlarmManager am = (AlarmManager)context. getSystemService(Activity.ALARM_SERVICE); 
-//				        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+i*2000, sender);
-//				        PendingIntent sender = PendingIntent.getBroadcast(
-//				                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-						Intent intent=new Intent(context,AlarmInitReceiver.class);  
-						intent.putExtra("id", Integer.valueOf(id));
-						PendingIntent pi = PendingIntent.getBroadcast(context, Integer.valueOf(id) ,intent, PendingIntent.FLAG_CANCEL_CURRENT); //通过getBroadcast第二个参数区分闹钟，将查询得到的note的ID值作为第二个参数。
+//						db.execSQL(insertMe + "("+(id)+","+hour+","+ min+","+0+","+ time+","+ 1+","+ 1+","+"'"+tag+"'"+", '',0);");
+//						Intent intent=new Intent(context,AlarmInitReceiver.class);  
+//						intent.putExtra("id", Integer.valueOf(id));
+//						PendingIntent pi = PendingIntent.getBroadcast(context, Integer.valueOf(id) ,intent, PendingIntent.FLAG_CANCEL_CURRENT); //通过getBroadcast第二个参数区分闹钟，将查询得到的note的ID值作为第二个参数。
+//
+//						AlarmManager am = (AlarmManager)context. getSystemService(Activity.ALARM_SERVICE); 
+//						am.set(AlarmManager.RTC_WAKEUP, Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000, pi);//设置闹铃 
+						/*Intent intent=new Intent(this,AlarmInitReceiver.class);  
+						intent.putExtra("id", Integer.valueOf(1000));
+						PendingIntent pi = PendingIntent.getBroadcast(this, Integer.valueOf(1000) ,intent, PendingIntent.FLAG_CANCEL_CURRENT); //通过getBroadcast第二个参数区分闹钟，将查询得到的note的ID值作为第二个参数。
 
-						AlarmManager am = (AlarmManager)context. getSystemService(Activity.ALARM_SERVICE); 
-//						TTLog.s(System.currentTimeMillis()+"TourInformationActivity.clockUnixlist.get(i)==="+TourInformationActivity.clockUnixlist.get(i));
-						am.set(AlarmManager.RTC_WAKEUP, Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000, pi);//设置闹铃 
-//						am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+60000*i , pi);//设置闹铃 
+						AlarmManager am = (AlarmManager)getSystemService(Activity.ALARM_SERVICE); 
+						am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+6000, pi);//设置闹铃 
+						*/
+						Alarm alarm=new Alarm();
+						alarm.time= Long.parseLong(time);
+						Alarms.addAlarm(context, alarm);
+						AlarmManager am = (AlarmManager)context. getSystemService(Context.ALARM_SERVICE);
+
+				        Intent intent = new Intent(Alarms.ALARM_ALERT_ACTION);
+
+				        Parcel out = Parcel.obtain();
+				        alarm.writeToParcel(out, 0);
+				        out.setDataPosition(0);
+				        intent.putExtra(Alarms.ALARM_RAW_DATA, out.marshall());
+
+				        PendingIntent sender = PendingIntent.getBroadcast(
+				        		context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+				        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+6000, sender);
+					
 					}else{
 						db.execSQL(insertMe + "("+(id)+","+hour+","+ min+","+0+","+ 1+","+ 0+","+ 0+","+"'"+tag+"'"+", '',0);");
 					}
@@ -492,14 +506,14 @@ public class TourData {
 		dbAlarm.close();
 	}
  
-	public static boolean isAlarmExist(SQLiteDatabase db,int alarmId){
+	public static boolean isAlarmExist(SQLiteDatabase db,String alarmtime){
 		boolean alarmFlag=false;
 		if(db==null){
 			return false;
 		}
 //		TTLog.s("alarmId=="+alarmId);
 		try {
-			Cursor cursor=db.query("alarms", null, "_id=?", new String[]{String.valueOf(alarmId)}, null, null, null);
+			Cursor cursor=db.query("alarms", null, "alarmtime=?", new String[]{String.valueOf(alarmtime)}, null, null, null);
 			alarmFlag= cursor.getCount()==0?false:true;
 			cursor.close();
 		} catch (Exception e) {

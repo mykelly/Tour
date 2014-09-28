@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import com.tour.R;
 import com.tour.photoview.PhotoViewAttacher.OnPhotoTapListener;
 import com.tour.util.PublicData;
+import com.tour.util.TTLog;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -76,8 +77,9 @@ public class ImageDetailFragment extends Fragment {
 //		  String imagename=imageurl.get(position); 
 		 
 		  String SDCardRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
-//		  String  pathName=SDCardRoot + File.separator + "DaMeiTour"+ File.separator+ "zip"+ File.separator+ PublicData.tour_zip+ File.separator+imagename;
-		  String  pathName=SDCardRoot + File.separator + "DaMeiTour"+ File.separator+ urlPath;
+		  String  pathName=SDCardRoot + File.separator + "DaMeiTour"+ File.separator+ "zip"+ File.separator+ PublicData.tour_zip+ File.separator+urlPath;
+		  TTLog.s("pathName===="+pathName);
+//		  String  pathName=SDCardRoot + File.separator + "DaMeiTour"+ File.separator+ urlPath;
 //		  Bitmap	d=BitmapFactory.decodeFile(pathName);
 		
 		  Bitmap d = null;					 

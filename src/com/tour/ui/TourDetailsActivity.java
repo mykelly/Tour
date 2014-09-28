@@ -55,7 +55,7 @@ public class TourDetailsActivity extends NotTitleActivity {
     private String type="";
     private int id=0,position=0;
 	private	List<String> ImageUrls = new ArrayList<String>();
-	private	List<String> imageurl = new ArrayList<String>();
+	private	ArrayList<String> imageurl = new ArrayList<String>();
 	private	List<String> imagedsc = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -230,8 +230,11 @@ public class TourDetailsActivity extends NotTitleActivity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					BigImageDialog buyLifeDialog=new BigImageDialog(TourDetailsActivity.this, R.style.exchange_dialog,position);
-					buyLifeDialog.show();	
+//					BigImageDialog buyLifeDialog=new BigImageDialog(TourDetailsActivity.this, R.style.exchange_dialog,position);
+//					buyLifeDialog.show();
+					Intent intent=new Intent(TourDetailsActivity.this,ImagePagerActivity.class);
+					intent.putStringArrayListExtra(ImagePagerActivity.DATA, imageurl);
+					startActivity(intent);
 				}
 			});
 			 return convertView;

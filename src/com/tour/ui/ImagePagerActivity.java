@@ -23,14 +23,14 @@ import com.tour.util.TTLog;
 
 public class ImagePagerActivity extends FragmentActivity  {
 	private static final String STATE_POSITION = "STATE_POSITION";
-	 
+	public static final String DATA = "data";
 	public static final String COUNT = "count";
 	private HackyViewPager mPager;
 	private int pagerPosition = 0;
 	private TextView indicator;
 
 	private ImageView backImag;
-	List<String> imagList;
+	ArrayList<String> imagList;
 
 
 	@SuppressLint("NewApi")
@@ -41,9 +41,7 @@ public class ImagePagerActivity extends FragmentActivity  {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.image_detail_pager);
-		imagList=new ArrayList<String>();
-		imagList.add("650328690.jpg");
-		imagList.add("-193159278.jpg");
+		imagList=getIntent().getStringArrayListExtra(DATA);
 		mPager = (HackyViewPager) findViewById(R.id.pager);
 		indicator = (TextView) findViewById(R.id.indicator);
 		indicator.setText("");
