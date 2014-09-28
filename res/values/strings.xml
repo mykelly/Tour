@@ -120,5 +120,6 @@
     </string-array>
 
     <string name="alarm_klaxon_service_desc">"在 DeskClock 中设置的闹钟铃声播放服务。"</string>
-
+    
+    <string name="viewpager_indicator">%1$d/%2$d</string>
 </resources>

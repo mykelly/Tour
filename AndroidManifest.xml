@@ -93,6 +93,10 @@
             android:name=".ui.DataDetailActivity"
             android:screenOrientation="landscape" >
         </activity>
+         <activity
+            android:name=".ui.ImagePagerActivity"
+            android:screenOrientation="landscape" >
+        </activity>
 	 <service
             android:name="com.down.sdk.service.DowenLoadService"
             android:exported="false" >
