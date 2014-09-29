@@ -1,11 +1,7 @@
 package com.tour.ui;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,15 +12,11 @@ import org.json.JSONObject;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -36,9 +28,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.tour.R;
-import com.tour.SQLite.DBTour;
-import com.tour.SQLite.TourData;
 import com.tour.adpater.RollListAdpater;
 import com.tour.dao.DataJsonParser;
 import com.tour.dao.HttpAsynTask;
@@ -358,7 +349,7 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 			bt_support_cancel=(Button)findViewById(R.id.tip_dialog_cancel);
 			bt_support_confirm.setOnClickListener(clickListener);
 			bt_support_cancel.setOnClickListener(clickListener);
-			tv_tips.setText("下载该团信息将清除之前团的数据！可直接进入当前的团。");
+			tv_tips.setText("注意:当前团信息将会被覆盖. 确定下载更新吗? ");
 		
 		}
 		private View.OnClickListener clickListener=new View.OnClickListener() {

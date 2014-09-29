@@ -3,13 +3,8 @@ package com.tour.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R.color;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -22,16 +17,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+
 import com.tour.R;
 import com.tour.SQLite.DBTour;
 import com.tour.SQLite.TourData;
 import com.tour.adpater.TourMemberAdapter;
 import com.tour.info.DataCustomerInfo;
 import com.tour.info.TourDataInfo;
-import com.tour.util.NetWorkStatus;
 import com.tour.util.PublicData;
 import com.tour.util.SaveDataClass;
-import com.tour.util.TTLog;
 import com.tour.util.TimeUtil;
 import com.tour.view.WaitDialog;
 /**
@@ -77,7 +71,11 @@ public class TourInformationActivity extends NotTitleActivity {
 						PublicData.isUpgrade=false;					 
 						DBTour dbTour=new DBTour(getApplicationContext());
 						dbTour.onUpgrade(null, 2, 3);//导入数据
+					}else{
+						SaveDataClass saveDataClass=new SaveDataClass();
+						PublicData.tour_id=saveDataClass.getTourId(getApplicationContext());//获取团id
 					}
+
 				}else{
 					SaveDataClass saveDataClass=new SaveDataClass();
 					PublicData.tour_id=saveDataClass.getTourId(getApplicationContext());//获取团id
