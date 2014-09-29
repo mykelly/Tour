@@ -212,13 +212,19 @@ public class RollListActivity extends NotTitleActivity implements HttpCallBack{
 						if(!last_updata_time.equals(PublicData.tour_update_time)){
 							 TipDialog tipDialog=new TipDialog(RollListActivity.this, R.style.exchange_dialog);
 							 tipDialog.show();
+						}else{
+						    DownloadZip downloadZip =new DownloadZip();
+						    String filename=PublicData.tour_zip+".zip";
+						    downloadZip.downloadzip(RollListActivity.this, filename, PublicData.zip_url);		
 						} 
+					}else{
+					    DownloadZip downloadZip =new DownloadZip();
+					    String filename=PublicData.tour_zip+".zip";
+					    downloadZip.downloadzip(RollListActivity.this, filename, PublicData.zip_url);
 					} 
 					
 				}
-//			    DownloadZip downloadZip =new DownloadZip();
-//			    String filename=PublicData.tour_zip+".zip";
-//			    downloadZip.downloadzip(RollListActivity.this, filename, PublicData.zip_url);
+
 			}
 		});
 		bt_next=(Button)findViewById(R.id.tour_roll_next);
