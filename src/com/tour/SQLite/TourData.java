@@ -455,6 +455,7 @@ public class TourData {
 //				TTLog.s("i===="+i);
 				id=1000+i;
 				String time=Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000+"";
+				TTLog.s("time============"+time);
 				boolean alarmFlag=isAlarmExist(db,time);
 				if(!alarmFlag){
 					boolean isAlarm=System.currentTimeMillis()<Long.parseLong(TourInformationActivity.clockUnixlist.get(i))*1000;
@@ -480,6 +481,10 @@ public class TourData {
 						*/
 						Alarm alarm=new Alarm();
 						alarm.time= Long.parseLong(time);
+						alarm.hour=Integer.parseInt(hour);
+						alarm.minutes=Integer.parseInt(min);;
+						alarm.enabled=true;
+						alarm.isdelete=false;
 						Alarms.addAlarm(context, alarm);
 						AlarmManager am = (AlarmManager)context. getSystemService(Context.ALARM_SERVICE);
 
@@ -493,7 +498,7 @@ public class TourData {
 				        PendingIntent sender = PendingIntent.getBroadcast(
 				        		context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-				        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+6000, sender);
+				        am.set(AlarmManager.RTC_WAKEUP, alarm.time, sender);
 					
 					}else{
 						db.execSQL(insertMe + "("+(id)+","+hour+","+ min+","+0+","+ 1+","+ 0+","+ 0+","+"'"+tag+"'"+", '',0);");

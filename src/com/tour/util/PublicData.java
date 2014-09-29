@@ -22,8 +22,8 @@ public class PublicData {
 	/**
 	 * 软件当前内部版本号，与LogoActivity共用，用于匹配检查版本更新
 	 */
-	public static double current_version= 106;
-	public static String version = "1.0.6";
+	public static double current_version= 107;
+	public static String version = "1.0.7";
 //	public static String postUrl ="http://192.168.1.10:7777/api/index.htm";//本地测试接口
 	public static String postUrl ="http://test.shoumedia.com/api/index.htm";//外网测试接口
 	public static boolean isNetWork=false;//是否联网
