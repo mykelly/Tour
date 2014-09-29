@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 
 public class NetWorkStatus {
 	
-	// ÅĞ¶ÏÍøÂç×´Ì¬²¢ÉèÖÃÍøÂç
+	// åˆ¤æ–­ç½‘ç»œçŠ¶æ€å¹¶è®¾ç½®ç½‘ç»œ
 	public boolean isNetWork(Context mContext) {
 			boolean netSataus = false;
 			ConnectivityManager cwjManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);

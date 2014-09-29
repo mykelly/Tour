@@ -19,7 +19,7 @@ import com.coremedia.iso.IsoFile;
 import com.tour.video.dao.VideoDao;
 
 /**
- * ÊÓÆµÏÂÔØ
+ * è§†é¢‘ä¸‹è½½
  * 
  * @author wl
  * 
@@ -28,13 +28,13 @@ import com.tour.video.dao.VideoDao;
  */
 public class VideoDownloader {
 
-	/* ÒÔ5sÎª·Ö¸îµã½øĞĞÊÓÆµ·Ö¶Î */
+	/* ä»¥5sä¸ºåˆ†å‰²ç‚¹è¿›è¡Œè§†é¢‘åˆ†æ®µ */
 	private final int SEP_SECOND = 5;
 
 	public static final int MSG_DOWNLOAD_UPDATE = 0x11;
 	public static final int MSG_DOWNLOAD_FINISH = 0x12;
 
-	/* ÏÂÔØµÄ¼¸ÖÖ×´Ì¬ */
+	/* ä¸‹è½½çš„å‡ ç§çŠ¶æ€ */
 	private final int NOTSTART = 0;
 	private final int DOWNLOADING = 1;
 	private final int FINISH = 2;
@@ -44,11 +44,11 @@ public class VideoDownloader {
 	private OnVideoDownloadErrorListener errorListener = null;
 
 	private String url, filePath, name;
-	// ÊÇ·ñ³õÊ¼»¯Íê³É
+	// æ˜¯å¦åˆå§‹åŒ–å®Œæˆ
 	private boolean isInitComplete = false;
-	// ÊÇ·ñµÚÒ»´Î¿ªÆôÏÂÔØ
+	// æ˜¯å¦ç¬¬ä¸€æ¬¡å¼€å¯ä¸‹è½½
 	private boolean isDownloadStart = false;
-	// ÔÊĞíÁ¢¿Ì½áÊøÏÂÔØ
+	// å…è®¸ç«‹åˆ»ç»“æŸä¸‹è½½
 	private boolean shutDown = false;
 	private int downloadIndex = -1;
 	private int seekIndex = -1;
@@ -67,12 +67,12 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ³õÊ¼»¯ÏÂÔØÈÎÎñ£¬»ñÈ¡ÊÓÆµÖ¡ĞÅÏ¢´æÈëVideoInfo£¬ÒÔ5s·Ö¶Î
+	 * åˆå§‹åŒ–ä¸‹è½½ä»»åŠ¡ï¼Œè·å–è§†é¢‘å¸§ä¿¡æ¯å­˜å…¥VideoInfoï¼Œä»¥5såˆ†æ®µ
 	 * 
 	 * @param startOffset
-	 *            ÊÓÆµÆğÊ¼Î»ÖÃ
+	 *            è§†é¢‘èµ·å§‹ä½ç½®
 	 * @param totalSize
-	 *            ÊÓÆµ×Ü´óĞ¡
+	 *            è§†é¢‘æ€»å¤§å°
 	 */
 	public void initVideoDownloader(final long startOffset,
 			final long totalSize, final boolean isFileExist,
@@ -124,20 +124,20 @@ public class VideoDownloader {
 
 					if (mp4Parser.timeOfSyncSamples[i] < (videoList.size() + 1)
 							* SEP_SECOND) {
-						// Î´´ïµ½5ÃëµÄ·Ö¶ÎÌõ¼ş£¬ÖĞ¶Ïµ±´ÎÑ­»·
+						// æœªè¾¾åˆ°5ç§’çš„åˆ†æ®µæ¡ä»¶ï¼Œä¸­æ–­å½“æ¬¡å¾ªç¯
 						continue;
 					}
-					// ¼ÇÂ¼¸Ã¶ÎÊÓÆµ½áÊøµã
+					// è®°å½•è¯¥æ®µè§†é¢‘ç»“æŸç‚¹
 					vi.offsetEnd = mp4Parser.syncSamplesOffset[i];
-					// ´æÏÂ¸Ã¶Î
+					// å­˜ä¸‹è¯¥æ®µ
 					videoList.add(vi);
 					vi = null;
-					// ÖØĞÂ¸Ã´ÎÑ­»·£¬ÒÔÃâ¶ªÖ¡
+					// é‡æ–°è¯¥æ¬¡å¾ªç¯ï¼Œä»¥å…ä¸¢å¸§
 					i--;
 				}
 
 				if (vi != null) {
-					// ÊÓÆµ×Ü´óĞ¡
+					// è§†é¢‘æ€»å¤§å°
 					vi.offsetEnd = totalSize;
 					videoList.add(vi);
 					vi = null;
@@ -152,9 +152,9 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ¼ì²â³õÊ¼»¯ÊÇ·ñÍê³É
+	 * æ£€æµ‹åˆå§‹åŒ–æ˜¯å¦å®Œæˆ
 	 * 
-	 * @return true:Íê³É,false:Î´Íê³É
+	 * @return true:å®Œæˆ,false:æœªå®Œæˆ
 	 */
 	public boolean isInitComplete() {
 		// TODO Auto-generated method stub
@@ -162,27 +162,27 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ÖĞ¶ÏÏÂÔØ²Ù×÷
+	 * ä¸­æ–­ä¸‹è½½æ“ä½œ
 	 */
 	public void cancelDownload(boolean isSeeked, long videoCacheSize) {
 		// TODO Auto-generated method stub
 		this.shutDown = true;
 		this.executorService.shutdown();
 		if (db != null) {
-			// Î´ÍÏ¶¯¹ıÔÚ½áÊøÊ±¼ÇÂ¼»º´æ
+			// æœªæ‹–åŠ¨è¿‡åœ¨ç»“æŸæ—¶è®°å½•ç¼“å­˜
 			if (!isSeeked && videoCacheSize > 0) {
 				seekVideoDBInfo(videoCacheSize);
 			}
-			// ¹Ø±ÕÊı¾İ¿â
+			// å…³é—­æ•°æ®åº“
 			db.close();
 		}
 	}
 
 	/**
-	 * ÏÂÔØÍêmp4ÎÄ¼şÍ·²¿Êı¾İÎ»ÖÃ´¦¿ªÊ¼ÏÂÔØÊÓÆµ
+	 * ä¸‹è½½å®Œmp4æ–‡ä»¶å¤´éƒ¨æ•°æ®ä½ç½®å¤„å¼€å§‹ä¸‹è½½è§†é¢‘
 	 * 
 	 * @param startOffset
-	 *            mp4ÎÄ¼şÍ·´¦µÄÆğÊ¼Î»ÖÃ
+	 *            mp4æ–‡ä»¶å¤´å¤„çš„èµ·å§‹ä½ç½®
 	 */
 	private void downloadVideo(long startOffset, long totalSize,
 			boolean isFileExist, boolean isDBInfoExist) {
@@ -191,41 +191,41 @@ public class VideoDownloader {
 
 		for (VideoInfo vi : videoList) {
 			if (vi.offsetEnd > startOffset) {
-				// ÒÀ¾İ½âÎöºó¸ÃÊÓÆµ¶Ï½áÊøÎ»ÖÃ´óÓÚ¼ÇÂ¼µÄ»º´æÎ»ÖÃ£¬ËµÃ÷¸Ã¶ÎÎ´ÏÂÔØ»òÕßÏÂÔØ²»ÍêÕû
+				// ä¾æ®è§£æåè¯¥è§†é¢‘æ–­ç»“æŸä½ç½®å¤§äºè®°å½•çš„ç¼“å­˜ä½ç½®ï¼Œè¯´æ˜è¯¥æ®µæœªä¸‹è½½æˆ–è€…ä¸‹è½½ä¸å®Œæ•´
 				break;
 			}
-			// ±ê¼ÇÒÑÏÂÔØ
+			// æ ‡è®°å·²ä¸‹è½½
 			vi.status = FINISH;
 			downloadIndex++;
 		}
 
 		if (!isFileExist) {
-			// Êı¾İ¿â²»´æÔÚ¼ÇÂ¼ÔòĞÂÔö¼ÇÂ¼
+			// æ•°æ®åº“ä¸å­˜åœ¨è®°å½•åˆ™æ–°å¢è®°å½•
 			if (!isDBInfoExist) {
 				db.add(name, startOffset, totalSize);
 			}
-			// ÎÄ¼ş²»´æÔÚ²ÅĞèÒªÏÂÔØ
+			// æ–‡ä»¶ä¸å­˜åœ¨æ‰éœ€è¦ä¸‹è½½
 			download();
 		}
 	}
 
 	/**
-	 * ÏÂÔØÎÄ¼ş
+	 * ä¸‹è½½æ–‡ä»¶
 	 */
 	private void download() {
 		// TODO Auto-generated method stub
-		// ¿ªÆôÏÂÔØ
+		// å¼€å¯ä¸‹è½½
 		isDownloadStart = true;
 		while (!isAllFinished()) {
-			// ÖĞ¶ÏÊÓÆµÍ£Ö¹ÏÂÔØ
+			// ä¸­æ–­è§†é¢‘åœæ­¢ä¸‹è½½
 			if (shutDown || downloadIndex >= videoList.size()) {
 			 
 				break;
 			}
 
 			/*
-			 * Èç¹ûÒª×Ô¶¯ÏÂÔØÍêÕûµÄÎÄ¼şÓÃ¸ÃËã·¨[downloadIndex %= videoList.size()]
-			 * ¸ÃËã·¨ÊÇ´ÓstartOffsetºóÒ»Ö±µ½ÏÂÔØÍêÎªÖ¹
+			 * å¦‚æœè¦è‡ªåŠ¨ä¸‹è½½å®Œæ•´çš„æ–‡ä»¶ç”¨è¯¥ç®—æ³•[downloadIndex %= videoList.size()]
+			 * è¯¥ç®—æ³•æ˜¯ä»startOffsetåä¸€ç›´åˆ°ä¸‹è½½å®Œä¸ºæ­¢
 			 */
 			VideoInfo vi = this.videoList.get(downloadIndex);
 			if (vi.status == NOTSTART) {
@@ -245,12 +245,12 @@ public class VideoDownloader {
 			}
 		}
 		mHandler.sendEmptyMessage(MSG_DOWNLOAD_FINISH);
-		// ÏÂÔØÍê³É
+		// ä¸‹è½½å®Œæˆ
 		isDownloadStart = false;
 	}
 
 	/**
-	 * ¼ì²âÊÇ·ñÈ«²¿ÊÓÆµÄ£¿é¶¼ÒÑÏÂÔØÍê±Ï
+	 * æ£€æµ‹æ˜¯å¦å…¨éƒ¨è§†é¢‘æ¨¡å—éƒ½å·²ä¸‹è½½å®Œæ¯•
 	 */
 	private boolean isAllFinished() {
 		// TODO Auto-generated method stub
@@ -263,14 +263,14 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ¼ì²âÖ¸¶¨Ê±¼äµÄÊÓÆµÊÇ·ñÒÑ¾­»º´æºÃÁË
+	 * æ£€æµ‹æŒ‡å®šæ—¶é—´çš„è§†é¢‘æ˜¯å¦å·²ç»ç¼“å­˜å¥½äº†
 	 * 
 	 * @param time
-	 *            Ö¸¶¨µÄÊ±¼ä
-	 * @return {ÊÇ·ñ»º´æÍê³É,ÊÇ·ñÊÇ´¦ÓÚÏÂÔØ×´Ì¬}
+	 *            æŒ‡å®šçš„æ—¶é—´
+	 * @return {æ˜¯å¦ç¼“å­˜å®Œæˆ,æ˜¯å¦æ˜¯å¤„äºä¸‹è½½çŠ¶æ€}
 	 */
 	public boolean checkIsBuffered(long time) {
-		// Êı×éÏÂ±êÊÇ´Ó0¿ªÊ¼µÄ
+		// æ•°ç»„ä¸‹æ ‡æ˜¯ä»0å¼€å§‹çš„
 		int index = -1;
 
 		for (VideoInfo vi : videoList) {
@@ -299,7 +299,7 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ¸ù¾İVideoInfoËù½âÎöµÄÊÓÆµ¶ÎÏÂÔØ¸Ã¶ÎÊÓÆµ
+	 * æ ¹æ®VideoInfoæ‰€è§£æçš„è§†é¢‘æ®µä¸‹è½½è¯¥æ®µè§†é¢‘
 	 * 
 	 * @param vi
 	 * @throws IOException
@@ -339,10 +339,10 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ¼ÓÔØµÚtimeÃë¿ªÊ¼µÄÊı¾İÁ÷
+	 * åŠ è½½ç¬¬timeç§’å¼€å§‹çš„æ•°æ®æµ
 	 */
 	public synchronized void seekLoadVideo(long time) {
-		// Êı×éÏÂ±êÊÇ´Ó0¿ªÊ¼µÄ
+		// æ•°ç»„ä¸‹æ ‡æ˜¯ä»0å¼€å§‹çš„
 		seekIndex = -1;
 
 		for (VideoInfo vi : videoList) {
@@ -369,7 +369,7 @@ public class VideoDownloader {
 
 						downloadIndex = seekIndex;
 						if (!isDownloadStart) {
-							// µÚtimeÃëËùÔÚµÄ¶ÎÒÑ¾­ÏÂÔØÍê³É£¬´ÓÏÂ¶Î¿ªÊ¼ÏÂÔØ
+							// ç¬¬timeç§’æ‰€åœ¨çš„æ®µå·²ç»ä¸‹è½½å®Œæˆï¼Œä»ä¸‹æ®µå¼€å§‹ä¸‹è½½
 							downloadIndex++;
 							download();
 						}
@@ -387,28 +387,28 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ²éÑ¯ÊÓÆµÒÑ»º´æĞÅÏ¢
+	 * æŸ¥è¯¢è§†é¢‘å·²ç¼“å­˜ä¿¡æ¯
 	 * 
 	 * @param videoName
-	 *            ÊÓÆµÃû³Æ
-	 * @return {ÊÇ·ñÓĞ¸Ã¼ÇÂ¼(0±íÊ¾Ã»ÓĞ£¬1±íÊ¾ÓĞ),»º´æ´óĞ¡,×Ü´óĞ¡,ÒÑ»º´æ´¦¶ÔÓ¦µÄÊ±¼ä
+	 *            è§†é¢‘åç§°
+	 * @return {æ˜¯å¦æœ‰è¯¥è®°å½•(0è¡¨ç¤ºæ²¡æœ‰ï¼Œ1è¡¨ç¤ºæœ‰),ç¼“å­˜å¤§å°,æ€»å¤§å°,å·²ç¼“å­˜å¤„å¯¹åº”çš„æ—¶é—´
 	 */
 	public long[] queryVideoDBInfo(String videoName) {
 		return db.query(videoName);
 	}
 
 	/**
-	 * ²åÈëÊÓÆµ»º´æĞÅÏ¢
+	 * æ’å…¥è§†é¢‘ç¼“å­˜ä¿¡æ¯
 	 * 
 	 * @param videoCacheSize
-	 *            µ±Ç°»º´æ
+	 *            å½“å‰ç¼“å­˜
 	 */
 	public void seekVideoDBInfo(long videoCacheSize) {
 		db.update(name, videoCacheSize);
 	}
 
 	/**
-	 * ×¢²áÊÓÆµÏÂÔØ´íÎó½Ó¿Ú
+	 * æ³¨å†Œè§†é¢‘ä¸‹è½½é”™è¯¯æ¥å£
 	 * 
 	 * @param listener
 	 *            VideoDownloadErrorListener
@@ -419,18 +419,18 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * »ñÈ¡ÊÓÆµĞÅÏ¢
+	 * è·å–è§†é¢‘ä¿¡æ¯
 	 */
 	class VideoInfo {
-		// ÊÓÆµ½áÊøÊ±¼ä
+		// è§†é¢‘ç»“æŸæ—¶é—´
 		double timeEnd;
-		// ÊÓÆµÆğÊ¼Î»ÖÃ
+		// è§†é¢‘èµ·å§‹ä½ç½®
 		long offsetStart;
-		// ÊÓÆµ½áÊøÎ»ÖÃ
+		// è§†é¢‘ç»“æŸä½ç½®
 		long offsetEnd;
-		// ÊÓÆµÒÑÏÂÔØ¸Ã¶ÏµÄ´óĞ¡
+		// è§†é¢‘å·²ä¸‹è½½è¯¥æ–­çš„å¤§å°
 		long downloadSize;
-		// ÊÓÆµÏÂÔØ×´Ì¬
+		// è§†é¢‘ä¸‹è½½çŠ¶æ€
 		int status;
 
 		public VideoInfo() {
@@ -448,7 +448,7 @@ public class VideoDownloader {
 	}
 
 	/**
-	 * ÊÓÆµÏÂÔØ´íÎó½Ó¿Ú
+	 * è§†é¢‘ä¸‹è½½é”™è¯¯æ¥å£
 	 */
 	public interface OnVideoDownloadErrorListener {
 		void onError();

@@ -3,16 +3,16 @@ package com.tour.video.dao;
 public class VideoDBData {
 
 	/**
-	 * ÊÓÆµÊı¾İ¿âÃû³Æ
+	 * è§†é¢‘æ•°æ®åº“åç§°
 	 */
 	public static final String VIDEO_DB_NAME = "video.db";
 	/**
-	 * ÊÓÆµÊı¾İ¿â°æ±¾ºÅ
+	 * è§†é¢‘æ•°æ®åº“ç‰ˆæœ¬å·
 	 */
 	public static final int VIDEO_DB_VERSION = 1;
 
 	/**
-	 * ÊÓÆµĞÅÏ¢±í
+	 * è§†é¢‘ä¿¡æ¯è¡¨
 	 */
 	public static final String VIDEO_TABLENAME = "videoInfo";
 	/**
@@ -20,15 +20,15 @@ public class VideoDBData {
 	 */
 	public static final String VIDEO_ID = "id";
 	/**
-	 * ÊÓÆµÃû³Æ×Ö¶Î
+	 * è§†é¢‘åç§°å­—æ®µ
 	 */
 	public static final String VIDEO_NAME = "videoName";
 	/**
-	 * ÊÓÆµÒÑ»º´æ´óĞ¡×Ö¶Î
+	 * è§†é¢‘å·²ç¼“å­˜å¤§å°å­—æ®µ
 	 */
 	public static final String VIDEO_CACHE_SIZE = "cacheSize";
 	/**
-	 * ÊÓÆµ×Ü´óĞ¡×Ö¶Î
+	 * è§†é¢‘æ€»å¤§å°å­—æ®µ
 	 */
 	public static final String VIDEO_TOTAL_SIZE = "totalSize";
 }

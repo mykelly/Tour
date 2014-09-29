@@ -12,10 +12,10 @@ import android.widget.ImageView;
 
 public class GalleryimageFlow extends Gallery {
 
-    private Camera mCamera = new Camera();//Ïà»úÀà
-    private int mMaxRotationAngle = 60;//×î´ó×ª¶¯½Ç¶È
-    private int mMaxZoom = -150;//Ëõ·Å±È{imagViewÕ¼GalleryFlow¿Ø¼þµÄ±ÈÀý}
-    private int mCoveflowCenter;//°ë¾¶Öµ
+    private Camera mCamera = new Camera();//ç›¸æœºç±»
+    private int mMaxRotationAngle = 60;//æœ€å¤§è½¬åŠ¨è§’åº¦
+    private int mMaxZoom = -150;//ç¼©æ”¾æ¯”{imagViewå GalleryFlowæŽ§ä»¶çš„æ¯”ä¾‹}
+    private int mCoveflowCenter;//åŠå¾„å€¼
     private int rotation;
 //	private int mCurrentBufferIndex;
 //	private int mCurrentAdapterIndex;
@@ -39,7 +39,7 @@ public class GalleryimageFlow extends Gallery {
 
 	public GalleryimageFlow(Context context) {
             super(context);
-            this.setStaticTransformationsEnabled(true);//Ö§³Ö×ª»» ,Ö´ÐÐgetChildStaticTransformation·½·¨
+            this.setStaticTransformationsEnabled(true);//æ”¯æŒè½¬æ¢ ,æ‰§è¡ŒgetChildStaticTransformationæ–¹æ³•
 
     }
 
@@ -74,7 +74,7 @@ public class GalleryimageFlow extends Gallery {
                             + getPaddingLeft();
     }
 
-     //ÓÃÀ´ÉèÖÃ»¬¶¯µÄÁé»îÐÔ
+     //ç”¨æ¥è®¾ç½®æ»‘åŠ¨çš„çµæ´»æ€§
 	/*public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
 		// TODO Auto-generated method stub
@@ -86,24 +86,24 @@ public class GalleryimageFlow extends Gallery {
             return view.getLeft() + view.getWidth() / 2;
     }
     
-  //¿ØÖÆgalleryÖÐÃ¿¸öÍ¼Æ¬µÄÐý×ª(ÖØÐ´µÄgalleryÖÐ·½·¨)
+  //æŽ§åˆ¶galleryä¸­æ¯ä¸ªå›¾ç‰‡çš„æ—‹è½¬(é‡å†™çš„galleryä¸­æ–¹æ³•)
     protected boolean getChildStaticTransformation(View child, Transformation t) {
-    	//È¡µÃµ±Ç°×ÓviewµÄ°ë¾¶Öµ
+    	//å–å¾—å½“å‰å­viewçš„åŠå¾„å€¼
             final int childCenter = getCenterOfView(child);
             final int childWidth = child.getWidth();
-            //Ðý×ª½Ç¶È
+            //æ—‹è½¬è§’åº¦
             int rotationAngle = 0;
-          //ÖØÖÃ×ª»»×´Ì¬
+          //é‡ç½®è½¬æ¢çŠ¶æ€
             t.clear();
-          //ÉèÖÃ×ª»»ÀàÐÍ
+          //è®¾ç½®è½¬æ¢ç±»åž‹
             t.setTransformationType(Transformation.TYPE_MATRIX);
-          //Èç¹ûÍ¼Æ¬Î»ÓÚÖÐÐÄÎ»ÖÃ²»ÐèÒª½øÐÐÐý×ª
+          //å¦‚æžœå›¾ç‰‡ä½äºŽä¸­å¿ƒä½ç½®ä¸éœ€è¦è¿›è¡Œæ—‹è½¬
             if (childCenter == mCoveflowCenter) {
                 transformImageBitmap((ImageView) child, t, 0);
             } else {
-            	//¸ù¾ÝÍ¼Æ¬ÔÚgalleryÖÐµÄÎ»ÖÃÀ´¼ÆËãÍ¼Æ¬µÄÐý×ª½Ç¶È
+            	//æ ¹æ®å›¾ç‰‡åœ¨galleryä¸­çš„ä½ç½®æ¥è®¡ç®—å›¾ç‰‡çš„æ—‹è½¬è§’åº¦
                 rotationAngle = (int) (((float) (mCoveflowCenter - childCenter) / childWidth) * mMaxRotationAngle);
-                //Èç¹ûÐý×ª½Ç¶È¾ø¶ÔÖµ´óÓÚ×î´óÐý×ª½Ç¶È·µ»Ø(-mMaxRotationAngle»òmMaxRotationAngle;)
+                //å¦‚æžœæ—‹è½¬è§’åº¦ç»å¯¹å€¼å¤§äºŽæœ€å¤§æ—‹è½¬è§’åº¦è¿”å›ž(-mMaxRotationAngleæˆ–mMaxRotationAngle;)
                 if (Math.abs(rotationAngle) > mMaxRotationAngle) {
                     rotationAngle = (rotationAngle < 0) ? -mMaxRotationAngle : mMaxRotationAngle;
                 }
@@ -118,25 +118,25 @@ public class GalleryimageFlow extends Gallery {
     }
 
     private void transformImageBitmap(ImageView child, Transformation t, int rotationAngle) {
-    	//¶ÔÐ§¹û½øÐÐ±£´æ
+    	//å¯¹æ•ˆæžœè¿›è¡Œä¿å­˜
             mCamera.save();
             final Matrix imageMatrix = t.getMatrix();
-            final int imageHeight = child.getLayoutParams().height; //Í¼Æ¬¸ß¶È
-            final int imageWidth = child.getLayoutParams().width;//Í¼Æ¬¿í¶È
-            rotation = Math.abs(rotationAngle);//·µ»ØÐý×ª½Ç¶ÈµÄ¾ø¶ÔÖµ
+            final int imageHeight = child.getLayoutParams().height; //å›¾ç‰‡é«˜åº¦
+            final int imageWidth = child.getLayoutParams().width;//å›¾ç‰‡å®½åº¦
+            rotation = Math.abs(rotationAngle);//è¿”å›žæ—‹è½¬è§’åº¦çš„ç»å¯¹å€¼
 
-            // ÔÚZÖáÉÏÕýÏòÒÆ¶¯cameraµÄÊÓ½Ç£¬Êµ¼ÊÐ§¹ûÎª·Å´óÍ¼Æ¬¡£
-            // Èç¹ûÔÚYÖáÉÏÒÆ¶¯£¬ÔòÍ¼Æ¬ÉÏÏÂÒÆ¶¯£»XÖáÉÏ¶ÔÓ¦Í¼Æ¬×óÓÒÒÆ¶¯¡£
+            // åœ¨Zè½´ä¸Šæ­£å‘ç§»åŠ¨cameraçš„è§†è§’ï¼Œå®žé™…æ•ˆæžœä¸ºæ”¾å¤§å›¾ç‰‡ã€‚
+            // å¦‚æžœåœ¨Yè½´ä¸Šç§»åŠ¨ï¼Œåˆ™å›¾ç‰‡ä¸Šä¸‹ç§»åŠ¨ï¼›Xè½´ä¸Šå¯¹åº”å›¾ç‰‡å·¦å³ç§»åŠ¨ã€‚
             mCamera.translate(0.0f, 0.0f, 100.0f);
      
     		 //As the angle of the view gets less, zoom in
             if (rotation < mMaxRotationAngle) {
-                    float zoomAmount = (float) (mMaxZoom + (rotation * 1.5));//·Å´ó±¶Êý
+                    float zoomAmount = (float) (mMaxZoom + (rotation * 1.5));//æ”¾å¤§å€æ•°
                     mCamera.translate(0.0f, 0.0f, zoomAmount);
             }
   			                   
-            // ÔÚYÖáÉÏÐý×ª£¬¶ÔÓ¦Í¼Æ¬ÊúÏòÏòÀï·­×ª¡£
-            // Èç¹ûÔÚXÖáÉÏÐý×ª£¬Ôò¶ÔÓ¦Í¼Æ¬ºáÏòÏòÀï·­×ª¡£
+            // åœ¨Yè½´ä¸Šæ—‹è½¬ï¼Œå¯¹åº”å›¾ç‰‡ç«–å‘å‘é‡Œç¿»è½¬ã€‚
+            // å¦‚æžœåœ¨Xè½´ä¸Šæ—‹è½¬ï¼Œåˆ™å¯¹åº”å›¾ç‰‡æ¨ªå‘å‘é‡Œç¿»è½¬ã€‚
         //    mCamera.rotateY(rotationAngle);
        //     mCamera.rotateY(-rotationAngle);
      //       mCamera.rotateX(rotationAngle);

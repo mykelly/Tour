@@ -45,7 +45,7 @@ public class CareyMp4Parser {
 			trackBox = iterator.next();
 			stbl = trackBox.getMediaBox().getMediaInformationBox()
 					.getSampleTableBox();
-			// ÎÒÃÇÖ»´¦ÀíÊÓÆµµÄ¹Ø¼üÖ¡£¬ÒôÆµÊı¾İÂÔ¹ı
+			// æˆ‘ä»¬åªå¤„ç†è§†é¢‘çš„å…³é”®å¸§ï¼ŒéŸ³é¢‘æ•°æ®ç•¥è¿‡
 			if (stbl.getSyncSampleBox() != null) {
 				syncSamples = stbl.getSyncSampleBox().getSampleNumber();
 				syncSamplesSize = new long[syncSamples.length];
@@ -194,11 +194,11 @@ public class CareyMp4Parser {
 	}
 
 	/**
-	 * ²é¿´ÊÓÆµ×ÜÊ±³¤¡¢¹Ø¼üÖ¡¡¢Ö¡Æ«ÒÆ¡¢Ö¡´óĞ¡¡¢Ö¡¶ÔÓ¦µÄÊ±¼ä
+	 * æŸ¥çœ‹è§†é¢‘æ€»æ—¶é•¿ã€å…³é”®å¸§ã€å¸§åç§»ã€å¸§å¤§å°ã€å¸§å¯¹åº”çš„æ—¶é—´
 	 */
 	public void printInfo() {
-		System.out.println("ÊÓÆµ×ÜÊ±³¤(Ãë): " + lengthInSeconds);
-		System.out.println("¹Ø¼üÖ¡ \t Ö¡Æ«ÒÆ \t Ö¡´óĞ¡ \t Ö¡¶ÔÓ¦µÄÊ±¼ä");
+		System.out.println("è§†é¢‘æ€»æ—¶é•¿(ç§’): " + lengthInSeconds);
+		System.out.println("å…³é”®å¸§ \t å¸§åç§» \t å¸§å¤§å° \t å¸§å¯¹åº”çš„æ—¶é—´");
 
 		int size = syncSamples.length;
 

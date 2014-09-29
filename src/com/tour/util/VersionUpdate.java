@@ -39,16 +39,16 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 /**
- * Èí¼ş°æ±¾Éı¼¶
+ * è½¯ä»¶ç‰ˆæœ¬å‡çº§
  * 
  * @author wl
  * @version 2014.04.08 
  */
 public class VersionUpdate {
 
-	private String strURL = null;// ÍøÂç½âÎöµÄAPKÏÂÔØµØÖ·
-	private double onLocalVersion = PublicData.current_version;// ±¾µØÄÚ²¿°æ±¾ºÅ
-	private double onNetVersion = 0.0;// ÍøÂç°æ±¾ºÅ
+	private String strURL = null;// ç½‘ç»œè§£æçš„APKä¸‹è½½åœ°å€
+	private double onLocalVersion = PublicData.current_version;// æœ¬åœ°å†…éƒ¨ç‰ˆæœ¬å·
+	private double onNetVersion = 0.0;// ç½‘ç»œç‰ˆæœ¬å·
 	private int downloadCompleted = 0;
 
 	private Context mContext = null;
@@ -57,24 +57,24 @@ public class VersionUpdate {
 	private Notification notice = null;
 	private VersionUpdateHandler mHandler = null;
     private static AlertDialog mDialog;
-	private String apkPath = null;// »ñÈ¡±¾µØSD¿¨APKÂ·¾¶
-	public static boolean higher = false;// °æ±¾±È½Ï
-	private boolean check = true;// ÊÇ·ñÊÇÍ¨¹ı×Ô¶¯»¹ÊÇÊÖ¶¯¼ì²é¸üĞÂ,Ä¬ÈÏtrue±íÊ¾Îª×Ô¶¯¼ì²âµÄ
-	private boolean error = false;// ÏÂÔØÊÇ·ñ³ö´í
-	private static boolean	isShowing= true;// ÊÇ·ñÏÔÊ¾¶Ô»°¿ò
-	private String title="";//ÌáÊ¾Óï±êÌâ
-	private String content="";//ÌáÊ¾ÓïÄÚÈİ
+	private String apkPath = null;// è·å–æœ¬åœ°SDå¡APKè·¯å¾„
+	public static boolean higher = false;// ç‰ˆæœ¬æ¯”è¾ƒ
+	private boolean check = true;// æ˜¯å¦æ˜¯é€šè¿‡è‡ªåŠ¨è¿˜æ˜¯æ‰‹åŠ¨æ£€æŸ¥æ›´æ–°,é»˜è®¤trueè¡¨ç¤ºä¸ºè‡ªåŠ¨æ£€æµ‹çš„
+	private boolean error = false;// ä¸‹è½½æ˜¯å¦å‡ºé”™
+	private static boolean	isShowing= true;// æ˜¯å¦æ˜¾ç¤ºå¯¹è¯æ¡†
+	private String title="";//æç¤ºè¯­æ ‡é¢˜
+	private String content="";//æç¤ºè¯­å†…å®¹
 	private String status = "";
 	private String errortitle ="";
 	private String errortip ="";
 	/**
-	 * ¼ì²é¸üĞÂ
+	 * æ£€æŸ¥æ›´æ–°
 	 * 
 	 * @param context
-	 *            À´×ÔµÄÒ³Ãæ
+	 *            æ¥è‡ªçš„é¡µé¢
 	 * 
 	 * @param autoCheck
-	 *            ÊÇÍ¨¹ı×Ô¶¯»¹ÊÇÊÖ¶¯¼ì²é¸üĞÂ,true±íÊ¾Îª×Ô¶¯¼ì²âµÄ,false±íÊ¾ÊÖ¶¯¼ì²â
+	 *            æ˜¯é€šè¿‡è‡ªåŠ¨è¿˜æ˜¯æ‰‹åŠ¨æ£€æŸ¥æ›´æ–°,trueè¡¨ç¤ºä¸ºè‡ªåŠ¨æ£€æµ‹çš„,falseè¡¨ç¤ºæ‰‹åŠ¨æ£€æµ‹
 	 */
 	public void asyncUpdate(Context context, boolean autoCheck) {
 		this.mContext = context;
@@ -93,7 +93,7 @@ public class VersionUpdate {
 		protected Object doInBackground(Object... params) {
 			// TODO Auto-generated method stub
 
-			// ÍøÂçÅĞ¶Ï°æ±¾¸üĞÂ
+			// ç½‘ç»œåˆ¤æ–­ç‰ˆæœ¬æ›´æ–°
 			String info = getCurrentVersionOnNet();
 
 			return info;
@@ -107,11 +107,11 @@ public class VersionUpdate {
 				loadingDialog.dismiss();
 			}
 			if("1".equals(status)){
-				// ·¢ÏÖĞÂ°æ±¾µ¯¿òÌáÊ¾
+				// å‘ç°æ–°ç‰ˆæœ¬å¼¹æ¡†æç¤º
 				if (higher) {
 					if("".equals(title)|"".equals(content)){
-					title="°æ±¾¸üĞÂ";
-					content="·¢ÏÖĞÂ°æ±¾,Çë¸üĞÂ!\nÈç¹û°²×°Ê§°Ü,ÇëÏÈĞ¶ÔØ±¾Ó¦ÓÃ,\nÈ»ºó´ÓSD¿¨µÄDaMeiTourÎÄ¼ş¼ĞÖĞÕÒµ½DaMeiTour.apkµã»÷°²×°¡£";
+					title="ç‰ˆæœ¬æ›´æ–°";
+					content="å‘ç°æ–°ç‰ˆæœ¬,è¯·æ›´æ–°!\nå¦‚æœå®‰è£…å¤±è´¥,è¯·å…ˆå¸è½½æœ¬åº”ç”¨,\nç„¶åä»SDå¡çš„DaMeiTouræ–‡ä»¶å¤¹ä¸­æ‰¾åˆ°DaMeiTour.apkç‚¹å‡»å®‰è£…ã€‚";
 					}
 					updateDialog();
 				}
@@ -125,13 +125,13 @@ public class VersionUpdate {
 
 	}
 
-	// »ñÈ¡µ±Ç°ÍøÂç°æ±¾ºÅ
+	// è·å–å½“å‰ç½‘ç»œç‰ˆæœ¬å·
 	private String getCurrentVersionOnNet() {
 
 		PostUtil pu = new PostUtil();
 		String data = null;
 		/*
-		 * sn:ÇşµÀºÅ version:°æ±¾ºÅ
+		 * sn:æ¸ é“å· version:ç‰ˆæœ¬å·
 		 */
 		String[] array = { "act", "check_version",
 //				"sn",PublicDataClass.factoryId,
@@ -140,21 +140,21 @@ public class VersionUpdate {
 		try {
 			JSONObject jsonObject = new JSONObject(data);
 			  status = jsonObject.getString("status");
-//			  System.out.println("°æ±¾Éı¼¶status="+status);
+//			  System.out.println("ç‰ˆæœ¬å‡çº§status="+status);
 			if ("1".equals(status)) {
 				strURL = jsonObject.getString("url");
 				String version = jsonObject.getString("version");
 				onNetVersion = Double.parseDouble(version);				
-				higher = onNetVersion > onLocalVersion ? true : false;// ±È½Ï°æ±¾
+				higher = onNetVersion > onLocalVersion ? true : false;// æ¯”è¾ƒç‰ˆæœ¬
 				  errortitle = jsonObject.getString("title");
 				  errortip = jsonObject.getString("tips");
-//				System.out.println(status+"·µ»ØÌáÊ¾Óïerrortip:"+errortip);
+//				System.out.println(status+"è¿”å›æç¤ºè¯­errortip:"+errortip);
 				title=errortitle;
-				content=errortip+"\n\n¸ÃÉı¼¶°²×°°üÏÂÔØ´æ·Åµ½SD¿¨µÄDaMeiTourÎÄ¼ş¼ĞÖĞ¡£";
+				content=errortip+"\n\nè¯¥å‡çº§å®‰è£…åŒ…ä¸‹è½½å­˜æ”¾åˆ°SDå¡çš„DaMeiTouræ–‡ä»¶å¤¹ä¸­ã€‚";
 			}else if("0".equals(status)){
 				  errortitle = jsonObject.getString("title");
 				  errortip = jsonObject.getString("tips");			
-//				System.out.println("·µ»ØÌáÊ¾Óïerrortip:"+errortip);
+//				System.out.println("è¿”å›æç¤ºè¯­errortip:"+errortip);
 				title=errortitle;
 				content=errortip;
 			 
@@ -171,33 +171,33 @@ public class VersionUpdate {
 	}
 
 	private void updateDialog() {
-//		System.out.println("ÏÔÊ¾¶Ô»°¿ò£¡");
+//		System.out.println("æ˜¾ç¤ºå¯¹è¯æ¡†ï¼");
 		  mDialog = new AlertDialog.Builder(mContext)
 				.setTitle(title).setMessage(content)
-				// ÉèÖÃÄÚÈİ
-				.setPositiveButton("ÏÖÔÚ¸üĞÂ", new DialogInterface.OnClickListener() {
+				// è®¾ç½®å†…å®¹
+				.setPositiveButton("ç°åœ¨æ›´æ–°", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						if("1".equals(status)){
-						showNotification();// ÏÔÊ¾Í¨Öª
-						new Thread(runnable).start();// ÏÂÔØÎÄ¼ş
+						showNotification();// æ˜¾ç¤ºé€šçŸ¥
+						new Thread(runnable).start();// ä¸‹è½½æ–‡ä»¶
 						}
 					}
 				})
-				.setNegativeButton("ÒÔºóÔÙËµ", new DialogInterface.OnClickListener() {
+				.setNegativeButton("ä»¥åå†è¯´", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						//¼Ç×¡µ±Ç°°æ±¾
+						//è®°ä½å½“å‰ç‰ˆæœ¬
 						
 					}
-				}).create();// ´´½¨
-		// ´¥Ãş¶Ô»°¿òÒÔÍâ²»ÏûÊ§
+				}).create();// åˆ›å»º
+		// è§¦æ‘¸å¯¹è¯æ¡†ä»¥å¤–ä¸æ¶ˆå¤±
 		mDialog.setCanceledOnTouchOutside(false);
-		// ÏÔÊ¾¶Ô»°¿ò
+		// æ˜¾ç¤ºå¯¹è¯æ¡†
 	 if(isShowing){
 		mDialog.show();
 	 }
@@ -209,10 +209,10 @@ public class VersionUpdate {
 		public void run() {
 			// TODO Auto-generated method stub
 
-			// Éè¶¨ÍøÂç³¬Ê±
+			// è®¾å®šç½‘ç»œè¶…æ—¶
 			BasicHttpParams httpParams = new BasicHttpParams();
-			HttpConnectionParams.setConnectionTimeout(httpParams, 10000);// ÉèÖÃÇëÇó³¬Ê±10ÃëÖÓ
-			HttpConnectionParams.setSoTimeout(httpParams, 10000);// ÉèÖÃµÈ´ıÊı¾İ³¬Ê±Ê±¼ä10ÃëÖÓ
+			HttpConnectionParams.setConnectionTimeout(httpParams, 10000);// è®¾ç½®è¯·æ±‚è¶…æ—¶10ç§’é’Ÿ
+			HttpConnectionParams.setSoTimeout(httpParams, 10000);// è®¾ç½®ç­‰å¾…æ•°æ®è¶…æ—¶æ—¶é—´10ç§’é’Ÿ
 			HttpClient client = new DefaultHttpClient(httpParams);
 			HttpGet get = new HttpGet(strURL);
 			HttpResponse response;
@@ -262,7 +262,7 @@ public class VersionUpdate {
 							while ((ch = is.read(buf)) != -1) {
 								fileOutputStream.write(buf, 0, ch);
 								temp += ch;
-								downloadCompleted = (int) (temp * 100 / length);// ¼ÆËã½ø¶ÈÖµ
+								downloadCompleted = (int) (temp * 100 / length);// è®¡ç®—è¿›åº¦å€¼
 							}
 						}
 						fileOutputStream.flush();
@@ -275,22 +275,22 @@ public class VersionUpdate {
 
 			} catch (ClientProtocolException e) {
 				e.printStackTrace();
-				error = true;// Òì³£³ö´í
+				error = true;// å¼‚å¸¸å‡ºé”™
 			} catch (IOException e) {
 				e.printStackTrace();
-				error = true;// ³¬Ê±³ö´í
+				error = true;// è¶…æ—¶å‡ºé”™
 			} catch (Exception e) {
 				e.printStackTrace();
 				error = true;
 			} finally {
-				// ÊÍ·ÅÁ¬½Ó
+				// é‡Šæ”¾è¿æ¥
 				client.getConnectionManager().shutdown();
 			}
 		}
 	};
 
 	/**
-	 * ´´½¨Í¨ÖªÀ¸
+	 * åˆ›å»ºé€šçŸ¥æ 
 	 */
 	private void showNotification() {
 
@@ -298,7 +298,7 @@ public class VersionUpdate {
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		notice = new Notification();
 		notice.icon = R.drawable.icon;
-		notice.tickerText = "°²×°°üÏÂÔØÖĞ...";
+		notice.tickerText = "å®‰è£…åŒ…ä¸‹è½½ä¸­...";
 		notice.flags = Notification.FLAG_NO_CLEAR;
 		updateNotification(false);
 
@@ -307,37 +307,37 @@ public class VersionUpdate {
 	}
 
 	/**
-	 * ¸üĞÂÍ¨ÖªÀ¸
+	 * æ›´æ–°é€šçŸ¥æ 
 	 * 
 	 * @param completed
-	 *            °²×°°üÊÇ·ñÏÂÔØÍê³É
+	 *            å®‰è£…åŒ…æ˜¯å¦ä¸‹è½½å®Œæˆ
 	 */
 	private void updateNotification(boolean completed) {
 
 		if (error) {
 			removeMessage();
-			notice.tickerText = "°²×°°üÏÂÔØ³ö´í£¡";
+			notice.tickerText = "å®‰è£…åŒ…ä¸‹è½½å‡ºé”™ï¼";
 			notice.flags = Notification.FLAG_AUTO_CANCEL;
-			notice.setLatestEventInfo(mContext, "´ïÃÀÂÃÓÎ", "ÏÂÔØ³ö´íÇë¼ì²éÍøÂç£¬²¢È·±£ÊÖ»úÓĞSD¿¨£¡",
+			notice.setLatestEventInfo(mContext, "è¾¾ç¾æ—…æ¸¸", "ä¸‹è½½å‡ºé”™è¯·æ£€æŸ¥ç½‘ç»œï¼Œå¹¶ç¡®ä¿æ‰‹æœºæœ‰SDå¡ï¼",
 					PendingIntent.getActivity(mContext, 0, new Intent(), 0));
 			manager.notify(0, notice);
 			return;
 		}
 		if (completed) {
-			notice.tickerText = "ÎÄ¼şÏÂÔØÍê³É£¡";
-			Intent intent = install();// ÓÃ»§Ò²¿ÉÒÔÊÖ¶¯°²×°
-			notice.setLatestEventInfo(mContext, "´ïÃÀÂÃÓÎ", "°²×°°üÏÂÔØÍê³É£¬µã»÷°²×°£¡",
+			notice.tickerText = "æ–‡ä»¶ä¸‹è½½å®Œæˆï¼";
+			Intent intent = install();// ç”¨æˆ·ä¹Ÿå¯ä»¥æ‰‹åŠ¨å®‰è£…
+			notice.setLatestEventInfo(mContext, "è¾¾ç¾æ—…æ¸¸", "å®‰è£…åŒ…ä¸‹è½½å®Œæˆï¼Œç‚¹å‡»å®‰è£…ï¼",
 					PendingIntent.getActivity(mContext, 0, intent, 0));
 			manager.notify(0, notice);
 		} else {
-			notice.setLatestEventInfo(mContext, "´ïÃÀÂÃÓÎ", "°²×°°üÒÑÏÂÔØ "
+			notice.setLatestEventInfo(mContext, "è¾¾ç¾æ—…æ¸¸", "å®‰è£…åŒ…å·²ä¸‹è½½ "
 					+ downloadCompleted + "%",
 					PendingIntent.getActivity(mContext, 0, new Intent(), 0));
 			manager.notify(0, notice);
 		}
 	}
 /**
- * ·ÀÖ¹¸Õ´ò¿ªÓ¦ÓÃÊ±Á¢¼´ÍË³ö£¬Ôì³É°æ±¾Éı¼¶µ¯¿ò¿ÕÖ¸Õë
+ * é˜²æ­¢åˆšæ‰“å¼€åº”ç”¨æ—¶ç«‹å³é€€å‡ºï¼Œé€ æˆç‰ˆæœ¬å‡çº§å¼¹æ¡†ç©ºæŒ‡é’ˆ
  */
 	public static void finishDialog(){
 		isShowing= false;
@@ -346,32 +346,32 @@ public class VersionUpdate {
 		}
 	}
 	/**
-	 * Çå³ıËùÓĞÍ¨Öª
+	 * æ¸…é™¤æ‰€æœ‰é€šçŸ¥
 	 */
 	public void clearAllNotification() {
 		
 		if (manager != null) {
-			removeMessage();// ÏÈÒÆ³ıÏûÏ¢
-			manager.cancel(0);// Çå³ıÍ¨Öª
+			removeMessage();// å…ˆç§»é™¤æ¶ˆæ¯
+			manager.cancel(0);// æ¸…é™¤é€šçŸ¥
 		}
 	}
 
 	/**
-	 * ÑÓÊ±·¢ËÍÏûÏ¢¸üĞÂ×´Ì¬£¬ÏÂÔØÍê³ÉÒÆ³ıÏûÏ¢²¢ÇÒÌáÊ¾ĞÂ×´Ì¬
+	 * å»¶æ—¶å‘é€æ¶ˆæ¯æ›´æ–°çŠ¶æ€ï¼Œä¸‹è½½å®Œæˆç§»é™¤æ¶ˆæ¯å¹¶ä¸”æç¤ºæ–°çŠ¶æ€
 	 */
 	public void updateHandleMessage() {
-		// 100%ÎªÏÂÔØÍê³É
+		// 100%ä¸ºä¸‹è½½å®Œæˆ
 		if (downloadCompleted == 100) {
-			removeMessage();// ÏÈÒÆ³ıÏûÏ¢
+			removeMessage();// å…ˆç§»é™¤æ¶ˆæ¯
 			updateNotification(true);
 		} else {
-			sendMessage();// ±ØĞëÏÈ·¢ËÍÏûÏ¢£¬²ÅÄÜÒÆ³ıºóÃæµÄÏûÏ¢
+			sendMessage();// å¿…é¡»å…ˆå‘é€æ¶ˆæ¯ï¼Œæ‰èƒ½ç§»é™¤åé¢çš„æ¶ˆæ¯
 			updateNotification(false);
 		}
 	}
 
 	/**
-	 * ·¢ËÍÏûÏ¢
+	 * å‘é€æ¶ˆæ¯
 	 */
 	private void sendMessage() {
 		Message msg = mHandler.obtainMessage(1);
@@ -379,7 +379,7 @@ public class VersionUpdate {
 	}
 
 	/**
-	 * ÒÆ³ıÏûÏ¢
+	 * ç§»é™¤æ¶ˆæ¯
 	 */
 	private void removeMessage() {
 		if (mHandler.hasMessages(1)) {
@@ -388,7 +388,7 @@ public class VersionUpdate {
 	}
 
 	/**
-	 * °²×°ÏÂÔØµÄÎÄ¼ş
+	 * å®‰è£…ä¸‹è½½çš„æ–‡ä»¶
 	 * 
 	 * @return
 	 */

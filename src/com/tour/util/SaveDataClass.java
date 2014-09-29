@@ -19,7 +19,7 @@ public class SaveDataClass {
 		SharedPreferences share = context.getSharedPreferences(SHARE_LOGIN_TAG, 0);
 //		if (!"".equals(userName)) {			
 			share.edit().putString(SHARE_LOGIN_USERNAME,userName).commit();
-			share.edit().putString(SHARE_LOGIN_USERID, userid).commit();// ÓÃ»§id
+			share.edit().putString(SHARE_LOGIN_USERID, userid).commit();// ç”¨æˆ·id
 //		}
 //		if (!"".equals(password)) {
 			share.edit().putString(SHARE_LOGIN_PASSWORD,password).commit();
@@ -39,7 +39,7 @@ public class SaveDataClass {
 	
 	/**
 	 * 
-	 * @param ±£´æ¸üĞÂÑ¹Ëõ°üÊı¾İÊ±¼ä
+	 * @param ä¿å­˜æ›´æ–°å‹ç¼©åŒ…æ•°æ®æ—¶é—´
 	 */
 	public void saveLastUpDataTime(Context context) {	 
 		String updata_time = PublicData.tour_update_time;
@@ -52,7 +52,7 @@ public class SaveDataClass {
 	}
 	/**
 	 * 
-	 * @param È¡³ö¸üĞÂÑ¹Ëõ°üÊı¾İÊ±¼ä
+	 * @param å–å‡ºæ›´æ–°å‹ç¼©åŒ…æ•°æ®æ—¶é—´
 	 */
 	public String  getLastUpDataTime(Context context){
 		String last_updata_time="";
@@ -62,7 +62,7 @@ public class SaveDataClass {
 	}
 	/**
 	 * 
-	 * @param È¡³öÍÅid
+	 * @param å–å‡ºå›¢id
 	 */
 	public String  getTourId(Context context){
 		SharedPreferences share = context.getSharedPreferences(SHARE_LOGIN_TAG, 0);

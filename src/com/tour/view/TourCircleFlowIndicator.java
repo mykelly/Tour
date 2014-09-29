@@ -201,7 +201,7 @@ public class TourCircleFlowIndicator extends View implements
 			canvas.drawCircle(leftPadding + radius + centeringOffset,
 					getPaddingTop() + radius, radius + activeRadius,
 					mPaintActive);
-		}// 若为最后一张图，直接跳回第一个点
+		}// 鑻ヤ负鏈�鍚庝竴寮犲浘锛岀洿鎺ヨ烦鍥炵涓�涓偣
 	}
 
 	/*

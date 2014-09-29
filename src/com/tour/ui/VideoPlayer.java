@@ -8,13 +8,6 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.tour.R;
-import com.tour.util.NetWorkStatus;
-import com.tour.util.VideoDownloader;
-import com.tour.util.VideoDownloader.OnVideoDownloadErrorListener;
-
-//import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -22,7 +15,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
@@ -54,10 +46,15 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tour.R;
+import com.tour.util.VideoDownloader;
+import com.tour.util.VideoDownloader.OnVideoDownloadErrorListener;
+//import android.annotation.SuppressLint;
+
 /**
- * ÊÓÆµ²¥·ÅÀà </p>
+ * è§†é¢‘æ’­æ”¾ç±» </p>
  * 
- * Ìø×ªÇëÎñ±ØĞ¯´øÊÓÆµµØÖ·ºÍÊÓÆµSD¿¨Â·¾¶²ÎÊı£º</br>
+ * è·³è½¬è¯·åŠ¡å¿…æºå¸¦è§†é¢‘åœ°å€å’Œè§†é¢‘SDå¡è·¯å¾„å‚æ•°ï¼š</br>
  * <b>intent.putExtra("VideoPlayer.VIDEO_URL",url=???);</b>
  * <b>intent.putExtra("VideoPlayer.VIDEO_PATH",path=???);</b></p>
  * 
@@ -73,73 +70,73 @@ public class VideoPlayer extends NotTitleActivity {
 	public static final String VIDEO_PATH = "VideoPath";
 	public static final String VIDEO_PLAY_ACTION = "zqkj.intent.action.video";
 	public static final String VIDEO_PLAY_COMPLETE = "isPlayComplete";
-	// ÆğÊ¼»º³å´óĞ¡,µ±Ç°±íÊ¾3%
+	// èµ·å§‹ç¼“å†²å¤§å°,å½“å‰è¡¨ç¤º3%
 	private final int READY_BUFF = 10;
-	// ×Ô¶¯Òş²Ø²¥·Å¿ØÖÆÆ÷µÄÊ±¼ä
+	// è‡ªåŠ¨éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ—¶é—´
 	private final int HIDE_CONTROL_TIME = 5000;
-	// ÊÓÆµ¸üĞÂ×´Ì¬
+	// è§†é¢‘æ›´æ–°çŠ¶æ€
 	private static final int VIDEO_STATE_UPDATE = 0;
-	// ÊÓÆµ»º³åÍê³É
+	// è§†é¢‘ç¼“å†²å®Œæˆ
 	private static final int VIDEO_CACHE_READY = 1;
-	// ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+	// æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 	private static final int VIDEO_SHOW_CONTROL = 2;
-	// ÖØĞÂ²¥·ÅÊÓÆµ
+	// é‡æ–°æ’­æ”¾è§†é¢‘
 	private static final int VIDEO_RESTART = 3;
-	// ÖØĞÂ²¥·ÅÊÓÆµ
+	// é‡æ–°æ’­æ”¾è§†é¢‘
 	private static final int VIDEO_DOWNLOAD_ERROR = 4;
 
 	private ProgressBar progressBar;
 	private SeekBar seekBar;
 	private SurfaceView surfaceView;
-	// ²¥·Å¿ØÖÆÆ÷
+	// æ’­æ”¾æ§åˆ¶å™¨
 	private LinearLayout playControl;
 	private ImageButton playBtn;
 	private TextView currentTime, totalTime;
-	// ÊÓÆµÍøÂçµØÖ·
+	// è§†é¢‘ç½‘ç»œåœ°å€
 	private String videoUrl = null;
-	// ÊÓÆµÃû³Æ
+	// è§†é¢‘åç§°
 	private String videoName = null;
-	// ±¾µØÊÓÆµ´æ·ÅÂ·¾¶
+	// æœ¬åœ°è§†é¢‘å­˜æ”¾è·¯å¾„
 	private String localPath = null;
 
 	private MediaPlayer videoPlayer = null;
 	private IntentFilter videoFilter = null;
 	private VideoHandler mHandler = null;
 	private VideoDownloader downloader = null;
-	// ÊÓÆµ×Ü´óĞ¡
+	// è§†é¢‘æ€»å¤§å°
 	private long videoTotalSize = 0;
-	// ÊÓÆµµ±Ç°µÄÒÑ»º³å´óĞ¡
+	// è§†é¢‘å½“å‰çš„å·²ç¼“å†²å¤§å°
 	private long videoCacheSize = 0;
-	// ×¼±¸²¥·ÅÊÓÆµ³öÏÖµÄÒì³£´ÎÊıÍ³¼Æ
+	// å‡†å¤‡æ’­æ”¾è§†é¢‘å‡ºç°çš„å¼‚å¸¸æ¬¡æ•°ç»Ÿè®¡
 	private int handlerPrepareExceptionTimes = 0;
-	// ÒÑ¾­ÏÂÔØ½ø¶È
+	// å·²ç»ä¸‹è½½è¿›åº¦
 	private int cachePercent = 0;
-	// ÊÓÆµ×ÜÊ±¼ä
+	// è§†é¢‘æ€»æ—¶é—´
 	private int duration = 0;
-	// ÊÇ·ñ×¼±¸Íê³É
+	// æ˜¯å¦å‡†å¤‡å®Œæˆ
 	private boolean isReady = false;
-	// ÊÇ·ñĞèÒªµÈ´ı¼ÓÔØÍê³É
+	// æ˜¯å¦éœ€è¦ç­‰å¾…åŠ è½½å®Œæˆ
 	private boolean isLoading = false;
-	// ÊÇ·ñÔİÍ£
+	// æ˜¯å¦æš‚åœ
 	private boolean isPaused = false;
-	// ÊÇ·ñÍÏ¶¯¹ı
+	// æ˜¯å¦æ‹–åŠ¨è¿‡
 	private boolean isSeeked = false;
-	// ÊÇ·ñÒÑ½áÊøÒ³Ãæ
+	// æ˜¯å¦å·²ç»“æŸé¡µé¢
 	private boolean isFinish = false;
-	// ÊÇ·ñÔÊĞíseekBar´¥Ãş»¬¶¯
+	// æ˜¯å¦å…è®¸seekBarè§¦æ‘¸æ»‘åŠ¨
 	private boolean isSeekBarCanTouch = false;
-	// ÎÄ¼şÊÇ·ñ´æÔÚ
+	// æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	private boolean isFileExist = false;
-	// Êı¾İ¿âÊÇ·ñÓĞ¸ÃÊÓÆµ¼ÇÂ¼
+	// æ•°æ®åº“æ˜¯å¦æœ‰è¯¥è§†é¢‘è®°å½•
 	private boolean isDBInfoExist = false;
-	// ÊÇ·ñ²¥·ÅÍê±Ï
+	// æ˜¯å¦æ’­æ”¾å®Œæ¯•
 	private boolean isPlayComplete = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// ²»ËøÆÁ
+		// ä¸é”å±
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.videoplayer);
@@ -151,37 +148,37 @@ public class VideoPlayer extends NotTitleActivity {
 				videoUrl = getIntent().getExtras().getString(VIDEO_URL);
 				
 				if (videoUrl != null) {
-					// »ñµÃÎÄ¼şÃû
+					// è·å¾—æ–‡ä»¶å
 					videoName = videoUrl.substring(
 							videoUrl.lastIndexOf("/") + 1, videoUrl.length());
 				}
 				String path = getIntent().getExtras().getString(VIDEO_PATH);
 				if (path != null) {
-					// »ñµÃ´æ´¢Â·¾¶
+					// è·å¾—å­˜å‚¨è·¯å¾„
 					localPath = Environment.getExternalStorageDirectory()
 							.getAbsolutePath() + path + videoName;
 				}
 				 File  dir = new File(path);					       
 				    if(!dir.exists())
-				        dir.mkdirs();  //Èç¹û²»´æÔÚÔò´´½¨
+				        dir.mkdirs();  //å¦‚æœä¸å­˜åœ¨åˆ™åˆ›å»º
 			} else {
-				Toast.makeText(getApplicationContext(), "ÄúµÄÊÖ»úÎ´°²×°SD¿¨£¬ÎŞ·¨²¥·ÅÊÓÆµ£¡",
+				Toast.makeText(getApplicationContext(), "æ‚¨çš„æ‰‹æœºæœªå®‰è£…SDå¡ï¼Œæ— æ³•æ’­æ”¾è§†é¢‘ï¼",
 						Toast.LENGTH_LONG).show();
 				finish();
 			}
 //			localPath="/storage/sdcard0/DaMeiTour/video/13031403002735tq.mp4";
-//			System.out.println("ÔÚÏß²¥·ÅÊÓÆµvideoUrl="+videoUrl);
+//			System.out.println("åœ¨çº¿æ’­æ”¾è§†é¢‘videoUrl="+videoUrl);
 //			System.out.println("localPath="+localPath);		
 
 			mHandler = new VideoHandler(this);
-			// ³õÊ¼»¯ÅäÖÃ
+			// åˆå§‹åŒ–é…ç½®
 			init();
 				
 //			File file = new File(localPath);
 //			 if(file.exists()){
-//				playlocalVideo();//ÎÄ¼ş´æÔÚ²¥·Å±¾µØÊÓÆµ
+//				playlocalVideo();//æ–‡ä»¶å­˜åœ¨æ’­æ”¾æœ¬åœ°è§†é¢‘
 //			}else{
-				// ²¥·ÅÊÓÆµ
+				// æ’­æ”¾è§†é¢‘
 				playVideo();
 //			}
 			TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -189,13 +186,13 @@ public class VideoPlayer extends NotTitleActivity {
 					PhoneStateListener.LISTEN_CALL_STATE);
 
 			videoFilter = new IntentFilter();
-			// ¼àÌıhome¼ü
+			// ç›‘å¬homeé”®
 			videoFilter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-			// ¼àÌıµçÔ´¼ü
+			// ç›‘å¬ç”µæºé”®
 			videoFilter.addAction(Intent.ACTION_SCREEN_OFF);
 			registerReceiver(systemStateReceiver, videoFilter);
 		} else {
-			Toast.makeText(getApplicationContext(), "ÏÂÔØµØÖ·Òì³££¬ÎŞ·¨²¥·ÅÊÓÆµ£¡",Toast.LENGTH_LONG).show();//Ã»ÓĞ´«Èë²¥·ÅµØÖ·»òÕß¸ÃµØÖ·Ã»ÓĞÊÓÆµ
+			Toast.makeText(getApplicationContext(), "ä¸‹è½½åœ°å€å¼‚å¸¸ï¼Œæ— æ³•æ’­æ”¾è§†é¢‘ï¼",Toast.LENGTH_LONG).show();//æ²¡æœ‰ä¼ å…¥æ’­æ”¾åœ°å€æˆ–è€…è¯¥åœ°å€æ²¡æœ‰è§†é¢‘
 			finish();
 		}
 		if (videoUrl == null || localPath == null) {
@@ -210,7 +207,7 @@ public class VideoPlayer extends NotTitleActivity {
 		super.onDestroy();
 
 		isFinish = true;
-		// ¶ÏµôÏÂÔØÏß³Ì
+		// æ–­æ‰ä¸‹è½½çº¿ç¨‹
 		isReady = true;
 		removeVideoUpadteMsg();
 		removeVideoErrorMsg();
@@ -233,7 +230,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ³õÊ¼»¯ÊÓÆµ²¥·Å×é¼ş
+	 * åˆå§‹åŒ–è§†é¢‘æ’­æ”¾ç»„ä»¶
 	 */
 	private void init() {
 		// TODO Auto-generated method stub
@@ -281,16 +278,16 @@ public class VideoPlayer extends NotTitleActivity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				// ³õÊ¼²»ÔÊĞí»¬¶¯£ºtrue²»ÔÊĞí»¬¶¯£¬falseÔÊĞí
+				// åˆå§‹ä¸å…è®¸æ»‘åŠ¨ï¼štrueä¸å…è®¸æ»‘åŠ¨ï¼Œfalseå…è®¸
 				return !isSeekBarCanTouch;
 			}
 		});
 		seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			boolean theFirst = true;
-			// ¼ÇÂ¼¶Ïµã¿ª¹Ø
+			// è®°å½•æ–­ç‚¹å¼€å…³
 			boolean setCurrentCache = true;
-			// ¼ÇÂ¼¶ÏµãÎ»ÖÃ£¬ÒÔºó²»ÔÙ·¢Éú¸ü¸Ä
+			// è®°å½•æ–­ç‚¹ä½ç½®ï¼Œä»¥åä¸å†å‘ç”Ÿæ›´æ”¹
 			long currentCachePercent = 0;
 
 			@Override
@@ -302,7 +299,7 @@ public class VideoPlayer extends NotTitleActivity {
 				if (setCurrentCache) {
 					currentCachePercent = cachePercent;
 				}
-				// ÓÃ»§ÍÏ¶¯µÄÇé¿öÖ»¼ÇÂ¼ÍÏ¶¯Ç°µÄ»º´æ
+				// ç”¨æˆ·æ‹–åŠ¨çš„æƒ…å†µåªè®°å½•æ‹–åŠ¨å‰çš„ç¼“å­˜
 				if (seekPosition > currentCachePercent) {
 					if (theFirst) {
 						theFirst = false;
@@ -312,24 +309,24 @@ public class VideoPlayer extends NotTitleActivity {
 					}
 					downloader.seekLoadVideo(seekPosition / 1000);
 				} else {
-					// ÉèÖÃ½ø¶ÈÖµ£¬±£Ö¤seekBarµÄ½ø¶È¸üĞÂ(ÔÚÒÑ»º´æ½ø¶È·¶Î§ÄÚÉúĞ§)
+					// è®¾ç½®è¿›åº¦å€¼ï¼Œä¿è¯seekBarçš„è¿›åº¦æ›´æ–°(åœ¨å·²ç¼“å­˜è¿›åº¦èŒƒå›´å†…ç”Ÿæ•ˆ)
 					videoPlayer.seekTo(seekPosition);
 					int next5sec = seekPosition + 5 * 1000;
 					if (next5sec > duration) {
 						next5sec = duration;
 					}
-					// ÅĞ¶Ï5ÃëºóµÄÊÓÆµ»º³åÊÇ·ñÍê³É
+					// åˆ¤æ–­5ç§’åçš„è§†é¢‘ç¼“å†²æ˜¯å¦å®Œæˆ
 					if (downloader.isInitComplete()
 							&& !downloader.checkIsBuffered(next5sec / 1000)) {
-						// ´ÓÎ´Íê³É´¦¿ªÊ¼ÏÂÔØ
+						// ä»æœªå®Œæˆå¤„å¼€å§‹ä¸‹è½½
 						downloader.seekLoadVideo(cachePercent / 1000);
 					}
 				}
 
 				isPaused = false;
-				// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+				// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 				sendHideControlMsg();
-				// ¸üĞÂUI×´Ì¬
+				// æ›´æ–°UIçŠ¶æ€
 				mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 			}
 
@@ -339,9 +336,9 @@ public class VideoPlayer extends NotTitleActivity {
 				playBtn.setImageResource(R.drawable.video_btn_play);
 				videoPlayer.pause();
 				isPaused = true;
-				// ÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+				// ç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 				removeHideControlMsg();
-				// Í£Ö¹¸üĞÂUI
+				// åœæ­¢æ›´æ–°UI
 				removeVideoUpadteMsg();
 			}
 
@@ -362,16 +359,16 @@ public class VideoPlayer extends NotTitleActivity {
 				// TODO Auto-generated method stub
 				final int action = event.getAction();
 				switch (action) {
-				// ÊÖÖ¸°´ÏÂÊÂ¼ş
+				// æ‰‹æŒ‡æŒ‰ä¸‹äº‹ä»¶
 				case MotionEvent.ACTION_DOWN:
-					// ÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+					// ç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 					removeHideControlMsg();
-					// ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+					// æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 					showPlayControl();
 					return true;
-					// ÊÖÖ¸Àë¿ªÊÂ¼ş
+					// æ‰‹æŒ‡ç¦»å¼€äº‹ä»¶
 				case MotionEvent.ACTION_UP:
-					// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+					// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 					sendHideControlMsg();
 					return true;
 				}
@@ -387,14 +384,14 @@ public class VideoPlayer extends NotTitleActivity {
 				// TODO Auto-generated method stub
 				final int action = event.getAction();
 				switch (action) {
-				// ÊÖÖ¸°´ÏÂÊÂ¼ş
+				// æ‰‹æŒ‡æŒ‰ä¸‹äº‹ä»¶
 				case MotionEvent.ACTION_DOWN:
-					// ÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+					// ç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 					removeHideControlMsg();
 					return true;
-					// ÊÖÖ¸Àë¿ªÊÂ¼ş
+					// æ‰‹æŒ‡ç¦»å¼€äº‹ä»¶
 				case MotionEvent.ACTION_UP:
-					// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+					// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 					sendHideControlMsg();
 					return true;
 				}
@@ -432,15 +429,15 @@ public class VideoPlayer extends NotTitleActivity {
 						if (videoPlayer != null && videoPlayer.isPlaying()) {
 							videoPlayer.stop();
 						}
-						sendErrorMsg("ÍøËÙ²»¸øÁ¦°¡£¬ÇëÉÔºóÖØÊÔ£¡");
+						sendErrorMsg("ç½‘é€Ÿä¸ç»™åŠ›å•Šï¼Œè¯·ç¨åé‡è¯•ï¼");
 					}
 				});
 		
 		
 	}
 	private void playlocalVideo(){
-//		if (!isNetWork) {//²¥·Å±¾µØÊÓÆµ			 
-//		System.out.println("²¥·Å±¾µØÊÓÆµlocalPath="+localPath);	
+//		if (!isNetWork) {//æ’­æ”¾æœ¬åœ°è§†é¢‘			 
+//		System.out.println("æ’­æ”¾æœ¬åœ°è§†é¢‘localPath="+localPath);	
 		if (videoPlayer == null) {
 			videoPlayer = new MediaPlayer();
 		}
@@ -468,14 +465,14 @@ public class VideoPlayer extends NotTitleActivity {
 //	}
 	}
 	/**
-	 * ¿ªÊ¼ÊÓÆµ²¥·Å
+	 * å¼€å§‹è§†é¢‘æ’­æ”¾
 	 */
 	private void playVideo() {
 		// TODO Auto-generated method stub
 	
 		if (!URLUtil.isNetworkUrl(videoUrl)) {
 			try {
-				// Èô¸ÃµØÖ··Ç±ê×¼ÍøÂçµØÖ·£¬Èç¿ÉÄÜÎª±¾µØÂ·¾¶µÈ£¬ÔòÖ±½Ó²¥·ÅÊÓÆµ
+				// è‹¥è¯¥åœ°å€éæ ‡å‡†ç½‘ç»œåœ°å€ï¼Œå¦‚å¯èƒ½ä¸ºæœ¬åœ°è·¯å¾„ç­‰ï¼Œåˆ™ç›´æ¥æ’­æ”¾è§†é¢‘
 				videoPlayer.setDataSource(videoUrl);
 				videoPlayer.prepareAsync();
 			} catch (IllegalArgumentException e) {
@@ -501,7 +498,7 @@ public class VideoPlayer extends NotTitleActivity {
 					prepareVideo();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					sendErrorMsg("ÍøÂçÒì³££¬ÇëÉÔºóÖØÊÔ£¡");
+					sendErrorMsg("ç½‘ç»œå¼‚å¸¸ï¼Œè¯·ç¨åé‡è¯•ï¼");
 					e.printStackTrace();
 				}
 			}
@@ -509,7 +506,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ¿ªÊ¼²¥·ÅµÄ×¼±¸½×¶Î
+	 * å¼€å§‹æ’­æ”¾çš„å‡†å¤‡é˜¶æ®µ
 	 * 
 	 * @throws IOException
 	 */
@@ -522,17 +519,17 @@ public class VideoPlayer extends NotTitleActivity {
 
 		if (isFileExist) {
 			if (isDBInfoExist) {
-				// Êı¾İ¿â¼ÇÂ¼µÄ»º´æ´óĞ¡
+				// æ•°æ®åº“è®°å½•çš„ç¼“å­˜å¤§å°
 				videoCacheSize = videoInfo[1];
-				// Êı¾İ¿â¼ÇÂ¼µÄ×Ü´óĞ¡
+				// æ•°æ®åº“è®°å½•çš„æ€»å¤§å°
 				videoTotalSize = videoInfo[2];
 				mHandler.sendEmptyMessageDelayed(VIDEO_CACHE_READY, 1000);
-				// Êı¾İ¿âÓĞ¼ÇÂ¼²¢ÇÒÎÄ¼ş´æÔÚÖ±½Ó²¥·Å
+				// æ•°æ®åº“æœ‰è®°å½•å¹¶ä¸”æ–‡ä»¶å­˜åœ¨ç›´æ¥æ’­æ”¾
 				return;
 			} else {
-				// ÎÄ¼ş´æÔÚµ«ÎŞÊı¾İ¿â¼ÇÂ¼É¾³ı
+				// æ–‡ä»¶å­˜åœ¨ä½†æ— æ•°æ®åº“è®°å½•åˆ é™¤
 				cacheFile.delete();
-				// ×´Ì¬ĞŞ¸ÄÎª²»´æÔÚ
+				// çŠ¶æ€ä¿®æ”¹ä¸ºä¸å­˜åœ¨
 				isFileExist = false;
 			}
 		}
@@ -549,7 +546,7 @@ public class VideoPlayer extends NotTitleActivity {
 		}
 
 		cacheFile.getParentFile().mkdirs();
-		// ´´½¨¸ÃÎÄ¼ş¼°Ä¿Â¼
+		// åˆ›å»ºè¯¥æ–‡ä»¶åŠç›®å½•
 		cacheFile.createNewFile();
 		RandomAccessFile raf = new RandomAccessFile(cacheFile, "rws");
 		raf.setLength(videoTotalSize);
@@ -559,7 +556,7 @@ public class VideoPlayer extends NotTitleActivity {
 		byte buf[] = new byte[10 * 1024];
 		int len = 0;
 		boolean b = true;
-		// ¼ÆËã¸ÃÊÓÆµĞèÒª»º³åµÄ´óĞ¡
+		// è®¡ç®—è¯¥è§†é¢‘éœ€è¦ç¼“å†²çš„å¤§å°
 		final long cache = (videoTotalSize * READY_BUFF) / 100;
 
 		while ((len = is.read(buf)) != -1 && (!isReady)) {
@@ -572,7 +569,7 @@ public class VideoPlayer extends NotTitleActivity {
 			}
 
 			if (b && videoCacheSize > cache) {
-				// ´ïµ½Ìõ¼şÖ»Ğë·¢ËÍÒ»´ÎÏûÏ¢
+				// è¾¾åˆ°æ¡ä»¶åªé¡»å‘é€ä¸€æ¬¡æ¶ˆæ¯
 				b = false;
 				mHandler.sendEmptyMessage(VIDEO_CACHE_READY);
 				 
@@ -598,7 +595,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ´´½¨ÊÓÆµ²¥·ÅÆ÷
+	 * åˆ›å»ºè§†é¢‘æ’­æ”¾å™¨
 	 */
 	private void createVideoPlayer(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
@@ -609,7 +606,7 @@ public class VideoPlayer extends NotTitleActivity {
 		videoPlayer.reset();
 		videoPlayer.setDisplay(holder);
 		
-		// ²¥·ÅÆ÷×¼±¸Íê³É
+		// æ’­æ”¾å™¨å‡†å¤‡å®Œæˆ
 		videoPlayer.setOnPreparedListener(new OnPreparedListener() {
 
 			@Override
@@ -617,55 +614,55 @@ public class VideoPlayer extends NotTitleActivity {
 				// TODO Auto-generated method stub
 				if (!isReady) {
 					isReady = true;
-					// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+					// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 					sendHideControlMsg();
                 
-					// ³õÊ¼»¯ÏÂÔØ
+					// åˆå§‹åŒ–ä¸‹è½½
 					downloader.initVideoDownloader(videoCacheSize,
 							videoTotalSize, isFileExist, isDBInfoExist);
 
 					duration = videoPlayer.getDuration();
 					seekBar.setMax(duration);
-					// ÊÓÆµ×ÜÊ±¼ä
+					// è§†é¢‘æ€»æ—¶é—´
 					totalTime.setText(transTimeToStr(duration));
-					// ¸üĞÂUI×´Ì¬
+					// æ›´æ–°UIçŠ¶æ€
 					mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 				
 				}
 			}
 		});
 
-		// ²¥·ÅÆ÷²¥·ÅÍê³É
+		// æ’­æ”¾å™¨æ’­æ”¾å®Œæˆ
 		videoPlayer.setOnCompletionListener(new OnCompletionListener() {
 
 			@Override
 			public void onCompletion(MediaPlayer mp) {
 				// TODO Auto-generated method stub
 				mp.pause();
-				// ÏÈÒÆ³ıÒş²Ø²¥·Å¿ØÖÆÆ÷µÄ²Ù×÷
+				// å…ˆç§»é™¤éšè—æ’­æ”¾æ§åˆ¶å™¨çš„æ“ä½œ
 				removeHideControlMsg();
-				// ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+				// æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 				showPlayControl();
 
 				final int duration = videoPlayer.getDuration();
 				currentTime.setText(transTimeToStr(duration));
-				// ²¥·ÅÍê±ÏÉèÖÃ×îºóµÄÊ±¼ä
+				// æ’­æ”¾å®Œæ¯•è®¾ç½®æœ€åçš„æ—¶é—´
 				seekBar.setProgress(duration);
 				isPlayComplete = true;
 				showDialog();
 			}
 		});
 
-		// ²¥·¢Æ÷²¥·Å³ö´í
+		// æ’­å‘å™¨æ’­æ”¾å‡ºé”™
 		videoPlayer.setOnErrorListener(new OnErrorListener() {
 
 			@Override
 			public boolean onError(MediaPlayer mp, int what, int extra) {
 				// TODO Auto-generated method stub
-				// Í£Ö¹¸üĞÂUI
+				// åœæ­¢æ›´æ–°UI
 				removeVideoUpadteMsg();
-				// ÌáÊ¾³ö´í
-				sendErrorMsg("±§Ç¸£¬ÊÓÆµ²¥·Å³ö´í£¡");
+				// æç¤ºå‡ºé”™
+				sendErrorMsg("æŠ±æ­‰ï¼Œè§†é¢‘æ’­æ”¾å‡ºé”™ï¼");
 				mp.stop();
 				mp.reset();
 				return true;
@@ -674,16 +671,16 @@ public class VideoPlayer extends NotTitleActivity {
 
 //		File file = new File(localPath);
 //		 if(file.exists()){
-//			playlocalVideo();//ÎÄ¼ş´æÔÚ²¥·Å±¾µØÊÓÆµ
+//			playlocalVideo();//æ–‡ä»¶å­˜åœ¨æ’­æ”¾æœ¬åœ°è§†é¢‘
 //		} 
 		
 	}
 
 	/**
-	 * ·¢ËÍ³ö´íĞÅÏ¢
+	 * å‘é€å‡ºé”™ä¿¡æ¯
 	 * 
 	 * @param msg
-	 *            ³ö´íĞÅÏ¢
+	 *            å‡ºé”™ä¿¡æ¯
 	 */
 	private void sendErrorMsg(String msg) {
 		Message message = mHandler.obtainMessage(VIDEO_DOWNLOAD_ERROR, msg);
@@ -691,7 +688,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ²¥·ÅÍê±Ï¶Ô»°¿ò
+	 * æ’­æ”¾å®Œæ¯•å¯¹è¯æ¡†
 	 */
 	private void showDialog() {
 		// TODO Auto-generated method stub
@@ -700,8 +697,8 @@ public class VideoPlayer extends NotTitleActivity {
 			return;
 		}
 		Dialog alertDialog = new AlertDialog.Builder(this)
-				.setMessage("ÊÓÆµ²¥·ÅÍê±Ï")
-				.setPositiveButton("ÖØ²¥", new DialogInterface.OnClickListener() {
+				.setMessage("è§†é¢‘æ’­æ”¾å®Œæ¯•")
+				.setPositiveButton("é‡æ’­", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -713,16 +710,16 @@ public class VideoPlayer extends NotTitleActivity {
 							public void run() {
 								// TODO Auto-generated method stub
 								if (!isSeeked) {
-									// Î´·¢Éú³¬¹ıµ±Ç°ÒÑ»º´æ´óĞ¡µÄÍÏ¶¯Çé¿ö£¬¸üĞÂÊı¾İ¿â
+									// æœªå‘ç”Ÿè¶…è¿‡å½“å‰å·²ç¼“å­˜å¤§å°çš„æ‹–åŠ¨æƒ…å†µï¼Œæ›´æ–°æ•°æ®åº“
 									downloader.seekVideoDBInfo(videoCacheSize);
 								}
 								long videoInfo[] = downloader
 										.queryVideoDBInfo(videoName);
-								// Êı¾İ¿â¼ÇÂ¼µÄ»º´æ´óĞ¡
+								// æ•°æ®åº“è®°å½•çš„ç¼“å­˜å¤§å°
 								videoCacheSize = videoInfo[1];
-								// ¿ÉÒÔÖØ²¥ËµÃ÷ÎÄ¼şÒÑ¾­´æÔÚ
+								// å¯ä»¥é‡æ’­è¯´æ˜æ–‡ä»¶å·²ç»å­˜åœ¨
 								isFileExist = true;
-								// ¿ÉÒÔÖØ²¥ËµÃ÷Êı¾İ¿âÒÑ¾­ÓĞ¼ÇÂ¼
+								// å¯ä»¥é‡æ’­è¯´æ˜æ•°æ®åº“å·²ç»æœ‰è®°å½•
 								isDBInfoExist = true;
 								mHandler.sendEmptyMessage(VIDEO_RESTART);
 							}
@@ -730,7 +727,7 @@ public class VideoPlayer extends NotTitleActivity {
 						dialog.dismiss();
 					}
 				})
-				.setNegativeButton("¹Ø±Õ", new DialogInterface.OnClickListener() {
+				.setNegativeButton("å…³é—­", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -744,7 +741,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ²¥·Å³ö´í¶Ô»°¿ò
+	 * æ’­æ”¾å‡ºé”™å¯¹è¯æ¡†
 	 */
 	private void showErrorDialog(String msg) {
 		// TODO Auto-generated method stub
@@ -752,7 +749,7 @@ public class VideoPlayer extends NotTitleActivity {
 			return;
 		}
 		Dialog alertDialog = new AlertDialog.Builder(this).setMessage(msg)
-				.setNegativeButton("¹Ø±Õ", new DialogInterface.OnClickListener() {
+				.setNegativeButton("å…³é—­", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -766,15 +763,15 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ½áÊøÒ³Ãæ</p> ·¢ËÍÊÓÆµ²¥·Å×´Ì¬¹ã²¥</p>
-	 * intent.getBooleanExtra(<b>VIDEO_PLAY_COMPLETE</b>)»ñµÃ<b>isPlayComplete
-	 * </b>ÊÇ·ñ²¥·ÅÍê±ÏµÄÖµ
+	 * ç»“æŸé¡µé¢</p> å‘é€è§†é¢‘æ’­æ”¾çŠ¶æ€å¹¿æ’­</p>
+	 * intent.getBooleanExtra(<b>VIDEO_PLAY_COMPLETE</b>)è·å¾—<b>isPlayComplete
+	 * </b>æ˜¯å¦æ’­æ”¾å®Œæ¯•çš„å€¼
 	 * 
 	 */
 	private void finishActivity() {
 		Intent intent = new Intent(VIDEO_PLAY_ACTION);
 		intent.putExtra(VIDEO_PLAY_COMPLETE, isPlayComplete);
-		// ·¢ËÍ¹ã²¥ÓÃÒÔÍâ²¿´¦Àí
+		// å‘é€å¹¿æ’­ç”¨ä»¥å¤–éƒ¨å¤„ç†
 		sendBroadcast(intent);
 
 		if (videoPlayer != null) {
@@ -784,7 +781,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ÏÔÊ¾µÈ´ı¿ò
+	 * æ˜¾ç¤ºç­‰å¾…æ¡†
 	 */
 	private void showLoading() {
 		// TODO Auto-generated method stub
@@ -794,7 +791,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * Òş²ØµÈ´ı¿ò
+	 * éšè—ç­‰å¾…æ¡†
 	 */
 	private void hideLoading() {
 		// TODO Auto-generated method stub
@@ -804,7 +801,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ÏÔÊ¾²¥·Å¿ØÖÆÆ÷
+	 * æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å™¨
 	 */
 	private void showPlayControl() {
 		// TODO Auto-generated method stub
@@ -821,7 +818,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * Òş²Ø²¥·Å¿ØÖÆÆ÷
+	 * éšè—æ’­æ”¾æ§åˆ¶å™¨
 	 */
 	private void hidePlayControl() {
 		// TODO Auto-generated method stub
@@ -854,7 +851,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ·¢ËÍÏûÏ¢ÏÔÊ¾²¥·Å¿ØÖÆÌ¨
+	 * å‘é€æ¶ˆæ¯æ˜¾ç¤ºæ’­æ”¾æ§åˆ¶å°
 	 */
 	private void sendHideControlMsg() {
 		Message msg = mHandler.obtainMessage(VIDEO_SHOW_CONTROL);
@@ -862,17 +859,17 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ÒÆ³ıÒòÎªÑÓÊ±¶øÉĞÎ´Ö´ĞĞµÄÒş²Ø²¥·Å¿ØÖÆÌ¨ÈÎÎñµÄÏûÏ¢
+	 * ç§»é™¤å› ä¸ºå»¶æ—¶è€Œå°šæœªæ‰§è¡Œçš„éšè—æ’­æ”¾æ§åˆ¶å°ä»»åŠ¡çš„æ¶ˆæ¯
 	 */
 	private void removeHideControlMsg() {
-		// ÏÈ¼ì²éÊÇ·ñ´æÔÚ¸ÃÏûÏ¢
+		// å…ˆæ£€æŸ¥æ˜¯å¦å­˜åœ¨è¯¥æ¶ˆæ¯
 		if (mHandler.hasMessages(VIDEO_SHOW_CONTROL)) {
 			mHandler.removeMessages(VIDEO_SHOW_CONTROL);
 		}
 	}
 
 	/**
-	 * Í£Ö¹¸üĞÂUI£¬ÈçÊ±¼ä¡¢½ø¶ÈÌõµÈ
+	 * åœæ­¢æ›´æ–°UIï¼Œå¦‚æ—¶é—´ã€è¿›åº¦æ¡ç­‰
 	 */
 	private void removeVideoUpadteMsg() {
 		if (mHandler != null && mHandler.hasMessages(VIDEO_STATE_UPDATE)) {
@@ -881,7 +878,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ÒÆ³ı´íÎóĞÅÏ¢
+	 * ç§»é™¤é”™è¯¯ä¿¡æ¯
 	 */
 	private void removeVideoErrorMsg() {
 		if (mHandler != null && mHandler.hasMessages(VIDEO_DOWNLOAD_ERROR)) {
@@ -890,11 +887,11 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ½«½ø¶ÈÖµ»»ËãÎªÊ±¼ä
+	 * å°†è¿›åº¦å€¼æ¢ç®—ä¸ºæ—¶é—´
 	 * 
 	 * @param time
-	 *            ½ø¶ÈÖµ
-	 * @return Ê±¼ä
+	 *            è¿›åº¦å€¼
+	 * @return æ—¶é—´
 	 */
 	private String transTimeToStr(int time) {
 		// TODO Auto-generated method stub
@@ -907,7 +904,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ¿ØÖÆÊÓÆµµÄ²¥·ÅºÍÔİÍ££¬¼°»º´æ»úÖÆ
+	 * æ§åˆ¶è§†é¢‘çš„æ’­æ”¾å’Œæš‚åœï¼ŒåŠç¼“å­˜æœºåˆ¶
 	 */
 	public void handlerVideoStartUpadte() {
 		// TODO Auto-generated method stub
@@ -917,7 +914,7 @@ public class VideoPlayer extends NotTitleActivity {
 
 		int position = videoPlayer.getCurrentPosition();
 		final int seekPosition = seekBar.getProgress();
-		// ÓĞÍÏ¶¯Çé¿öÎ´³¬¹ıÒÑ»º´æÖµÈ¡½ø¶ÈÌõ½ø¶ÈÖµ£¬Î´ÍÏ¶¯¹ı»òÕß³¬¹ıÒÑ»º´æÖµÈ¡²¥·ÅµÄµ±Ç°Öµ
+		// æœ‰æ‹–åŠ¨æƒ…å†µæœªè¶…è¿‡å·²ç¼“å­˜å€¼å–è¿›åº¦æ¡è¿›åº¦å€¼ï¼Œæœªæ‹–åŠ¨è¿‡æˆ–è€…è¶…è¿‡å·²ç¼“å­˜å€¼å–æ’­æ”¾çš„å½“å‰å€¼
 		position = position > seekPosition ? position : seekPosition;
 
 		cachePercent = (int) ((videoCacheSize * duration) / (videoTotalSize == 0 ? 1
@@ -925,27 +922,27 @@ public class VideoPlayer extends NotTitleActivity {
 		seekBar.setSecondaryProgress(cachePercent);
 
 		if (videoPlayer.isPlaying()) {
-			// µ±Ç°²¥·ÅÊ±¼ä
+			// å½“å‰æ’­æ”¾æ—¶é—´
 			currentTime.setText(transTimeToStr(position));
-			// µ±Ç°²¥·Å½ø¶È
+			// å½“å‰æ’­æ”¾è¿›åº¦
 			seekBar.setProgress(position);
 
-			// ¼ì²â2ÃëÖ®ºóµÄÊı¾İÊÇ·ñÓĞ»º³åÍê³É
+			// æ£€æµ‹2ç§’ä¹‹åçš„æ•°æ®æ˜¯å¦æœ‰ç¼“å†²å®Œæˆ
 			int next1sec = position + 1 * 1000;
 			if (next1sec > duration) {
 				next1sec = duration;
 			}
 			if (downloader.isInitComplete()
-					&& !downloader.checkIsBuffered(next1sec / 1000)) {// »º³åÎ´Íê³É
-				// ´ÓÎ´Íê³É´¦¿ªÊ¼ÏÂÔØ
+					&& !downloader.checkIsBuffered(next1sec / 1000)) {// ç¼“å†²æœªå®Œæˆ
+				// ä»æœªå®Œæˆå¤„å¼€å§‹ä¸‹è½½
 				downloader.seekLoadVideo(cachePercent / 1000);
-				// ÔİÍ£²¥·Å²¢ÇÒÌáÊ¾µÈ´ı
+				// æš‚åœæ’­æ”¾å¹¶ä¸”æç¤ºç­‰å¾…
 				videoPlayer.pause();
 				showLoading();
 			}
 		} else {
 			if (!isPaused && isLoading) {
-				// ¼ì²â5ÃëÖ®ºóµÄÊı¾İÊÇ·ñÓĞ»º³åÍê³É
+				// æ£€æµ‹5ç§’ä¹‹åçš„æ•°æ®æ˜¯å¦æœ‰ç¼“å†²å®Œæˆ
 				int next5sec = position + 5 * 1000;
 				if (next5sec > duration) {
 					next5sec = duration;
@@ -953,10 +950,10 @@ public class VideoPlayer extends NotTitleActivity {
 			 
 				if (downloader.isInitComplete()&& downloader.checkIsBuffered(next5sec / 1000)) {
 					videoPlayer.seekTo(position);
-					// »º´æÍê³É¿ÉÒÔ²¥·ÅÊÓÆµ
+					// ç¼“å­˜å®Œæˆå¯ä»¥æ’­æ”¾è§†é¢‘
 					videoPlayer.start();
 					hideLoading();
-					// ²¥·ÅÆ÷²¥·Åºó²ÅÔÊĞíseekBarÍÏ¶¯
+					// æ’­æ”¾å™¨æ’­æ”¾åæ‰å…è®¸seekBaræ‹–åŠ¨
 					isSeekBarCanTouch = true;
 				}
 			}
@@ -965,7 +962,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * »º´æÍê³É²¥·ÅÏÂÔØµ½±¾µØµÄÊÓÆµ
+	 * ç¼“å­˜å®Œæˆæ’­æ”¾ä¸‹è½½åˆ°æœ¬åœ°çš„è§†é¢‘
 	 */
 	private void handlerVideoCacheReady() {
 		// TODO Auto-generated method stub
@@ -977,10 +974,10 @@ public class VideoPlayer extends NotTitleActivity {
 			// TODO Auto-generated catch block
 			 
 			if (handlerPrepareExceptionTimes < 5) {
-				// ÖØĞÂ·¢ËÍÏûÏ¢
+				// é‡æ–°å‘é€æ¶ˆæ¯
 				mHandler.sendEmptyMessageDelayed(VIDEO_CACHE_READY, 1500);
 			} else {
-				// ³öÏÖÒì³£µÄ´ÎÊı³¬¹ıÖ¸¶¨µÄÔòĞèÒªÍ£µôÏà¹ØÁªµÄÏß³Ì
+				// å‡ºç°å¼‚å¸¸çš„æ¬¡æ•°è¶…è¿‡æŒ‡å®šçš„åˆ™éœ€è¦åœæ‰ç›¸å…³è”çš„çº¿ç¨‹
 				isReady = true;
 			}
 			handlerPrepareExceptionTimes++;
@@ -989,7 +986,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * Íê³ÉÏÂÔØµÄ²Ù×÷
+	 * å®Œæˆä¸‹è½½çš„æ“ä½œ
 	 */
 	private void handlerDownloadFinish() {
 		// TODO Auto-generated method stub
@@ -997,7 +994,7 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ÏÂÔØ¹ı³ÌÖĞĞèÒªµÄ¸üĞÂ²Ù×÷
+	 * ä¸‹è½½è¿‡ç¨‹ä¸­éœ€è¦çš„æ›´æ–°æ“ä½œ
 	 */
 	private void handlerDownloadUpdate(Message msg) {
 		// TODO Auto-generated method stub
@@ -1008,31 +1005,31 @@ public class VideoPlayer extends NotTitleActivity {
 	}
 
 	/**
-	 * ÊÓÆµÖØĞÂ²¥·Å²Ù×÷
+	 * è§†é¢‘é‡æ–°æ’­æ”¾æ“ä½œ
 	 */
 	public void handlerVideoRestart() {
 		// TODO Auto-generated method stub
 		videoPlayer.seekTo(0);
 		seekBar.setProgress(0);
 	
-		// ³õÊ¼»¯ÏÂÔØ
+		// åˆå§‹åŒ–ä¸‹è½½
 		downloader.initVideoDownloader(videoCacheSize, videoTotalSize,
 				isFileExist, isDBInfoExist);
 		
-		// ·¢ËÍÒş²Ø²¥·Å¿ØÖÆÆ÷ÏûÏ¢
+		// å‘é€éšè—æ’­æ”¾æ§åˆ¶å™¨æ¶ˆæ¯
 		sendHideControlMsg();
-		// ¸üĞÂUI×´Ì¬
+		// æ›´æ–°UIçŠ¶æ€
 		mHandler.sendEmptyMessageDelayed(VIDEO_STATE_UPDATE, 1000);
 	}
 
-	// À´µç¼àÌı
+	// æ¥ç”µç›‘å¬
 	private final PhoneStateListener videoPhoneStateListener = new PhoneStateListener() {
 		@Override
 		public void onCallStateChanged(int state, String incomingNumber) {
 			// TODO Auto-generated method stub
 			if (videoPlayer != null) {
 				if (state == TelephonyManager.CALL_STATE_RINGING) {
-					// ÏìÁåÊ±
+					// å“é“ƒæ—¶
 					finishActivity();
 				}
 			}
@@ -1076,31 +1073,31 @@ public class VideoPlayer extends NotTitleActivity {
 				VideoPlayer theActivity = mReference.get();
 				switch (msg.what) {
 				case VIDEO_CACHE_READY:
-					// »º´æ²Ù×÷
+					// ç¼“å­˜æ“ä½œ
 					theActivity.handlerVideoCacheReady();
 					break;
 				case VIDEO_STATE_UPDATE:
-					// ²¥·Å²Ù×÷
+					// æ’­æ”¾æ“ä½œ
 					theActivity.handlerVideoStartUpadte();
 					break;
 				case VIDEO_SHOW_CONTROL:
-					// Ö´ĞĞÒş²Ø²¥·Å¿ØÖÆÌ¨²Ù×÷
+					// æ‰§è¡Œéšè—æ’­æ”¾æ§åˆ¶å°æ“ä½œ
 					theActivity.hidePlayControl();
 					break;
 				case VIDEO_RESTART:
-					// ÊÓÆµÖØĞÂ²¥·Å²Ù×÷
+					// è§†é¢‘é‡æ–°æ’­æ”¾æ“ä½œ
 					theActivity.handlerVideoRestart();
 					break;
 				case VIDEO_DOWNLOAD_ERROR:
-					// ÊÓÆµÏÂÔØ³ö´í²Ù×÷
+					// è§†é¢‘ä¸‹è½½å‡ºé”™æ“ä½œ
 					theActivity.showErrorDialog(msg.obj.toString());
 					break;
 				case VideoDownloader.MSG_DOWNLOAD_FINISH:
-					// ÏÂÔØÍê³É²Ù×÷
+					// ä¸‹è½½å®Œæˆæ“ä½œ
 					theActivity.handlerDownloadFinish();
 					break;
 				case VideoDownloader.MSG_DOWNLOAD_UPDATE:
-					// ´¦ÓÚÏÂÔØ¹ı³ÌÖĞµÄ²Ù×÷
+					// å¤„äºä¸‹è½½è¿‡ç¨‹ä¸­çš„æ“ä½œ
 					theActivity.handlerDownloadUpdate(msg);
 					break;
 				}

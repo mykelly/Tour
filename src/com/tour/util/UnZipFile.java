@@ -22,11 +22,11 @@ public class UnZipFile{
 	private static final int BUFF_SIZE = 1024 * 1024; // 1M Byte
 	
 	  /**
-     * ½âÑ¹ËõÒ»¸öÎÄ¼ş
+     * è§£å‹ç¼©ä¸€ä¸ªæ–‡ä»¶
      *
-     * @param zipFile Ñ¹ËõÎÄ¼ş
-     * @param folderPath ½âÑ¹ËõµÄÄ¿±êÄ¿Â¼
-     * @throws IOException µ±½âÑ¹Ëõ¹ı³Ì³ö´íÊ±Å×³ö
+     * @param zipFile å‹ç¼©æ–‡ä»¶
+     * @param folderPath è§£å‹ç¼©çš„ç›®æ ‡ç›®å½•
+     * @throws IOException å½“è§£å‹ç¼©è¿‡ç¨‹å‡ºé”™æ—¶æŠ›å‡º
      */
     public static void upZipFile(File zipFile, String folderPath) throws ZipException, IOException {
         File desDir = new File(folderPath);
@@ -59,13 +59,13 @@ public class UnZipFile{
     }
 
     /**
-     * ½âÑ¹ÎÄ¼şÃû°üº¬´«ÈëÎÄ×ÖµÄÎÄ¼ş
+     * è§£å‹æ–‡ä»¶ååŒ…å«ä¼ å…¥æ–‡å­—çš„æ–‡ä»¶
      *
-     * @param zipFile Ñ¹ËõÎÄ¼ş
-     * @param folderPath Ä¿±êÎÄ¼ş¼Ğ
-     * @param nameContains ´«ÈëµÄÎÄ¼şÆ¥ÅäÃû
-     * @throws ZipException Ñ¹Ëõ¸ñÊ½ÓĞÎóÊ±Å×³ö
-     * @throws IOException IO´íÎóÊ±Å×³ö
+     * @param zipFile å‹ç¼©æ–‡ä»¶
+     * @param folderPath ç›®æ ‡æ–‡ä»¶å¤¹
+     * @param nameContains ä¼ å…¥çš„æ–‡ä»¶åŒ¹é…å
+     * @throws ZipException å‹ç¼©æ ¼å¼æœ‰è¯¯æ—¶æŠ›å‡º
+     * @throws IOException IOé”™è¯¯æ—¶æŠ›å‡º
      */
     public static ArrayList<File> upZipSelectedFile(File zipFile, String folderPath,
             String nameContains) throws ZipException, IOException {
@@ -83,8 +83,8 @@ public class UnZipFile{
                 InputStream in = zf.getInputStream(entry);
                 String str = folderPath + File.separator + entry.getName();
                 str = new String(str.getBytes("8859_1"), "GB2312");
-                // str.getBytes("GB2312"),"8859_1" Êä³ö
-                // str.getBytes("8859_1"),"GB2312" ÊäÈë
+                // str.getBytes("GB2312"),"8859_1" è¾“å‡º
+                // str.getBytes("8859_1"),"GB2312" è¾“å…¥
                 File desFile = new File(str);
                 if (!desFile.exists()) {
                     File fileParentDir = desFile.getParentFile();
@@ -108,12 +108,12 @@ public class UnZipFile{
     }
 
     /**
-     * »ñµÃÑ¹ËõÎÄ¼şÄÚÎÄ¼şÁĞ±í
+     * è·å¾—å‹ç¼©æ–‡ä»¶å†…æ–‡ä»¶åˆ—è¡¨
      *
-     * @param zipFile Ñ¹ËõÎÄ¼ş
-     * @return Ñ¹ËõÎÄ¼şÄÚÎÄ¼şÃû³Æ
-     * @throws ZipException Ñ¹ËõÎÄ¼ş¸ñÊ½ÓĞÎóÊ±Å×³ö
-     * @throws IOException µ±½âÑ¹Ëõ¹ı³Ì³ö´íÊ±Å×³ö
+     * @param zipFile å‹ç¼©æ–‡ä»¶
+     * @return å‹ç¼©æ–‡ä»¶å†…æ–‡ä»¶åç§°
+     * @throws ZipException å‹ç¼©æ–‡ä»¶æ ¼å¼æœ‰è¯¯æ—¶æŠ›å‡º
+     * @throws IOException å½“è§£å‹ç¼©è¿‡ç¨‹å‡ºé”™æ—¶æŠ›å‡º
      */
     public static ArrayList<String> getEntriesNames(File zipFile) throws ZipException, IOException {
         ArrayList<String> entryNames = new ArrayList<String>();
@@ -126,12 +126,12 @@ public class UnZipFile{
     }
 
     /**
-     * »ñµÃÑ¹ËõÎÄ¼şÄÚÑ¹ËõÎÄ¼ş¶ÔÏóÒÔÈ¡µÃÆäÊôĞÔ
+     * è·å¾—å‹ç¼©æ–‡ä»¶å†…å‹ç¼©æ–‡ä»¶å¯¹è±¡ä»¥å–å¾—å…¶å±æ€§
      *
-     * @param zipFile Ñ¹ËõÎÄ¼ş
-     * @return ·µ»ØÒ»¸öÑ¹ËõÎÄ¼şÁĞ±í
-     * @throws ZipException Ñ¹ËõÎÄ¼ş¸ñÊ½ÓĞÎóÊ±Å×³ö
-     * @throws IOException IO²Ù×÷ÓĞÎóÊ±Å×³ö
+     * @param zipFile å‹ç¼©æ–‡ä»¶
+     * @return è¿”å›ä¸€ä¸ªå‹ç¼©æ–‡ä»¶åˆ—è¡¨
+     * @throws ZipException å‹ç¼©æ–‡ä»¶æ ¼å¼æœ‰è¯¯æ—¶æŠ›å‡º
+     * @throws IOException IOæ“ä½œæœ‰è¯¯æ—¶æŠ›å‡º
      */
     public static Enumeration<?> getEntriesEnumeration(File zipFile) throws ZipException,
             IOException {
@@ -141,10 +141,10 @@ public class UnZipFile{
     }
 
     /**
-     * È¡µÃÑ¹ËõÎÄ¼ş¶ÔÏóµÄ×¢ÊÍ
+     * å–å¾—å‹ç¼©æ–‡ä»¶å¯¹è±¡çš„æ³¨é‡Š
      *
-     * @param entry Ñ¹ËõÎÄ¼ş¶ÔÏó
-     * @return Ñ¹ËõÎÄ¼ş¶ÔÏóµÄ×¢ÊÍ
+     * @param entry å‹ç¼©æ–‡ä»¶å¯¹è±¡
+     * @return å‹ç¼©æ–‡ä»¶å¯¹è±¡çš„æ³¨é‡Š
      * @throws UnsupportedEncodingException
      */
     public static String getEntryComment(ZipEntry entry) throws UnsupportedEncodingException {
@@ -152,10 +152,10 @@ public class UnZipFile{
     }
 
     /**
-     * È¡µÃÑ¹ËõÎÄ¼ş¶ÔÏóµÄÃû³Æ
+     * å–å¾—å‹ç¼©æ–‡ä»¶å¯¹è±¡çš„åç§°
      *
-     * @param entry Ñ¹ËõÎÄ¼ş¶ÔÏó
-     * @return Ñ¹ËõÎÄ¼ş¶ÔÏóµÄÃû³Æ
+     * @param entry å‹ç¼©æ–‡ä»¶å¯¹è±¡
+     * @return å‹ç¼©æ–‡ä»¶å¯¹è±¡çš„åç§°
      * @throws UnsupportedEncodingException
      */
     public static String getEntryName(ZipEntry entry) throws UnsupportedEncodingException {

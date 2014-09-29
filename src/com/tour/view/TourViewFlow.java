@@ -49,7 +49,7 @@ import android.widget.Scroller;
  */
 public class TourViewFlow extends AdapterView<Adapter> {
 
-	private static final int SNAP_VELOCITY = 150;// ´óÓÚ¸ÃÒÆ¶¯XÖáµÄ¾àÀëÖµÊ±ÇĞ»»ÏÂÒ»ÕÅÍ¼
+	private static final int SNAP_VELOCITY = 150;// å¤§äºè¯¥ç§»åŠ¨Xè½´çš„è·ç¦»å€¼æ—¶åˆ‡æ¢ä¸‹ä¸€å¼ å›¾
 	private static final int INVALID_SCREEN = -1;
 	private final static int TOUCH_STATE_REST = 0;
 	private final static int TOUCH_STATE_SCROLLING = 1;
@@ -73,7 +73,7 @@ public class TourViewFlow extends AdapterView<Adapter> {
 	private AdapterDataSetObserver mDataSetObserver;
 	private TourFlowIndicator mIndicator;
 	private int mLastOrientation = -1;
-	private long timeSpan = 4000;// 4ÃëÇĞ»»ÏÂÒ»ÕÅ
+	private long timeSpan = 4000;// 4ç§’åˆ‡æ¢ä¸‹ä¸€å¼ 
 	private Handler handler;
 	private OnGlobalLayoutListener orientationChangeListener = new OnGlobalLayoutListener() {
 
@@ -132,7 +132,7 @@ public class TourViewFlow extends AdapterView<Adapter> {
 		mMaximumVelocity = configuration.getScaledMaximumFlingVelocity();
 	}
 
-	// Í¨¹ıÑÓ³ÙÏûÏ¢ÊµÏÖ×Ô¶¯²¥·Å£¬Ê¹ÓÃÊ±Í¨¹ıµ÷ÓÃ¸Ã·½·¨À´Æô¶¯×Ô¶¯²¥·Å¹¦ÄÜ
+	// é€šè¿‡å»¶è¿Ÿæ¶ˆæ¯å®ç°è‡ªåŠ¨æ’­æ”¾ï¼Œä½¿ç”¨æ—¶é€šè¿‡è°ƒç”¨è¯¥æ–¹æ³•æ¥å¯åŠ¨è‡ªåŠ¨æ’­æ”¾åŠŸèƒ½
 	public void startAutoFlowTimer() {
 		handler = new Handler() {
 			@Override
@@ -147,7 +147,7 @@ public class TourViewFlow extends AdapterView<Adapter> {
 		handler.sendMessageDelayed(message, timeSpan);
 	}
 
-	// Í£Ö¹×Ô¶¯²¥·Å
+	// åœæ­¢è‡ªåŠ¨æ’­æ”¾
 	public void stopAutoFlowTimer() {
 		if (handler != null)
 			handler.removeMessages(0);
@@ -155,9 +155,9 @@ public class TourViewFlow extends AdapterView<Adapter> {
 	}
 
 	/**
-	 * ÓÃÓÚÅĞ¶ÏÂÖ²¥ÊÇ·ñÍ£Ö¹
+	 * ç”¨äºåˆ¤æ–­è½®æ’­æ˜¯å¦åœæ­¢
 	 * 
-	 * @return true:¹Ø±ÕÁË×Ô¶¯²¥·Å£¬ĞèÒªÖØĞÂÆô¶¯ false:²»ĞèÒª¿ªÆô
+	 * @return true:å…³é—­äº†è‡ªåŠ¨æ’­æ”¾ï¼Œéœ€è¦é‡æ–°å¯åŠ¨ false:ä¸éœ€è¦å¼€å¯
 	 */
 	public boolean isStop() {
 		return handler != null && !handler.hasMessages(0) ? true : false;
@@ -172,7 +172,7 @@ public class TourViewFlow extends AdapterView<Adapter> {
 	}
 
 	public int getViewsCount() {
-		return mSideBuffer; // CircleFlowIndicator»áÒÀÀµÕâ¸ö·½·¨·µ»ØÊıÀ´»­Ô²È¦¸öÊı¡£
+		return mSideBuffer; // CircleFlowIndicatorä¼šä¾èµ–è¿™ä¸ªæ–¹æ³•è¿”å›æ•°æ¥ç”»åœ†åœˆä¸ªæ•°ã€‚
 	}
 
 	@Override
@@ -347,7 +347,7 @@ public class TourViewFlow extends AdapterView<Adapter> {
 
 			mTouchState = mScroller.isFinished() ? TOUCH_STATE_REST
 					: TOUCH_STATE_SCROLLING;
-			// ÊÖÖ¸µãÏÂÊ±£¬É¾³ıÏûÏ¢ÒÔÔİÍ£×Ô¶¯²¥·Å
+			// æ‰‹æŒ‡ç‚¹ä¸‹æ—¶ï¼Œåˆ é™¤æ¶ˆæ¯ä»¥æš‚åœè‡ªåŠ¨æ’­æ”¾
 			if (handler != null)
 				handler.removeMessages(0);
 			break;
@@ -418,7 +418,7 @@ public class TourViewFlow extends AdapterView<Adapter> {
 
 			mTouchState = TOUCH_STATE_REST;
 
-			// action_upÊ±£¬ÖØĞÂ·¢ÑÓ³ÙÏûÏ¢ÒÔ»Ö¸´×Ô¶¯²¥·Å£¬Èç¹ûÒÑ´æÔÚ¸ÃÏûÏ¢Ôò²»·¢ËÍ
+			// action_upæ—¶ï¼Œé‡æ–°å‘å»¶è¿Ÿæ¶ˆæ¯ä»¥æ¢å¤è‡ªåŠ¨æ’­æ”¾ï¼Œå¦‚æœå·²å­˜åœ¨è¯¥æ¶ˆæ¯åˆ™ä¸å‘é€
 			if (handler != null && !handler.hasMessages(0)) {
 				Message message = handler.obtainMessage(0);
 				handler.sendMessageDelayed(message, timeSpan);

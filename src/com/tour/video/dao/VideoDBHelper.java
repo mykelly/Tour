@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class VideoDBHelper extends SQLiteOpenHelper {
 
 	/**
-	 * ´´½¨Êı¾İ¿â
+	 * åˆ›å»ºæ•°æ®åº“
 	 * 
 	 * @param context
-	 *            ÉÏÏÂÎÄ
+	 *            ä¸Šä¸‹æ–‡
 	 */
 	public VideoDBHelper(Context context) {
 		super(context, VideoDBData.VIDEO_DB_NAME, null,

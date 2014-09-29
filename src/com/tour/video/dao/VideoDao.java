@@ -11,7 +11,7 @@ public class VideoDao {
 	private SQLiteDatabase db;
 
 	/**
-	 * ´´½¨ºÍ³õÊ¼»¯Êı¾İ¿â£¬Ê¹ÓÃÍê¼ÇµÃµ÷ÓÃclose·½·¨¹Ø±ÕÊı¾İ¿â
+	 * åˆ›å»ºå’Œåˆå§‹åŒ–æ•°æ®åº“ï¼Œä½¿ç”¨å®Œè®°å¾—è°ƒç”¨closeæ–¹æ³•å…³é—­æ•°æ®åº“
 	 * 
 	 * @param context
 	 */
@@ -22,15 +22,15 @@ public class VideoDao {
 	}
 
 	/**
-	 * Ôö¼ÓÊÓÆµÏà¹Ø¼ÇÂ¼
+	 * å¢åŠ è§†é¢‘ç›¸å…³è®°å½•
 	 * 
 	 * @param videoName
-	 *            ÊÓÆµÃû³Æ
+	 *            è§†é¢‘åç§°
 	 * @param videoCacheSize
-	 *            ÊÓÆµÒÑ»º´æ´óĞ¡
+	 *            è§†é¢‘å·²ç¼“å­˜å¤§å°
 	 * @param videoTotalSize
-	 *            ÊÓÆµ×Ü´óĞ¡
-	 * @return ÊÇ·ñ¼ÇÂ¼³É¹¦
+	 *            è§†é¢‘æ€»å¤§å°
+	 * @return æ˜¯å¦è®°å½•æˆåŠŸ
 	 */
 	public long add(String videoName, long videoCacheSize, long videoTotalSize) {
 		ContentValues values = new ContentValues();
@@ -43,13 +43,13 @@ public class VideoDao {
 	}
 
 	/**
-	 * ¸üĞÂÊÓÆµÏà¹Ø¼ÇÂ¼
+	 * æ›´æ–°è§†é¢‘ç›¸å…³è®°å½•
 	 * 
 	 * @param videoName
-	 *            ÊÓÆµÃû³Æ
+	 *            è§†é¢‘åç§°
 	 * @param videoCacheSize
-	 *            ÊÓÆµÒÑ»º´æ´óĞ¡
-	 * @return ÊÜÓ°ÏìµÄĞĞÊı
+	 *            è§†é¢‘å·²ç¼“å­˜å¤§å°
+	 * @return å—å½±å“çš„è¡Œæ•°
 	 */
 	public int update(String videoName, long videoCacheSize) {
 		ContentValues values = new ContentValues();
@@ -60,11 +60,11 @@ public class VideoDao {
 	}
 
 	/**
-	 * ²éÑ¯ÊÓÆµÏà¹ØĞÅÏ¢
+	 * æŸ¥è¯¢è§†é¢‘ç›¸å…³ä¿¡æ¯
 	 * 
 	 * @param videoName
-	 *            ÊÓÆµÃû³Æ
-	 * @return {ÊÇ·ñÓĞ¸Ã¼ÇÂ¼(0±íÊ¾Ã»ÓĞ£¬1±íÊ¾ÓĞ),»º´æ´óĞ¡,×Ü´óĞ¡,ÒÑ»º´æ´¦¶ÔÓ¦µÄÊ±¼ä}
+	 *            è§†é¢‘åç§°
+	 * @return {æ˜¯å¦æœ‰è¯¥è®°å½•(0è¡¨ç¤ºæ²¡æœ‰ï¼Œ1è¡¨ç¤ºæœ‰),ç¼“å­˜å¤§å°,æ€»å¤§å°,å·²ç¼“å­˜å¤„å¯¹åº”çš„æ—¶é—´}
 	 */
 	public long[] query(String videoName) {
 		long isExist = 0, cacheSize = 0, totalSize = 0;
@@ -84,7 +84,7 @@ public class VideoDao {
 	}
 
 	/**
-	 * Ê¹ÓÃÍêÊı¾İ¿â±ØĞë¹Ø±Õ
+	 * ä½¿ç”¨å®Œæ•°æ®åº“å¿…é¡»å…³é—­
 	 */
 	public void close() {
 		db.close();

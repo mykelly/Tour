@@ -16,38 +16,38 @@ import com.tour.info.TourDataInfo;
 
 public class PublicData {
 	/**
-	 * °²×°°üÇşµÀÂë
+	 * å®‰è£…åŒ…æ¸ é“ç 
 	 */
 	public static String factoryId = "0000000";
 	/**
-	 * Èí¼şµ±Ç°ÄÚ²¿°æ±¾ºÅ£¬ÓëLogoActivity¹²ÓÃ£¬ÓÃÓÚÆ¥Åä¼ì²é°æ±¾¸üĞÂ
+	 * è½¯ä»¶å½“å‰å†…éƒ¨ç‰ˆæœ¬å·ï¼Œä¸LogoActivityå…±ç”¨ï¼Œç”¨äºåŒ¹é…æ£€æŸ¥ç‰ˆæœ¬æ›´æ–°
 	 */
 	public static double current_version= 106;
 	public static String version = "1.0.6";
-//	public static String postUrl ="http://192.168.1.10:7777/api/index.htm";//±¾µØ²âÊÔ½Ó¿Ú
-	public static String postUrl ="http://test.shoumedia.com/api/index.htm";//ÍâÍø²âÊÔ½Ó¿Ú
-	public static boolean isNetWork=false;//ÊÇ·ñÁªÍø
-	public static boolean isUpgrade=true;//ÊÇ·ñ¸üĞÂÊı¾İ¿â
+//	public static String postUrl ="http://192.168.1.10:7777/api/index.htm";//æœ¬åœ°æµ‹è¯•æ¥å£
+	public static String postUrl ="http://test.shoumedia.com/api/index.htm";//å¤–ç½‘æµ‹è¯•æ¥å£
+	public static boolean isNetWork=false;//æ˜¯å¦è”ç½‘
+	public static boolean isUpgrade=true;//æ˜¯å¦æ›´æ–°æ•°æ®åº“
 	/*
-	 * ÓĞÎŞÍÅĞÅÏ¢£¨1´ú±íÓĞ£¬0´ú±íÃ»ÓĞ£©
+	 * æœ‰æ— å›¢ä¿¡æ¯ï¼ˆ1ä»£è¡¨æœ‰ï¼Œ0ä»£è¡¨æ²¡æœ‰ï¼‰
 	 */
 	public static String isnew = "";
 	/*
-	 * µÇÂ½×´Ì¬£¨1ÒÑµÇÂ½£»0Î´µÇÂ½£©
+	 * ç™»é™†çŠ¶æ€ï¼ˆ1å·²ç™»é™†ï¼›0æœªç™»é™†ï¼‰
 	 */
 	public static String islogin = "";
-	public static String truename = "";//ÕæÊµÃû
-	public static String username = "";//ÓÃ»§Ãû
-	public static String password = "";//µÇÂ¼ÃÜÂë
-	public static String uid = "273";//ÓÃ»§id£¨±¾µØ²âÊÔuid="1";ÍâÍø²âÊÔuid="273"£©
-	public static String gid = "";//×éid
-	public static String tour_id = "";//ÂÃÓÎÍÅid
-	public static String tour_title = "";//ÍÅÃû
-	public static String tour_zip = "";//ÍÅĞÅÏ¢Ñ¹Ëõ°üÃû
-	public static String tour_no = "";//ÍÅºÅ£¨±àºÅ£©
-	public static String tour_date = "";//³ö·¢ÈÕÆÚ
-	public static String tour_update_time = "";//¸üĞÂÊı¾İÈÕÆÚ
-	public static String zip_url = "";//ÏÂÔØÍÅĞÅÏ¢°üµØÖ·
+	public static String truename = "";//çœŸå®å
+	public static String username = "";//ç”¨æˆ·å
+	public static String password = "";//ç™»å½•å¯†ç 
+	public static String uid = "273";//ç”¨æˆ·idï¼ˆæœ¬åœ°æµ‹è¯•uid="1";å¤–ç½‘æµ‹è¯•uid="273"ï¼‰
+	public static String gid = "";//ç»„id
+	public static String tour_id = "";//æ—…æ¸¸å›¢id
+	public static String tour_title = "";//å›¢å
+	public static String tour_zip = "";//å›¢ä¿¡æ¯å‹ç¼©åŒ…å
+	public static String tour_no = "";//å›¢å·ï¼ˆç¼–å·ï¼‰
+	public static String tour_date = "";//å‡ºå‘æ—¥æœŸ
+	public static String tour_update_time = "";//æ›´æ–°æ•°æ®æ—¥æœŸ
+	public static String zip_url = "";//ä¸‹è½½å›¢ä¿¡æ¯åŒ…åœ°å€
 	
 	public static TourDataInfo tourDataInfo;
 	public static List<DataTourDateInfo> dataTourDateInfos= new ArrayList<DataTourDateInfo>();

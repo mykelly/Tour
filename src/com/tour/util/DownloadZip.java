@@ -47,19 +47,19 @@ import android.widget.TextView;
 
 public class DownloadZip {
 
-	private String zipUrl = null;// ÍøÂç½âÎöµÄzipÊı¾İ°üÏÂÔØµØÖ·
-	private String zipName = null;//Ñ¹Ëõ°üÃû×Ö
-	private String score = null;//·µÒøÆ±ÊıÁ¿
+	private String zipUrl = null;// ç½‘ç»œè§£æçš„zipæ•°æ®åŒ…ä¸‹è½½åœ°å€
+	private String zipName = null;//å‹ç¼©åŒ…åå­—
+	private String score = null;//è¿”é“¶ç¥¨æ•°é‡
 	private int downloadCompleted = 0;
 
 	private Context mContext = null;
-	private WaitDialog dialog;// ¡°µÈ´ı¡±¶Ô»°¿ò
+	private WaitDialog dialog;// â€œç­‰å¾…â€å¯¹è¯æ¡†
 	private NotificationManager manager = null;
 	private Notification notice = null;
 	private DownloadApkHandler mHandler = null;
 
-	private String zipPath = null;// ´æ·Åµ½SD¿¨ZipÂ·¾¶
-	private boolean error = false;// ÏÂÔØÊÇ·ñ³ö´í
+	private String zipPath = null;// å­˜æ”¾åˆ°SDå¡Zipè·¯å¾„
+	private boolean error = false;// ä¸‹è½½æ˜¯å¦å‡ºé”™
 	private ProgressBar loadProgressBar;
 	private TextView tiptext;
 	private AlertDialog loading;
@@ -75,8 +75,8 @@ public class DownloadZip {
 	this.score=score;
 //	System.out.println("zipUrl="+zipUrl);
 	showDialog();
-	showNotification();// ÏÔÊ¾Í¨Öª
-	new Thread(runnable).start();// ÏÂÔØÎÄ¼ş
+	showNotification();// æ˜¾ç¤ºé€šçŸ¥
+	new Thread(runnable).start();// ä¸‹è½½æ–‡ä»¶
    }
     public void showDialog(){
     	dialog=new WaitDialog(mContext, android.R.style.Theme_Translucent);
@@ -93,26 +93,26 @@ public class DownloadZip {
 	});
 	loading.show();
 	Window window = loading.getWindow();
-	window.setContentView(R.layout.attention_loadingdialog);// ¿ÉÒÔÈ¥µô±³¾°
+	window.setContentView(R.layout.attention_loadingdialog);// å¯ä»¥å»æ‰èƒŒæ™¯
 	tiptext=(TextView)window.findViewById(R.id.loadprogresstext);
-	 SpannableString sp = new SpannableString("ÏÂÔØÔËĞĞ±¾Èí¼ş30Ãëºó,Äú¿ÉÒÔ»ñµÃ  "+score+" ÕÅÒøÆ±·µÀû"+"\nÍ¬Ò»ÕËºÅ»òÍ¬Ò»ÊÖ»úÖ»·µÀûÒ»´Î"+"\nÕıÔÚÏÂÔØÎÄ¼ş£¬ÇëÉÔºò...");  
+	 SpannableString sp = new SpannableString("ä¸‹è½½è¿è¡Œæœ¬è½¯ä»¶30ç§’å,æ‚¨å¯ä»¥è·å¾—  "+score+" å¼ é“¶ç¥¨è¿”åˆ©"+"\nåŒä¸€è´¦å·æˆ–åŒä¸€æ‰‹æœºåªè¿”åˆ©ä¸€æ¬¡"+"\næ­£åœ¨ä¸‹è½½æ–‡ä»¶ï¼Œè¯·ç¨å€™...");  
 	 sp.setSpan(new ForegroundColorSpan(Color.RED),17,21,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);   
-	  //´´½¨Ò»¸ö SpannableString¶ÔÏó  
-//    SpannableString sp = new SpannableString("Õâ¾ä»°ÖĞÓĞ°Ù¶È³¬Á´½Ó,ÓĞ¸ßÁÁÏÔÊ¾£¬ÕâÑù£¬»òÕßÕâÑù£¬»¹ÓĞĞ±Ìå.");   
- //ÉèÖÃ³¬Á´½Ó  
+	  //åˆ›å»ºä¸€ä¸ª SpannableStringå¯¹è±¡  
+//    SpannableString sp = new SpannableString("è¿™å¥è¯ä¸­æœ‰ç™¾åº¦è¶…é“¾æ¥,æœ‰é«˜äº®æ˜¾ç¤ºï¼Œè¿™æ ·ï¼Œæˆ–è€…è¿™æ ·ï¼Œè¿˜æœ‰æ–œä½“.");   
+ //è®¾ç½®è¶…é“¾æ¥  
 //      sp.setSpan(new URLSpan("http://www.baidu.com"), 5, 7,   
 //              Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);   
-//      //ÉèÖÃ¸ßÁÁÑùÊ½Ò»  
+//      //è®¾ç½®é«˜äº®æ ·å¼ä¸€  
 //     sp.setSpan(new BackgroundColorSpan(Color.RED), 17 ,19,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);   
-//      //ÉèÖÃ¸ßÁÁÑùÊ½¶ş  
+//      //è®¾ç½®é«˜äº®æ ·å¼äºŒ  
 //   sp.setSpan(new ForegroundColorSpan(Color.YELLOW),20,24,Spannable.SPAN_EXCLUSIVE_INCLUSIVE);     
-//      //ÉèÖÃĞ±Ìå  
+//      //è®¾ç½®æ–œä½“  
 //     sp.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC), 27, 29, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);   
-    //SpannableString¶ÔÏóÉèÖÃ¸øTextView  
-      //ÉèÖÃTextView¿Éµã»÷  
+    //SpannableStringå¯¹è±¡è®¾ç½®ç»™TextView  
+      //è®¾ç½®TextViewå¯ç‚¹å‡»  
 //     adsDetailDescription.setMovementMethod(LinkMovementMethod.getInstance()); 
 	 tiptext.setText(sp);
-//	tiptext.setText("±¾Ó¦ÓÃÏÂÔØ°²×°ºó£¬Äú¿ÉÒÔ»ñµÃ  "+score+" ÕÅÒøÆ±·µÀû"+"\nÍ¬Ò»ÕËºÅ»òÍ¬Ò»ÊÖ»úÖ»·µÀûÒ»´Î"+"\nÕıÔÚÏÂÔØÎÄ¼ş£¬ÇëÉÔºò...");
+//	tiptext.setText("æœ¬åº”ç”¨ä¸‹è½½å®‰è£…åï¼Œæ‚¨å¯ä»¥è·å¾—  "+score+" å¼ é“¶ç¥¨è¿”åˆ©"+"\nåŒä¸€è´¦å·æˆ–åŒä¸€æ‰‹æœºåªè¿”åˆ©ä¸€æ¬¡"+"\næ­£åœ¨ä¸‹è½½æ–‡ä»¶ï¼Œè¯·ç¨å€™...");
 	loadProgressBar = (ProgressBar) window.findViewById(R.id.loadprogressBar);
 	loadProgressBar.setMax(100);*/
 }
@@ -122,10 +122,10 @@ private Runnable runnable = new Runnable() {
 	public void run() {
 		// TODO Auto-generated method stub
 
-		// Éè¶¨ÍøÂç³¬Ê±
+		// è®¾å®šç½‘ç»œè¶…æ—¶
 		BasicHttpParams httpParams = new BasicHttpParams();
-		HttpConnectionParams.setConnectionTimeout(httpParams, 10000);// ÉèÖÃÇëÇó³¬Ê±10ÃëÖÓ
-		HttpConnectionParams.setSoTimeout(httpParams, 10000);// ÉèÖÃµÈ´ıÊı¾İ³¬Ê±Ê±¼ä10ÃëÖÓ
+		HttpConnectionParams.setConnectionTimeout(httpParams, 10000);// è®¾ç½®è¯·æ±‚è¶…æ—¶10ç§’é’Ÿ
+		HttpConnectionParams.setSoTimeout(httpParams, 10000);// è®¾ç½®ç­‰å¾…æ•°æ®è¶…æ—¶æ—¶é—´10ç§’é’Ÿ
 		HttpClient client = new DefaultHttpClient(httpParams);
 		HttpGet get = new HttpGet(zipUrl);
 		HttpResponse response;
@@ -143,20 +143,20 @@ private Runnable runnable = new Runnable() {
 					if (Environment.getExternalStorageState().equals(
 							Environment.MEDIA_MOUNTED)) {
 						File  file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "DaMeiTour"+ File.separator+ "zip");
-						delete(file);//É¾³ıÖ®Ç°µÄ¾ÉÎÄ¼ş
+						delete(file);//åˆ é™¤ä¹‹å‰çš„æ—§æ–‡ä»¶
 						createDir(Environment.getExternalStorageDirectory().getAbsolutePath());
 						zipPath =Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "DaMeiTour" + File.separator + "zip"+File.separator;
 //						apkPath += File.separator;
 					
 					} else {
 						zipPath = Environment.getExternalStorageDirectory().getPath();
-//						System.out.println("Ã»ÓĞsd¿¨ÏÂÔØÂ·¾¶apkPath="+apkPath);
+//						System.out.println("æ²¡æœ‰sdå¡ä¸‹è½½è·¯å¾„apkPath="+apkPath);
 						for (int i = 0; i < 4; i++) {
 							String temp = zipPath + i;
 							File f = new File(temp);
 							if (f.exists()) {
 								File  file = new File(temp + File.separator + "DaMeiTour"+ File.separator+ "zip");
-								delete(file);//É¾³ıÖ®Ç°µÄ¾ÉÎÄ¼ş
+								delete(file);//åˆ é™¤ä¹‹å‰çš„æ—§æ–‡ä»¶
 //								apkPath = temp + File.separator;
 								createDir(temp);
 								zipPath = temp + File.separator+ "DaMeiTour" + File.separator + "zip"+File.separator;
@@ -165,7 +165,7 @@ private Runnable runnable = new Runnable() {
 							}
 						}
 					}
-//                  System.out.println("´æ·ÅapkÎÄ¼şÂ·¾¶apkPath:"+apkPath);
+//                  System.out.println("å­˜æ”¾apkæ–‡ä»¶è·¯å¾„apkPath:"+apkPath);
 					archiveFilePath=zipPath+zipName;
 					File file = new File(zipPath, zipName);
 					fileOutputStream = new FileOutputStream(file);
@@ -176,7 +176,7 @@ private Runnable runnable = new Runnable() {
 						while ((ch = is.read(buf)) != -1) {
 							fileOutputStream.write(buf, 0, ch);
 							temp += ch;
-							downloadCompleted = (int) (temp * 100 / length);// ¼ÆËã½ø¶ÈÖµ
+							downloadCompleted = (int) (temp * 100 / length);// è®¡ç®—è¿›åº¦å€¼
 						
 						}
 					}
@@ -191,15 +191,15 @@ private Runnable runnable = new Runnable() {
 
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
-			error = true;// Òì³£³ö´í
+			error = true;// å¼‚å¸¸å‡ºé”™
 		} catch (IOException e) {
 			e.printStackTrace();
-			error = true;// ³¬Ê±³ö´í
+			error = true;// è¶…æ—¶å‡ºé”™
 		} catch (Exception e) {
 			e.printStackTrace();
 			error = true;
 		} finally {
-			// ÊÍ·ÅÁ¬½Ó
+			// é‡Šæ”¾è¿æ¥
 			client.getConnectionManager().shutdown();
 		}
 	}
@@ -210,7 +210,7 @@ private File createDir(String Path) {
 	return file;
 }
 /**
- * ´´½¨Í¨ÖªÀ¸
+ * åˆ›å»ºé€šçŸ¥æ 
  */
 private void showNotification() {
 
@@ -218,7 +218,7 @@ private void showNotification() {
 			.getSystemService(Context.NOTIFICATION_SERVICE);
 	notice = new Notification();
 	notice.icon = R.drawable.icon;
-	notice.tickerText = "ÕıÔÚÏÂÔØÎÄ¼ş";
+	notice.tickerText = "æ­£åœ¨ä¸‹è½½æ–‡ä»¶";
 	notice.flags = Notification.FLAG_AUTO_CANCEL;
 	updateNotification(false);
 
@@ -227,10 +227,10 @@ private void showNotification() {
 }
 
 /**
- * ¸üĞÂÍ¨ÖªÀ¸
+ * æ›´æ–°é€šçŸ¥æ 
  * 
  * @param completed
- *            ÊÇ·ñÏÂÔØÍê³É
+ *            æ˜¯å¦ä¸‹è½½å®Œæˆ
  */
 private void updateNotification(boolean completed) {
 
@@ -238,9 +238,9 @@ private void updateNotification(boolean completed) {
 		if (dialog != null && dialog.isShowing())
 			dialog.dismiss();
 		removeMessage();
-		notice.tickerText = "ÎÄ¼şÏÂÔØ³ö´í£¡";
+		notice.tickerText = "æ–‡ä»¶ä¸‹è½½å‡ºé”™ï¼";
 		notice.flags = Notification.FLAG_AUTO_CANCEL;
-		notice.setLatestEventInfo(mContext, "´ïÃÀÂÃÓÎ", "ÎÄ¼şÏÂÔØ³ö´í£¬Çë¼ì²éÍøÂç²¢È·±£ÊÖ»úÓĞSD¿¨£¡",
+		notice.setLatestEventInfo(mContext, "è¾¾ç¾æ—…æ¸¸", "æ–‡ä»¶ä¸‹è½½å‡ºé”™ï¼Œè¯·æ£€æŸ¥ç½‘ç»œå¹¶ç¡®ä¿æ‰‹æœºæœ‰SDå¡ï¼",
 				PendingIntent.getActivity(mContext, 0, new Intent(), 0));
 		manager.notify(0, notice);
 		return;
@@ -248,15 +248,15 @@ private void updateNotification(boolean completed) {
 	if (completed) {
 		if (dialog != null && dialog.isShowing())
 			dialog.dismiss();
-		notice.tickerText = "ÎÄ¼şÏÂÔØÍê³É£¡";
-//		Intent intent = install();// ÓÃ»§Ò²¿ÉÒÔÊÖ¶¯°²×°
-		notice.setLatestEventInfo(mContext, "´ïÃÀÂÃÓÎ", "ÎÄ¼şÏÂÔØÍê³É",
+		notice.tickerText = "æ–‡ä»¶ä¸‹è½½å®Œæˆï¼";
+//		Intent intent = install();// ç”¨æˆ·ä¹Ÿå¯ä»¥æ‰‹åŠ¨å®‰è£…
+		notice.setLatestEventInfo(mContext, "è¾¾ç¾æ—…æ¸¸", "æ–‡ä»¶ä¸‹è½½å®Œæˆ",
 				PendingIntent.getActivity(mContext, 0,  new Intent(), 0));
 		manager.notify(0, notice);		
-		RollListActivity.mHandler.sendEmptyMessage(2);//ÏÂÔØÍêÑ¹Ëõ°ü·¢ËÍÏûÏ¢
+		RollListActivity.mHandler.sendEmptyMessage(2);//ä¸‹è½½å®Œå‹ç¼©åŒ…å‘é€æ¶ˆæ¯
 	} else {
 //		loadProgressBar.setProgress(downloadCompleted);
-		notice.setLatestEventInfo(mContext, "´ïÃÀÂÃÓÎ", "ÎÄ¼şÒÑÏÂÔØ "
+		notice.setLatestEventInfo(mContext, "è¾¾ç¾æ—…æ¸¸", "æ–‡ä»¶å·²ä¸‹è½½ "
 				+ downloadCompleted + "%",
 				PendingIntent.getActivity(mContext, 0, new Intent(), 0));
 		manager.notify(0, notice);
@@ -264,31 +264,31 @@ private void updateNotification(boolean completed) {
 }
 
 /**
- * Çå³ıËùÓĞÍ¨Öª
+ * æ¸…é™¤æ‰€æœ‰é€šçŸ¥
  */
 public void clearAllNotification() {
 	if (manager != null) {
-		removeMessage();// ÏÈÒÆ³ıÏûÏ¢
-		manager.cancel(0);// Çå³ıÍ¨Öª
+		removeMessage();// å…ˆç§»é™¤æ¶ˆæ¯
+		manager.cancel(0);// æ¸…é™¤é€šçŸ¥
 	}
 }
 
 /**
- * ÑÓÊ±·¢ËÍÏûÏ¢¸üĞÂ×´Ì¬£¬ÏÂÔØÍê³ÉÒÆ³ıÏûÏ¢²¢ÇÒÌáÊ¾ĞÂ×´Ì¬
+ * å»¶æ—¶å‘é€æ¶ˆæ¯æ›´æ–°çŠ¶æ€ï¼Œä¸‹è½½å®Œæˆç§»é™¤æ¶ˆæ¯å¹¶ä¸”æç¤ºæ–°çŠ¶æ€
  */
 public void updateHandleMessage() {
-	// 100%ÎªÏÂÔØÍê³É
+	// 100%ä¸ºä¸‹è½½å®Œæˆ
 	if (downloadCompleted == 100) {
-		removeMessage();// ÏÈÒÆ³ıÏûÏ¢
+		removeMessage();// å…ˆç§»é™¤æ¶ˆæ¯
 		updateNotification(true);
 	} else {
-		sendMessage();// ±ØĞëÏÈ·¢ËÍÏûÏ¢£¬²ÅÄÜÒÆ³ıºóÃæµÄÏûÏ¢
+		sendMessage();// å¿…é¡»å…ˆå‘é€æ¶ˆæ¯ï¼Œæ‰èƒ½ç§»é™¤åé¢çš„æ¶ˆæ¯
 		updateNotification(false);
 	}
 }
 
 /**
- * ·¢ËÍÏûÏ¢
+ * å‘é€æ¶ˆæ¯
  */
 private void sendMessage() {
 	Message msg = mHandler.obtainMessage(1);
@@ -296,7 +296,7 @@ private void sendMessage() {
 }
 
 /**
- * ÒÆ³ıÏûÏ¢
+ * ç§»é™¤æ¶ˆæ¯
  */
 private void removeMessage() {
 	if (mHandler.hasMessages(1)) {
@@ -305,7 +305,7 @@ private void removeMessage() {
 }
 
 /**
- * °²×°ÏÂÔØµÄÎÄ¼ş
+ * å®‰è£…ä¸‹è½½çš„æ–‡ä»¶
  * 
  * @return
  */
@@ -336,7 +336,7 @@ private static class DownloadApkHandler extends Handler {
 	}
 }
 /**
- * É¾³ıÖ®Ç°µÄÎÄ¼ş
+ * åˆ é™¤ä¹‹å‰çš„æ–‡ä»¶
  * @param file
  */
 public static void delete(File file) {  
